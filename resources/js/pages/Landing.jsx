@@ -119,6 +119,66 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Bots Showcase Section */}
+      <section className="py-24 px-6 border-b-2 border-black bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Готовые Торговые Боты</h2>
+            <p className="text-gray-600 font-bold uppercase tracking-widest text-lg max-w-2xl mx-auto">Выберите проверенную стратегию или создайте свою с нуля.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-[#D3F55F] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <h3 className="text-2xl font-black uppercase mb-2">ScalpBot Pro</h3>
+              <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Скальпинг</span>
+              <p className="text-gray-900 font-medium leading-relaxed">
+                Высокочастотный бот для краткосрочных сделок. Открывает до 200 позиций в сутки на минутных свечах BTC/ETH.
+              </p>
+            </div>
+
+            <div className="bg-[#A5F3FC] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <h3 className="text-2xl font-black uppercase mb-2">TrendRider</h3>
+              <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Трендовый</span>
+              <p className="text-gray-900 font-medium leading-relaxed">
+                Торгует по направлению тренда на 4H и дневных графиках. Оптимален для спокойного рынка с чётким направлением.
+              </p>
+            </div>
+
+            <div className="bg-[#FDE68A] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <h3 className="text-2xl font-black uppercase mb-2">GridMaster</h3>
+              <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Сеточный</span>
+              <p className="text-gray-900 font-medium leading-relaxed">
+                Сеточная стратегия в боковом рынке. Зарабатывает на волатильности без прогнозирования направления.
+              </p>
+            </div>
+
+            <div className="bg-[#DDD6FE] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <h3 className="text-2xl font-black uppercase mb-2">ArbitrageX</h3>
+              <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Арбитраж</span>
+              <p className="text-gray-900 font-medium leading-relaxed">
+                Межбиржевой арбитраж. Использует разницу цен между биржами для безрискового заработка.
+              </p>
+            </div>
+
+            <div className="bg-[#FCA5A5] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <h3 className="text-2xl font-black uppercase mb-2">NewsTrader AI</h3>
+              <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Новостной</span>
+              <p className="text-gray-900 font-medium leading-relaxed">
+                ИИ-бот анализирует новости и твиты в реальном времени. Реагирует на события раньше рынка.
+              </p>
+            </div>
+
+            <div className="bg-[#BBF7D0] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <h3 className="text-2xl font-black uppercase mb-2">DCA Bot</h3>
+              <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Усреднение</span>
+              <p className="text-gray-900 font-medium leading-relaxed">
+                Классическая стратегия усреднения (DCA). Идеален для долгосрочного накопления активов при падении.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How it Works Block */}
       <section id="how-it-works" className="py-24 px-6 border-b-2 border-black bg-white">
         <div className="max-w-7xl mx-auto">
