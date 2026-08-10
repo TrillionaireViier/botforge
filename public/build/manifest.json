@@ -1,0 +1,16 @@
+{
+  "resources/js/index.css": {
+    "file": "assets/index-bSPJ082O.css",
+    "src": "resources/js/index.css",
+    "isEntry": true
+  },
+  "resources/js/main.jsx": {
+    "file": "assets/main-Du2lZTZ0.js",
+    "name": "main",
+    "src": "resources/js/main.jsx",
+    "isEntry": true,
+    "css": [
+      "assets/index-bSPJ082O.css"
+    ]
+  }
+}
