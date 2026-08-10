@@ -2,24 +2,13 @@
     "version": 2,
     "builds": [
         {
-            "src": "package.json",
-            "use": "@vercel/node",
-            "config": {
-                "buildCommand": "npm run build"
-            }
-        },
-        {
             "src": "api/index.php",
-            "use": "vercel-php@0.6.0"
+            "use": "vercel-php@0.6.2"
         }
     ],
     "routes": [
         {
-            "src": "/build/(.*)",
-            "dest": "/public/build/$1"
-        },
-        {
-            "src": "/(css|js|images)/(.*)",
+            "src": "/(build|css|js|images)/(.*)",
             "dest": "/public/$1/$2"
         },
         {
