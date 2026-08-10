@@ -1,0 +1,40 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/node",
+            "config": {
+                "buildCommand": "npm run build"
+            }
+        },
+        {
+            "src": "api/index.php",
+            "use": "vercel-php@0.6.0"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/build/$1"
+        },
+        {
+            "src": "/(css|js|images)/(.*)",
+            "dest": "/public/$1/$2"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/api/index.php"
+        }
+    ],
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://botforge-blue.vercel.app",
+        "ASSET_URL": "https://botforge-blue.vercel.app",
+        "CACHE_DRIVER": "array",
+        "SESSION_DRIVER": "cookie",
+        "QUEUE_CONNECTION": "sync",
+        "LOG_CHANNEL": "stderr"
+    }
+}
