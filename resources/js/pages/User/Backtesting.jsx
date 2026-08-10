@@ -1,0 +1,75 @@
+import React, { useState } from 'react';
+import { Play, Settings2, BarChart2 } from 'lucide-react';
+
+const Backtesting = () => {
+  const [running, setRunning] = useState(false);
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-gray-900">Backtesting Engine</h1>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-1 space-y-6">
+          <div className="bg-white p-6 rounded-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black">
+            <h2 className="text-xl font-bold mb-4 flex items-center"><Settings2 className="mr-2" /> Parameters</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Trading Pair</label>
+                <select className="w-full p-2 border-2 border-black rounded-md focus:ring-black focus:border-black">
+                  <option>BTC/USDT</option>
+                  <option>ETH/USDT</option>
+                  <option>SOL/USDT</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Timeframe</label>
+                <select className="w-full p-2 border-2 border-black rounded-md focus:ring-black focus:border-black">
+                  <option>1h</option>
+                  <option>4h</option>
+                  <option>1d</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Date Range</label>
+                <div className="flex space-x-2">
+                  <input type="date" className="w-1/2 p-2 border-2 border-black rounded-md" />
+                  <input type="date" className="w-1/2 p-2 border-2 border-black rounded-md" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Initial Capital (USDT)</label>
+                <input type="number" defaultValue={10000} className="w-full p-2 border-2 border-black rounded-md" />
+              </div>
+              <button 
+                onClick={() => setRunning(!running)}
+                className={`w-full py-3 rounded-md font-bold flex justify-center items-center transition-colors border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${running ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-green-500 hover:bg-green-600 text-black'}`}
+              >
+                {running ? 'Stop Test' : <><Play className="w-5 h-5 mr-2" /> Run Backtest</>}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="lg:col-span-2 space-y-6">
+          <div className="bg-white p-6 rounded-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black min-h-[400px] flex flex-col">
+            <h2 className="text-xl font-bold mb-4 flex items-center"><BarChart2 className="mr-2" /> Results</h2>
+            {running ? (
+              <div className="flex-1 flex flex-col items-center justify-center">
+                <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <p className="text-lg font-semibold animate-pulse">Running simulation over historical data...</p>
+              </div>
+            ) : (
+              <div className="flex-1 flex items-center justify-center text-gray-400">
+                <p>Configure parameters and run a backtest to see results here.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Backtesting;
