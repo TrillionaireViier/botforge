@@ -9,7 +9,7 @@ const History = () => {
     const fetchHistory = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/history", {
+        const res = await fetch("/api/history", {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.ok) {
@@ -22,7 +22,7 @@ const History = () => {
             amount: trade.amount.toString(),
             price: `$${trade.price.toLocaleString()}`,
             total: `$${(trade.amount * trade.price).toLocaleString()}`,
-            date: new Date(trade.createdAt).toLocaleString('en-US', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+            date: new Date(trade.createdAt).toLocaleString('ru-RU', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
             status: trade.status.charAt(0).toUpperCase() + trade.status.slice(1),
             profit: trade.profit ? `${trade.profit > 0 ? '+' : ''}$${trade.profit.toFixed(2)}` : '$0.00'
           }));
@@ -40,9 +40,9 @@ const History = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">Trade History</h1>
+        <h1 className="text-3xl font-bold text-gray-900">История сделок</h1>
         <button className="px-4 py-2 border-2 border-black rounded-md font-bold flex items-center hover:bg-gray-50 transition-colors shadow-[2px_2px_0_0_rgba(0,0,0,1)]">
-          <Download className="w-4 h-4 mr-2" /> Export CSV
+          <Download className="w-4 h-4 mr-2" /> Экспорт CSV
         </button>
       </div>
 
@@ -51,23 +51,23 @@ const History = () => {
           <div className="flex gap-4 flex-1">
             <div className="relative flex-1 min-w-[200px] max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input type="text" placeholder="Search pair, ID..." className="w-full p-2 pl-10 border-2 border-black rounded-lg focus:ring-black focus:border-black" />
+              <input type="text" placeholder="Поиск пары, ID..." className="w-full p-2 pl-10 border-2 border-black rounded-lg focus:ring-black focus:border-black" />
             </div>
             <select className="p-2 border-2 border-black rounded-lg font-bold bg-white">
-              <option>All Pairs</option>
+              <option>Все пары</option>
               <option>BTC/USDT</option>
               <option>ETH/USDT</option>
               <option>SOL/USDT</option>
             </select>
             <select className="p-2 border-2 border-black rounded-lg font-bold bg-white">
-              <option>All Types</option>
-              <option>Buy</option>
-              <option>Sell</option>
+              <option>Все типы</option>
+              <option>Покупка</option>
+              <option>Продажа</option>
             </select>
             <input type="date" className="p-2 border-2 border-black rounded-lg font-bold bg-white" />
           </div>
           <button className="px-4 py-2 bg-black text-white rounded-md font-bold flex items-center hover:bg-gray-800 transition-colors">
-            <Filter className="w-4 h-4 mr-2" /> Apply Filters
+            <Filter className="w-4 h-4 mr-2" /> Фильтр
           </button>
         </div>
         
@@ -76,11 +76,11 @@ const History = () => {
             <thead className="bg-white border-b-2 border-black">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Trade ID</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Pair / Date</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Type</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Amount / Price</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Total</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Profit/Loss</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Пара / Дата</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Тип</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Кол-во / Цена</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Сумма</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Прибыль/Убыток</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -92,14 +92,14 @@ const History = () => {
                     <p className="text-sm text-gray-500">{trade.date}</p>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`px-3 py-1 text-xs font-bold rounded-full border-2 border-black flex items-center w-max ${trade.type === 'Buy' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                      {trade.type === 'Buy' ? <ArrowDownRight className="w-3 h-3 mr-1" /> : <ArrowUpRight className="w-3 h-3 mr-1" />}
-                      {trade.type}
+                    <span className={`px-3 py-1 text-xs font-bold rounded-full border-2 border-black flex items-center w-max ${trade.type === 'Buy' || trade.type === 'Покупка' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                      {trade.type === 'Buy' || trade.type === 'Покупка' ? <ArrowDownRight className="w-3 h-3 mr-1" /> : <ArrowUpRight className="w-3 h-3 mr-1" />}
+                      {trade.type === 'Buy' ? 'Покупка' : trade.type === 'Sell' ? 'Продажа' : trade.type}
                     </span>
                   </td>
                   <td className="px-6 py-4">
                     <p className="font-bold">{trade.amount}</p>
-                    <p className="text-sm text-gray-500">@ {trade.price}</p>
+                    <p className="text-sm text-gray-500">по {trade.price}</p>
                   </td>
                   <td className="px-6 py-4 font-bold">{trade.total}</td>
                   <td className={`px-6 py-4 font-bold ${trade.profit.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>

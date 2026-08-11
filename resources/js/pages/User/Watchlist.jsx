@@ -12,9 +12,9 @@ const Watchlist = () => {
   return (
     <div className="space-y-6 max-w-5xl">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">My Watchlist</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Избранное</h1>
         <button className="px-4 py-2 bg-black text-white rounded-md font-bold flex items-center hover:bg-gray-800 transition-colors">
-          <Plus className="w-5 h-5 mr-2" /> Add Asset
+          <Plus className="w-5 h-5 mr-2" /> Добавить актив
         </button>
       </div>
 
@@ -22,7 +22,7 @@ const Watchlist = () => {
         <div className="p-6 border-b-2 border-black bg-gray-50">
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input type="text" placeholder="Search saved pairs..." className="w-full p-3 pl-10 border-2 border-black rounded-lg focus:ring-black focus:border-black font-bold" />
+            <input type="text" placeholder="Поиск по сохраненным парам..." className="w-full p-3 pl-10 border-2 border-black rounded-lg focus:ring-black focus:border-black font-bold" />
           </div>
         </div>
         <div className="overflow-x-auto">
@@ -30,11 +30,11 @@ const Watchlist = () => {
             <thead className="bg-white border-b-2 border-black">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-bold text-gray-900 w-12"></th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Trading Pair</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Last Price</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">24h Change</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">24h Volume</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Action</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Торговая пара</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Текущая цена</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Изм. 24ч</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Объем 24ч</th>
+                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Действие</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -53,7 +53,7 @@ const Watchlist = () => {
                   </td>
                   <td className="px-6 py-4 text-sm font-bold text-gray-500">{asset.volume}</td>
                   <td className="px-6 py-4">
-                    <button className="px-4 py-2 border-2 border-black rounded-lg font-bold text-sm hover:bg-black hover:text-white transition-colors">Trade Now</button>
+                    <button className="px-4 py-2 border-2 border-black rounded-lg font-bold text-sm hover:bg-black hover:text-white transition-colors">Торговать</button>
                   </td>
                 </tr>
               ))}

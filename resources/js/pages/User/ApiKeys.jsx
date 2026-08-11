@@ -8,7 +8,7 @@ const ApiKeys = () => {
   const fetchKeys = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/apikeys", {
+      const res = await fetch("/api/apikeys", {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.ok) {
@@ -18,7 +18,7 @@ const ApiKeys = () => {
           exchange: k.exchange,
           name: k.name,
           lastUsed: k.lastUsed,
-          permissions: 'Read, Trade' // Hardcoded for demo since DB doesn't store this yet
+          permissions: 'Чтение, Торговля' // Hardcoded for demo since DB doesn't store this yet
         }));
         setKeys(mappedKeys);
       }
@@ -34,10 +34,10 @@ const ApiKeys = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (!confirm('Are you sure you want to delete this API Key?')) return;
+    if (!confirm('Вы уверены, что хотите удалить этот API ключ?')) return;
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/apikeys/${id}`, {
+      const res = await fetch(`/api/apikeys/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -52,32 +52,32 @@ const ApiKeys = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">API Key Management</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Управление API ключами</h1>
         <button className="px-4 py-2 bg-black text-white rounded-md font-semibold hover:bg-gray-800 flex items-center">
-          <Plus className="w-5 h-5 mr-2" /> Add New Key
+          <Plus className="w-5 h-5 mr-2" /> Добавить ключ
         </button>
       </div>
 
       <div className="bg-yellow-50 p-4 border-l-4 border-yellow-400 flex items-start space-x-3 rounded-r-md">
         <Shield className="w-6 h-6 text-yellow-600 mt-0.5" />
         <div>
-          <h3 className="font-bold text-yellow-800">Security Recommendation</h3>
-          <p className="text-sm text-yellow-700">Never share your API keys. Ensure that your API keys have IP restriction enabled and do NOT have withdrawal permissions enabled.</p>
+          <h3 className="font-bold text-yellow-800">Рекомендации по безопасности</h3>
+          <p className="text-sm text-yellow-700">Никогда не делитесь своими API ключами. Убедитесь, что для ваших API ключей включено ограничение по IP и НЕ включены разрешения на вывод средств.</p>
         </div>
       </div>
 
       <div className="bg-white rounded-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black overflow-hidden">
         <div className="p-6 border-b-2 border-black">
-          <h2 className="text-xl font-bold">Connected Exchanges</h2>
+          <h2 className="text-xl font-bold">Подключенные биржи</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b-2 border-black">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Exchange / Name</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Permissions</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Last Used</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Actions</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Биржа / Имя</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Права</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Последнее использование</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Действия</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
