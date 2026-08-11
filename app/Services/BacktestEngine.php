@@ -19,8 +19,8 @@ class BacktestEngine
         ];
         $interval = $intervalMap[$timeframe] ?? '1h';
 
-        // 3. Fetch KLINES (up to 1000 candles) from Binance
-        $response = Http::get("https://api.binance.com/api/v3/klines", [
+        // 3. Fetch KLINES (up to 1000 candles) from Binance Data API (avoids Vercel/US IP blocks)
+        $response = Http::get("https://data-api.binance.vision/api/v3/klines", [
             'symbol' => $symbol,
             'interval' => $interval,
             'limit' => 1000
