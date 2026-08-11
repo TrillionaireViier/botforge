@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, Settings2, BarChart2 } from 'lucide-react';
 
 const Backtesting = () => {
-  const [running, setRunning] = useState(false);
+  const [status, setStatus] = useState('idle'); // 'idle' | 'running' | 'finished'
+
+  useEffect(() => {
+    let timer;
+    if (status === 'running') {
+      timer = setTimeout(() => {
+        setStatus('finished');
+      }, 2500); // 2.5 seconds mock processing
+    }
+    return () => clearTimeout(timer);
+  }, [status]);
 
   return (
     <div className="space-y-6">
@@ -53,10 +63,10 @@ const Backtesting = () => {
                 <input type="number" defaultValue={10000} className="w-full p-2 border-2 border-black rounded-md" />
               </div>
               <button 
-                onClick={() => setRunning(!running)}
-                className={`w-full py-3 rounded-md font-bold flex justify-center items-center transition-colors border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${running ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-green-500 hover:bg-green-600 text-black'}`}
+                onClick={() => setStatus(status === 'running' ? 'idle' : 'running')}
+                className={`w-full py-3 rounded-md font-bold flex justify-center items-center transition-colors border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${status === 'running' ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-green-500 hover:bg-green-600 text-black'}`}
               >
-                {running ? 'Остановить тест' : <><Play className="w-5 h-5 mr-2" /> Запустить тест</>}
+                {status === 'running' ? 'Остановить тест' : <><Play className="w-5 h-5 mr-2" /> Запустить тест</>}
               </button>
             </div>
           </div>
@@ -65,14 +75,43 @@ const Backtesting = () => {
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white p-6 rounded-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black min-h-[400px] flex flex-col">
             <h2 className="text-xl font-bold mb-4 flex items-center"><BarChart2 className="mr-2" /> Результаты</h2>
-            {running ? (
+            
+            {status === 'running' && (
               <div className="flex-1 flex flex-col items-center justify-center">
                 <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
                 <p className="text-lg font-semibold animate-pulse">Запуск симуляции на исторических данных...</p>
               </div>
-            ) : (
+            )}
+
+            {status === 'idle' && (
               <div className="flex-1 flex items-center justify-center text-gray-400">
                 <p>Настройте параметры и запустите тест, чтобы увидеть результаты.</p>
+              </div>
+            )}
+
+            {status === 'finished' && (
+              <div className="flex-1 flex flex-col space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="p-4 border-2 border-black bg-[#D3F55F]">
+                    <p className="text-xs font-bold uppercase">ROI</p>
+                    <p className="text-2xl font-black mt-1">+18.4%</p>
+                  </div>
+                  <div className="p-4 border-2 border-black bg-[#A5F3FC]">
+                    <p className="text-xs font-bold uppercase">Чистая Прибыль</p>
+                    <p className="text-2xl font-black mt-1">+$1,840.00</p>
+                  </div>
+                  <div className="p-4 border-2 border-black bg-white">
+                    <p className="text-xs font-bold uppercase">Винрейт</p>
+                    <p className="text-2xl font-black mt-1">68.5%</p>
+                  </div>
+                  <div className="p-4 border-2 border-black bg-white">
+                    <p className="text-xs font-bold uppercase">Макс. Просадка</p>
+                    <p className="text-2xl font-black mt-1 text-red-500">-4.2%</p>
+                  </div>
+                </div>
+                <div className="flex-1 border-2 border-black flex items-center justify-center min-h-[200px] bg-gray-50">
+                  <p className="text-gray-500 font-mono text-sm">[ Здесь будет график Equity Curve (кривая доходности) ]</p>
+                </div>
               </div>
             )}
           </div>
