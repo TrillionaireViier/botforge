@@ -48,6 +48,17 @@ class TradingController extends Controller
 
         $user = $request->user();
 
+        // Check limit: Maximum 1 API key for users on the 'Free' tier
+        if ($user->tier === 'Free') {
+            $keyCount = UserExchangeKey::where('user_id', $user->id)->count();
+            // If they already have 1 key and are trying to add a new exchange (not updating the existing one)
+            $existingKey = UserExchangeKey::where('user_id', $user->id)->where('exchange', 'binance')->first();
+            
+            if ($keyCount >= 1 && !$existingKey) {
+                return response()->json(['message' => 'Достигнут лимит API-ключей для вашего тарифа (макс. 1). Пожалуйста, приобретите подписку.'], 403);
+            }
+        }
+
         UserExchangeKey::updateOrCreate(
             ['user_id' => $user->id, 'exchange' => 'binance'],
             [

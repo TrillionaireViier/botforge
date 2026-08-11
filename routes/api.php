@@ -20,6 +20,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/trading/keys', [TradingController::class, 'saveKeys']);
     Route::get('/trading/balance', [TradingController::class, 'getBalance']);
     Route::post('/trading/order', [TradingController::class, 'placeOrder']);
+
+    // Billing API Routes
+    Route::post('/billing/cryptomus', [\App\Http\Controllers\Api\BillingController::class, 'payWithCryptomus']);
+    Route::post('/billing/whitebit', [\App\Http\Controllers\Api\BillingController::class, 'payWithWhitebit']);
 });
 
 Route::get('/admin/users', [AdminController::class, 'getUsers']);

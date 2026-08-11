@@ -104,7 +104,28 @@ export default function UserLayout() {
       </aside>
 
       {/* Main Content Area */}
-      <main className={`flex-1 overflow-y-auto ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <main className={`flex-1 flex flex-col overflow-y-auto ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        
+        {/* Trial / Subscription Banner */}
+        {user && (!user.trial_ends_at || new Date(user.trial_ends_at) < new Date()) && (
+          <div className="bg-red-500 text-white p-4 border-b-4 border-black text-center shadow-[0_4px_0_0_rgba(0,0,0,1)] z-20">
+            <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
+              <div className="flex items-center space-x-3">
+                <ShieldAlert className="w-6 h-6 animate-pulse" />
+                <span className="font-bold uppercase tracking-widest text-sm sm:text-base">
+                  Ваша подписка или тестовый период не активны.
+                </span>
+              </div>
+              <Link 
+                to="/user/pricing" 
+                className="bg-black text-white px-6 py-2 uppercase font-black tracking-widest text-sm hover:bg-white hover:text-black border-2 border-transparent hover:border-black transition-colors"
+              >
+                Оплатить $10
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* Mobile Header */}
         <header className={`md:hidden p-4 flex items-center justify-between border-b-2 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-black'}`}>
           <span className="font-black text-xl uppercase tracking-widest">Кабинет</span>
