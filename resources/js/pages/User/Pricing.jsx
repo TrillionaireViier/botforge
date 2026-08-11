@@ -6,27 +6,27 @@ const Pricing = () => {
 
   const plans = [
     {
-      name: 'Basic',
+      name: 'Базовый',
       price: billingCycle === 'monthly' ? '$19' : '$190',
-      description: 'Perfect for beginners starting their crypto journey.',
-      features: ['Up to 2 active bots', 'Basic trading signals', 'Email support', '1 Connected Exchange'],
+      description: 'Идеально для новичков, начинающих свой путь в крипте.',
+      features: ['До 2 активных ботов', 'Базовые торговые сигналы', 'Поддержка по Email', '1 Подключенная биржа'],
       icon: <Shield className="w-8 h-8 text-blue-500 mb-4" />,
       color: 'border-blue-500'
     },
     {
-      name: 'Pro',
+      name: 'Профи',
       price: billingCycle === 'monthly' ? '$49' : '$490',
-      description: 'Advanced features for serious traders.',
-      features: ['Up to 10 active bots', 'Premium AI signals', 'Priority 24/7 support', '3 Connected Exchanges', 'Advanced Backtesting'],
+      description: 'Продвинутые функции для серьезных трейдеров.',
+      features: ['До 10 активных ботов', 'Премиум AI сигналы', 'Приоритетная поддержка 24/7', '3 Подключенные биржи', 'Продвинутый бэктестинг'],
       icon: <Star className="w-8 h-8 text-yellow-500 mb-4" />,
       color: 'border-yellow-500',
       popular: true
     },
     {
-      name: 'Elite',
+      name: 'Элит',
       price: billingCycle === 'monthly' ? '$99' : '$990',
-      description: 'Maximum power for institutional volume.',
-      features: ['Unlimited active bots', 'Real-time API access', 'Dedicated account manager', 'Unlimited Exchanges', 'Custom bot logic'],
+      description: 'Максимальная мощность для институциональных объемов.',
+      features: ['Безлимитные активные боты', 'API доступ в реальном времени', 'Персональный менеджер', 'Безлимитные биржи', 'Кастомная логика ботов'],
       icon: <Zap className="w-8 h-8 text-purple-500 mb-4" />,
       color: 'border-purple-500'
     }
@@ -35,8 +35,8 @@ const Pricing = () => {
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-black text-gray-900">Subscription Management</h1>
-        <p className="text-xl text-gray-500 font-bold max-w-2xl mx-auto">Current Plan: <span className="text-black bg-yellow-300 px-2 py-1 rounded">Pro Plan (Active)</span></p>
+        <h1 className="text-4xl font-black text-gray-900">Управление подпиской</h1>
+        <p className="text-xl text-gray-500 font-bold max-w-2xl mx-auto">Текущий план: <span className="text-black bg-yellow-300 px-2 py-1 rounded">Профи (Активен)</span></p>
       </div>
 
       <div className="flex justify-center">
@@ -45,13 +45,13 @@ const Pricing = () => {
             onClick={() => setBillingCycle('monthly')}
             className={`px-6 py-2 rounded-md font-bold transition-colors ${billingCycle === 'monthly' ? 'bg-black text-white' : 'hover:bg-gray-100 text-gray-600'}`}
           >
-            Monthly Billing
+            Ежемесячно
           </button>
           <button 
             onClick={() => setBillingCycle('yearly')}
             className={`px-6 py-2 rounded-md font-bold transition-colors ${billingCycle === 'yearly' ? 'bg-black text-white' : 'hover:bg-gray-100 text-gray-600'}`}
           >
-            Yearly (Save 20%)
+            Ежегодно (Экономия 20%)
           </button>
         </div>
       </div>
@@ -61,7 +61,7 @@ const Pricing = () => {
           <div key={plan.name} className={`bg-white rounded-2xl p-8 border-4 relative flex flex-col ${plan.color} ${plan.popular ? 'shadow-[8px_8px_0_0_rgba(0,0,0,1)] transform md:-translate-y-4' : 'shadow-[4px_4px_0_0_rgba(0,0,0,1)]'}`}>
             {plan.popular && (
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-yellow-400 border-2 border-black px-4 py-1 rounded-full font-bold text-sm">
-                Most Popular
+                Самый популярный
               </div>
             )}
             
@@ -69,7 +69,7 @@ const Pricing = () => {
             <h3 className="text-2xl font-black mb-2">{plan.name}</h3>
             <div className="mb-4">
               <span className="text-4xl font-black">{plan.price}</span>
-              <span className="text-gray-500 font-bold">/{billingCycle === 'monthly' ? 'mo' : 'yr'}</span>
+              <span className="text-gray-500 font-bold">/{billingCycle === 'monthly' ? 'мес' : 'год'}</span>
             </div>
             <p className="text-gray-600 font-medium mb-6 h-12">{plan.description}</p>
             
@@ -84,8 +84,8 @@ const Pricing = () => {
               </ul>
             </div>
             
-            <button className={`w-full py-4 rounded-xl font-black text-lg border-2 border-black transition-transform hover:-translate-y-1 ${plan.name === 'Pro' ? 'bg-black text-white' : 'bg-white hover:bg-gray-50'}`}>
-              {plan.name === 'Pro' ? 'Current Plan' : `Upgrade to ${plan.name}`}
+            <button className={`w-full py-4 rounded-xl font-black text-lg border-2 border-black transition-transform hover:-translate-y-1 ${plan.name === 'Профи' ? 'bg-black text-white' : 'bg-white hover:bg-gray-50'}`}>
+              {plan.name === 'Профи' ? 'Текущий план' : `Перейти на ${plan.name}`}
             </button>
           </div>
         ))}
@@ -93,11 +93,11 @@ const Pricing = () => {
 
       <div className="bg-red-50 p-6 rounded-xl border-2 border-red-200 mt-12 flex justify-between items-center">
         <div>
-          <h3 className="font-bold text-red-800 text-lg">Cancel Subscription</h3>
-          <p className="text-red-600">You will lose access to Pro features at the end of your billing cycle.</p>
+          <h3 className="font-bold text-red-800 text-lg">Отменить подписку</h3>
+          <p className="text-red-600">Вы потеряете доступ к Pro-функциям в конце вашего расчетного периода.</p>
         </div>
         <button className="px-6 py-2 border-2 border-red-800 text-red-800 font-bold rounded-lg hover:bg-red-100 transition-colors">
-          Cancel Plan
+          Отменить план
         </button>
       </div>
     </div>

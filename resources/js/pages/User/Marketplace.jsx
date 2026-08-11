@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Search, TrendingUp, Users, Copy, Star, Shield, Filter, ArrowUpRight } from 'lucide-react';
 
 export default function Marketplace() {
-  const [filter, setFilter] = useState('ALL');
+  const [filter, setFilter] = useState('ВСЕ');
 
   const strategies = [
-    { id: 1, name: 'Safe Haven DCA', author: '@cryptoking', risk: 'Low', roi: '+4.2%', users: 1240, pair: 'BTC/USDT', rating: 4.9 },
-    { id: 2, name: 'Aggressive Alt Grid', author: '@degen_bot', risk: 'High', roi: '+28.5%', users: 342, pair: 'SOL/USDT', rating: 4.5 },
-    { id: 3, name: 'ETH Stacking', author: '@eth_whale', risk: 'Medium', roi: '+12.1%', users: 890, pair: 'ETH/USDT', rating: 4.8 },
-    { id: 4, name: 'Meme Coin Sniper', author: '@moonboy', risk: 'Extreme', roi: '+145.0%', users: 2100, pair: 'DOGE/USDT', rating: 3.9 },
-    { id: 5, name: 'Stable Yield', author: '@system', risk: 'Low', roi: '+1.5%', users: 5400, pair: 'USDC/USDT', rating: 5.0 },
-    { id: 6, name: 'Trend Follower 5x', author: '@pro_trader', risk: 'High', roi: '+34.2%', users: 67, pair: 'BNB/USDT', rating: 4.2 },
+    { id: 1, name: 'Safe Haven DCA', author: '@cryptoking', risk: 'Низкий', roi: '+4.2%', users: 1240, pair: 'BTC/USDT', rating: 4.9 },
+    { id: 2, name: 'Aggressive Alt Grid', author: '@degen_bot', risk: 'Высокий', roi: '+28.5%', users: 342, pair: 'SOL/USDT', rating: 4.5 },
+    { id: 3, name: 'ETH Stacking', author: '@eth_whale', risk: 'Средний', roi: '+12.1%', users: 890, pair: 'ETH/USDT', rating: 4.8 },
+    { id: 4, name: 'Meme Coin Sniper', author: '@moonboy', risk: 'Экстрим', roi: '+145.0%', users: 2100, pair: 'DOGE/USDT', rating: 3.9 },
+    { id: 5, name: 'Stable Yield', author: '@system', risk: 'Низкий', roi: '+1.5%', users: 5400, pair: 'USDC/USDT', rating: 5.0 },
+    { id: 6, name: 'Trend Follower 5x', author: '@pro_trader', risk: 'Высокий', roi: '+34.2%', users: 67, pair: 'BNB/USDT', rating: 4.2 },
   ];
 
   return (
@@ -32,7 +32,7 @@ export default function Marketplace() {
       </div>
 
       <div className="flex gap-4 overflow-x-auto pb-4">
-        {['ALL', 'LOW RISK', 'HIGH ROI', 'NEW', 'TOP RATED'].map(f => (
+        {['ВСЕ', 'НИЗКИЙ РИСК', 'ВЫСОКИЙ ROI', 'НОВЫЕ', 'ЛУЧШИЕ'].map(f => (
           <button 
             key={f}
             onClick={() => setFilter(f)}
