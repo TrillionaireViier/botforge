@@ -1,109 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import { Search, Plus, Filter, ArrowRight, Settings, Save, CheckCircle, AlertTriangle, RefreshCw, Server, FileText, BarChart3, Database } from 'lucide-react';
-export default function Payouts() {
-  const [payouts, setPayouts] = useState([]);
-  const [loading, setLoading] = useState(true);
+import React, { useState } from 'react';
+import { Download, CheckCircle, XCircle, DollarSign, Clock } from 'lucide-react';
 
-  useEffect(() => {
-    const fetchPayouts = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await fetch("/api/admin/payouts", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setPayouts(data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch payouts", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPayouts();
-  }, []);
+export default function Payouts() {
+  const [payouts] = useState([
+    { id: 'PAY-8821', affiliate: 'TopCryptoBlogger', amount: '$450.00', wallet: '0x123...456', status: 'pending', date: '2026-08-11' },
+    { id: 'PAY-8820', affiliate: 'TradingSignalGroup', amount: '$1,200.00', wallet: 'TRX98...XYZ', status: 'approved', date: '2026-08-10' },
+    { id: 'PAY-8819', affiliate: 'Ivan Ivanov', amount: '$50.00', wallet: '0xabc...def', status: 'rejected', date: '2026-08-09' },
+    { id: 'PAY-8818', affiliate: 'CryptoNinja', amount: '$320.00', wallet: '0x999...111', status: 'pending', date: '2026-08-08' },
+  ]);
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="flex justify-between items-end border-b-4 border-black pb-4">
         <div>
-          <h1 className="text-3xl font-black uppercase tracking-widest text-black">Реферальные Выплаты</h1>
-          <div className="w-16 h-2 bg-black mt-2"></div>
+          <h1 className="text-4xl font-black uppercase tracking-widest text-black">Выплаты</h1>
+          <p className="text-gray-600 mt-2 font-mono uppercase font-bold">Управление заявками на вывод средств (Affiliate)</p>
         </div>
-        <div className="flex gap-2">
-          <button className="bg-white text-black border-2 border-black p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
-            <Filter className="w-5 h-5" />
-          </button>
-          <button className="bg-black text-white border-2 border-black px-4 py-2 font-bold uppercase text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:bg-white hover:text-black transition-colors flex items-center gap-2">
-            <Database className="w-4 h-4" /> Экспорт
+        <div className="flex gap-4 font-black uppercase text-sm">
+          <div className="bg-yellow-300 border-4 border-black px-4 py-2 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
+            Ожидает: $770.00
+          </div>
+          <button className="bg-black text-white px-4 py-2 border-2 border-black hover:bg-white hover:text-black transition-colors flex items-center gap-2 shadow-[4px_4px_0_0_rgba(0,0,0,0.5)]">
+            <Download className="w-4 h-4" /> CSV Экспорт
           </button>
         </div>
       </div>
 
-      <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-        <div className="p-4 border-b-4 border-black flex justify-between items-center bg-gray-50">
-          <div className="flex items-center border-2 border-black bg-white px-3 py-2 w-full max-w-md shadow-[inset_2px_2px_0px_rgba(0,0,0,0.1)]">
-            <Search className="w-5 h-5 text-gray-400 mr-2" />
-            <input type="text" placeholder="Поиск по ID, почте или имени..." className="w-full outline-none font-bold text-sm" />
-          </div>
-          <button className="p-2 hover:bg-gray-200 border-2 border-transparent hover:border-black transition-all rounded-full">
-            <Settings className="w-5 h-5" />
-          </button>
-        </div>
-        
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse whitespace-nowrap">
-            <thead>
-              <tr className="bg-black text-white text-xs uppercase tracking-widest">
-                <th className="p-4 font-black border-r border-gray-700">ID</th>
-                <th className="p-4 font-black border-r border-gray-700">Пользователь</th>
-                <th className="p-4 font-black border-r border-gray-700">Сумма</th>
-                <th className="p-4 font-black border-r border-gray-700">Статус</th>
-                <th className="p-4 font-black border-r border-gray-700">Дата</th>
-                <th className="p-4 font-black border-r border-gray-700">Метод</th>
-                <th className="p-4 font-black text-right">Действия</th>
+      <div className="bg-white border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] overflow-hidden mt-8">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="bg-black text-white uppercase font-black text-sm tracking-wider">
+              <th className="p-4 border-r-2 border-gray-800">ID</th>
+              <th className="p-4 border-r-2 border-gray-800">Партнер</th>
+              <th className="p-4 border-r-2 border-gray-800">Сумма</th>
+              <th className="p-4 border-r-2 border-gray-800">Кошелек (USDT)</th>
+              <th className="p-4 border-r-2 border-gray-800">Статус</th>
+              <th className="p-4 text-center">Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {payouts.map((pay) => (
+              <tr key={pay.id} className="border-b-4 border-black last:border-b-0 hover:bg-blue-50 transition-colors font-bold uppercase text-sm">
+                <td className="p-4 border-r-4 border-black">{pay.id}</td>
+                <td className="p-4 border-r-4 border-black">{pay.affiliate}</td>
+                <td className="p-4 border-r-4 border-black text-green-600 text-lg">{pay.amount}</td>
+                <td className="p-4 border-r-4 border-black font-mono text-xs">{pay.wallet}</td>
+                <td className="p-4 border-r-4 border-black">
+                  {pay.status === 'pending' && <span className="flex items-center gap-2 text-yellow-600"><Clock className="w-4 h-4"/> Ожидание</span>}
+                  {pay.status === 'approved' && <span className="flex items-center gap-2 text-green-600"><CheckCircle className="w-4 h-4"/> Выплачено</span>}
+                  {pay.status === 'rejected' && <span className="flex items-center gap-2 text-red-600"><XCircle className="w-4 h-4"/> Отклонено</span>}
+                </td>
+                <td className="p-4 flex items-center justify-center gap-2">
+                  {pay.status === 'pending' ? (
+                    <>
+                      <button className="px-3 py-1 text-xs border-2 border-black bg-green-400 hover:bg-green-500 transition-colors flex items-center gap-1">
+                        <CheckCircle className="w-3 h-3" /> Одобрить
+                      </button>
+                      <button className="px-3 py-1 text-xs border-2 border-black bg-red-400 hover:bg-red-500 transition-colors flex items-center gap-1">
+                        <XCircle className="w-3 h-3" /> Отклонить
+                      </button>
+                    </>
+                  ) : (
+                    <span className="text-gray-400 text-xs">—</span>
+                  )}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {payouts.map((payout) => (
-                <tr key={payout.id} className="border-b-2 border-gray-200 hover:bg-yellow-100 transition-colors group">
-                  <td className="p-4 font-mono font-bold text-sm">#{payout.id}</td>
-                  <td className="p-4">
-                    <div className="font-black text-sm">{payout.user?.email || 'Неизвестен'}</div>
-                    <div className="text-xs font-bold text-gray-500 uppercase">{payout.user?.name}</div>
-                  </td>
-                  <td className="p-4 font-black text-green-600">${payout.amount}</td>
-                  <td className="p-4">
-                    <span className={`inline-block border-2 border-black px-2 py-0.5 text-[10px] font-black uppercase tracking-wider ${payout.status === 'completed' ? 'bg-green-300' : 'bg-red-300'}`}>
-                      {payout.status.toUpperCase()}
-                    </span>
-                  </td>
-                  <td className="p-4 font-mono text-sm font-bold text-gray-700">{new Date(payout.created_at).toLocaleDateString()}</td>
-                  <td className="p-4 text-sm font-medium text-gray-600 truncate max-w-[150px]">{payout.method}</td>
-                  <td className="p-4 text-right">
-                    <button className="text-black font-black uppercase text-xs border-2 border-black px-3 py-1 bg-white opacity-0 group-hover:opacity-100 hover:bg-black hover:text-white transition-all shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-                      Смотреть
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {payouts.length === 0 && !loading && (
-                <tr>
-                  <td colSpan="7" className="p-8 text-center font-bold text-gray-500">Нет выплат</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-        
-        <div className="p-4 border-t-4 border-black flex justify-between items-center bg-gray-50 text-sm font-bold uppercase tracking-wider">
-          <span>Показано 1-7 из 450</span>
-          <div className="flex gap-2">
-            <button className="border-2 border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition-colors">&lt;</button>
-            <button className="border-2 border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition-colors">&gt;</button>
-          </div>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

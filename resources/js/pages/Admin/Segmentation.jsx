@@ -1,79 +1,46 @@
 import React from 'react';
-import { Search, Plus, Filter, ArrowRight, Settings, Save, CheckCircle, AlertTriangle, RefreshCw, Server, FileText, BarChart3, Database } from 'lucide-react';
+import { Users, Filter, Download } from 'lucide-react';
+
 export default function Segmentation() {
+  const segments = [
+    { name: 'Киты (Whales)', criteria: 'Депозит > $100k', usersCount: 12, arpu: '$250', color: 'bg-purple-300' },
+    { name: 'Активные Трейдеры', criteria: '> 50 сделок в день', usersCount: 340, arpu: '$45', color: 'bg-blue-300' },
+    { name: 'Спящие', criteria: 'Не заходили > 30 дней', usersCount: 1250, arpu: '$0', color: 'bg-gray-300' },
+    { name: 'Новички', criteria: 'Регистрация < 7 дней', usersCount: 89, arpu: '$10', color: 'bg-green-300' },
+  ];
+
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="flex justify-between items-end border-b-4 border-black pb-4">
         <div>
-          <h1 className="text-3xl font-black uppercase tracking-widest text-black">Сегментация Аудитории</h1>
-          <div className="w-16 h-2 bg-black mt-2"></div>
+          <h1 className="text-4xl font-black uppercase tracking-widest text-black">Сегментация</h1>
+          <p className="text-gray-600 mt-2 font-mono uppercase font-bold">Когортный анализ базы пользователей</p>
         </div>
-        <div className="flex gap-2">
-          <select className="bg-white border-2 border-black px-4 py-2 font-bold uppercase text-sm outline-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
-            <option>Последние 7 дней</option>
-            <option>Этот месяц</option>
-            <option>За все время</option>
-          </select>
-          <button className="bg-black text-white border-2 border-black px-4 py-2 font-bold uppercase text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:bg-white hover:text-black transition-colors flex items-center gap-2">
-            <BarChart3 className="w-4 h-4" /> Экспорт CSV
-          </button>
-        </div>
+        <button className="bg-black text-white px-4 py-2 font-black uppercase border-2 border-black hover:bg-white hover:text-black transition-colors flex items-center gap-2 shadow-[4px_4px_0_0_rgba(0,0,0,0.5)]">
+          <Filter className="w-4 h-4" /> Создать Сегмент
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden group">
-          <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-gray-100 rounded-full group-hover:scale-150 transition-transform duration-500 z-0"></div>
-          <div className="relative z-10">
-            <p className="text-xs font-bold uppercase tracking-wider">Всего</p>
-            <p className="text-5xl font-black mt-2 mb-1">14,291</p>
-            <p className="text-xs font-bold text-green-600 flex items-center gap-1">+12% с прошлой недели</p>
-          </div>
-        </div>
-        <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] col-span-1 md:col-span-2 relative overflow-hidden">
-          <p className="text-xs font-bold uppercase tracking-wider mb-4">График активности</p>
-          <div className="flex items-end gap-2 h-24">
-            {[30,50,40,70,60,90,40,60,80,50,70,100,60,80].map((h, i) => (
-              <div key={i} className="w-full bg-black hover:bg-yellow-400 transition-colors cursor-pointer" style={{height: `${h}%`}}></div>
-            ))}
-          </div>
-        </div>
-        <div className="bg-yellow-300 border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <p className="text-xs font-bold uppercase tracking-wider">Конверсия</p>
-          <p className="text-5xl font-black mt-2 mb-1">4.8%</p>
-          <p className="text-xs font-bold text-black opacity-75 flex items-center gap-1">Цель: 5.0%</p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h3 className="font-black uppercase text-xl mb-6">Топ показатели</h3>
-          <div className="space-y-4">
-            {['Показатель А', 'Событие Б', 'Параметр В'].map((item, idx) => (
-              <div key={idx}>
-                <div className="flex justify-between text-sm font-bold uppercase mb-1">
-                  <span>{item}</span>
-                  <span>{80 - idx * 15}%</span>
-                </div>
-                <div className="h-4 w-full border-2 border-black bg-gray-100">
-                  <div className="h-full bg-black" style={{width: `${80 - idx * 15}%`}}></div>
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
+        {segments.map((seg, i) => (
+          <div key={i} className={`${seg.color} border-4 border-black p-6 shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform`}>
+            <h3 className="font-black uppercase text-xl mb-1">{seg.name}</h3>
+            <p className="font-mono text-xs uppercase font-bold border-b-2 border-black pb-2 mb-4">{seg.criteria}</p>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center bg-white border-2 border-black p-2">
+                <span className="font-bold uppercase text-xs">Юзеров</span>
+                <span className="font-black">{seg.usersCount}</span>
               </div>
-            ))}
+              <div className="flex justify-between items-center bg-white border-2 border-black p-2">
+                <span className="font-bold uppercase text-xs">ARPU</span>
+                <span className="font-black">{seg.arpu}</span>
+              </div>
+            </div>
+            <button className="w-full mt-4 bg-white border-2 border-black font-black uppercase text-xs py-2 hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2">
+              <Download className="w-3 h-3" /> Экспорт CSV
+            </button>
           </div>
-        </div>
-        <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h3 className="font-black uppercase text-xl mb-6">Аномалии и Инсайты</h3>
-          <ul className="space-y-4">
-            <li className="flex gap-3">
-              <CheckCircle className="w-6 h-6 text-green-500 shrink-0" />
-              <p className="font-medium text-sm">Обнаружен аномальный рост метрики "Удержание" на 15% за последние 48 часов.</p>
-            </li>
-            <li className="flex gap-3">
-              <AlertTriangle className="w-6 h-6 text-yellow-500 shrink-0" />
-              <p className="font-medium text-sm">Падение показателей в мобильной версии на iOS-устройствах.</p>
-            </li>
-          </ul>
-        </div>
+        ))}
       </div>
     </div>
   );

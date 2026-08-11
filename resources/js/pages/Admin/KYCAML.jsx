@@ -1,79 +1,91 @@
-import React from 'react';
-import { Search, Plus, Filter, ArrowRight, Settings, Save, CheckCircle, AlertTriangle, RefreshCw, Server, FileText, BarChart3, Database } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, ShieldAlert, CheckCircle, XCircle, Eye, FileText } from 'lucide-react';
+
 export default function KYCAML() {
+  const [requests] = useState([
+    { id: 'KYC-1001', user: 'Alexey V.', email: 'alex@example.com', date: '2026-08-11', status: 'pending', riskScore: 'Low' },
+    { id: 'KYC-1002', user: 'Ivan D.', email: 'ivan.d@example.com', date: '2026-08-10', status: 'approved', riskScore: 'Low' },
+    { id: 'KYC-1003', user: 'Unknown Entity', email: 'crypto.boss@mail.com', date: '2026-08-09', status: 'rejected', riskScore: 'High' },
+    { id: 'KYC-1004', user: 'Maria S.', email: 'maria@example.com', date: '2026-08-09', status: 'pending', riskScore: 'Medium' },
+  ]);
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="flex justify-between items-end border-b-4 border-black pb-4">
         <div>
-          <h1 className="text-3xl font-black uppercase tracking-widest text-black">KYC / AML Проверка</h1>
-          <div className="w-16 h-2 bg-black mt-2"></div>
+          <h1 className="text-4xl font-black uppercase tracking-widest text-black">KYC / AML Контроль</h1>
+          <p className="text-gray-600 mt-2 font-mono uppercase font-bold">Управление верификацией пользователей</p>
         </div>
         <div className="flex gap-2">
-          <button className="bg-white text-black border-2 border-black p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
-            <Filter className="w-5 h-5" />
-          </button>
-          <button className="bg-black text-white border-2 border-black px-4 py-2 font-bold uppercase text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:bg-white hover:text-black transition-colors flex items-center gap-2">
-            <Database className="w-4 h-4" /> Экспорт
+          <button className="bg-black text-white px-4 py-2 font-black uppercase border-2 border-black hover:bg-white hover:text-black transition-colors flex items-center gap-2 shadow-[4px_4px_0_0_rgba(0,0,0,0.5)]">
+            <FileText className="w-4 h-4" /> Выгрузить лог
           </button>
         </div>
       </div>
 
-      <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-        <div className="p-4 border-b-4 border-black flex justify-between items-center bg-gray-50">
-          <div className="flex items-center border-2 border-black bg-white px-3 py-2 w-full max-w-md shadow-[inset_2px_2px_0px_rgba(0,0,0,0.1)]">
-            <Search className="w-5 h-5 text-gray-400 mr-2" />
-            <input type="text" placeholder="Поиск по ID, почте или имени..." className="w-full outline-none font-bold text-sm" />
-          </div>
-          <button className="p-2 hover:bg-gray-200 border-2 border-transparent hover:border-black transition-all rounded-full">
-            <Settings className="w-5 h-5" />
-          </button>
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="flex-1 relative">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
+          <input type="text" placeholder="ПОИСК ПО EMAIL ИЛИ ID..." className="w-full bg-white border-4 border-black p-3 pl-12 font-bold uppercase placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)]" />
         </div>
-        
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse whitespace-nowrap">
-            <thead>
-              <tr className="bg-black text-white text-xs uppercase tracking-widest">
-                <th className="p-4 font-black border-r border-gray-700">ID</th>
-                <th className="p-4 font-black border-r border-gray-700">Пользователь</th>
-                <th className="p-4 font-black border-r border-gray-700">Статус</th>
-                <th className="p-4 font-black border-r border-gray-700">Дата</th>
-                <th className="p-4 font-black border-r border-gray-700">Детали</th>
-                <th className="p-4 font-black text-right">Действия</th>
+        <select className="bg-white border-4 border-black p-3 font-bold uppercase focus:outline-none focus:ring-4 focus:ring-yellow-300 shadow-[4px_4px_0_0_rgba(0,0,0,1)] cursor-pointer">
+          <option>ВСЕ СТАТУСЫ</option>
+          <option>ОЖИДАЮТ</option>
+          <option>ОДОБРЕНЫ</option>
+          <option>ОТКЛОНЕНЫ</option>
+        </select>
+      </div>
+
+      <div className="bg-white border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] overflow-hidden">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="bg-black text-white uppercase font-black text-sm tracking-wider">
+              <th className="p-4 border-r-2 border-gray-800">ID Заявки</th>
+              <th className="p-4 border-r-2 border-gray-800">Пользователь</th>
+              <th className="p-4 border-r-2 border-gray-800">Дата</th>
+              <th className="p-4 border-r-2 border-gray-800">AML Риск</th>
+              <th className="p-4 border-r-2 border-gray-800">Статус</th>
+              <th className="p-4 text-center">Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {requests.map((req, i) => (
+              <tr key={req.id} className="border-b-4 border-black last:border-b-0 hover:bg-yellow-50 transition-colors font-bold uppercase text-sm">
+                <td className="p-4 border-r-4 border-black">{req.id}</td>
+                <td className="p-4 border-r-4 border-black">
+                  <div>{req.user}</div>
+                  <div className="text-gray-500 text-xs mt-1">{req.email}</div>
+                </td>
+                <td className="p-4 border-r-4 border-black">{req.date}</td>
+                <td className="p-4 border-r-4 border-black">
+                  <span className={`px-2 py-1 border-2 border-black ${req.riskScore === 'High' ? 'bg-red-400' : req.riskScore === 'Medium' ? 'bg-yellow-400' : 'bg-green-400'}`}>
+                    {req.riskScore}
+                  </span>
+                </td>
+                <td className="p-4 border-r-4 border-black">
+                  {req.status === 'pending' && <span className="flex items-center gap-2 text-yellow-600"><ShieldAlert className="w-4 h-4"/> На проверке</span>}
+                  {req.status === 'approved' && <span className="flex items-center gap-2 text-green-600"><CheckCircle className="w-4 h-4"/> Одобрен</span>}
+                  {req.status === 'rejected' && <span className="flex items-center gap-2 text-red-600"><XCircle className="w-4 h-4"/> Отклонен</span>}
+                </td>
+                <td className="p-4 flex items-center justify-center gap-2">
+                  <button className="p-2 border-2 border-black hover:bg-black hover:text-white transition-colors" title="Просмотр документов">
+                    <Eye className="w-4 h-4" />
+                  </button>
+                  {req.status === 'pending' && (
+                    <>
+                      <button className="p-2 border-2 border-black bg-green-400 hover:bg-green-500 transition-colors" title="Одобрить">
+                        <CheckCircle className="w-4 h-4" />
+                      </button>
+                      <button className="p-2 border-2 border-black bg-red-400 hover:bg-red-500 transition-colors" title="Отклонить">
+                        <XCircle className="w-4 h-4" />
+                      </button>
+                    </>
+                  )}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                <tr key={i} className="border-b-2 border-gray-200 hover:bg-yellow-100 transition-colors group">
-                  <td className="p-4 font-mono font-bold text-sm">#{i}8X9{i*2}</td>
-                  <td className="p-4">
-                    <div className="font-black text-sm">user_{i}@example.com</div>
-                    <div className="text-xs font-bold text-gray-500 uppercase">Tier {i%3 + 1}</div>
-                  </td>
-                  <td className="p-4">
-                    <span className={`inline-block border-2 border-black px-2 py-0.5 text-[10px] font-black uppercase tracking-wider ${i%2===0 ? 'bg-green-300' : 'bg-red-300'}`}>
-                      {i%2===0 ? 'Approved' : 'Pending'}
-                    </span>
-                  </td>
-                  <td className="p-4 font-mono text-sm font-bold text-gray-700">1{i} Oct 2026</td>
-                  <td className="p-4 text-sm font-medium text-gray-600 truncate max-w-[150px]">Обновлен профиль по API</td>
-                  <td className="p-4 text-right">
-                    <button className="text-black font-black uppercase text-xs border-2 border-black px-3 py-1 bg-white opacity-0 group-hover:opacity-100 hover:bg-black hover:text-white transition-all shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-                      Смотреть
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        
-        <div className="p-4 border-t-4 border-black flex justify-between items-center bg-gray-50 text-sm font-bold uppercase tracking-wider">
-          <span>Показано 1-7 из 450</span>
-          <div className="flex gap-2">
-            <button className="border-2 border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition-colors">&lt;</button>
-            <button className="border-2 border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition-colors">&gt;</button>
-          </div>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
