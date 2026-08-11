@@ -78,13 +78,13 @@ class BacktestEngine
                 $crossDown = ($prevMaFast >= $prevMaSlow) && ($maFast < $maSlow);
                 
                 if ($crossUp && $position == 0) {
-                    // BUY (using 99% of balance to account for fake fees)
+                    // BUY (using 99.9% of balance to account for 0.1% Binance spot fee)
                     $buyPrice = $closePrice;
-                    $position = ($balance * 0.99) / $buyPrice;
+                    $position = ($balance * 0.999) / $buyPrice;
                     $balance = 0;
                 } elseif ($crossDown && $position > 0) {
                     // SELL
-                    $sellValue = $position * $closePrice * 0.99; // 1% simulated fee/slippage
+                    $sellValue = $position * $closePrice * 0.999; // 0.1% Binance spot fee
                     $profit = $sellValue - ($position * $buyPrice);
                     
                     if ($profit > 0) {

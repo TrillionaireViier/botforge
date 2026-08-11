@@ -35,6 +35,8 @@
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_EVENTS_CACHE": "/tmp/events.php"
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "DB_CONNECTION": "pgsql",
+        "DATABASE_URL": "postgresql://neondb_owner:npg_9SVAZh6YJxIG@ep-fragrant-band-afo098g1-pooler.c-2.us-west-2.aws.neon.tech/neondb?sslmode=require"
     }
 }
