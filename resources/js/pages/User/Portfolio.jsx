@@ -63,7 +63,7 @@ export default function Portfolio() {
     const fetchBots = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/bots", {
+        const res = await fetch("/api/bots", {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.ok) {

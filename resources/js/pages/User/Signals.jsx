@@ -11,7 +11,7 @@ const Signals = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">AI Trading Signals</h1>
+        <h1 className="text-3xl font-bold text-gray-900">AI Торговые Сигналы</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -19,7 +19,7 @@ const Signals = () => {
           <div className="flex items-center space-x-4">
             <div className="p-3 bg-blue-100 rounded-lg"><Activity className="w-6 h-6 text-blue-600" /></div>
             <div>
-              <p className="text-sm text-gray-500">Active Signals</p>
+              <p className="text-sm text-gray-500">Активные сигналы</p>
               <h3 className="text-2xl font-bold">24</h3>
             </div>
           </div>
@@ -28,7 +28,7 @@ const Signals = () => {
           <div className="flex items-center space-x-4">
             <div className="p-3 bg-green-100 rounded-lg"><TrendingUp className="w-6 h-6 text-green-600" /></div>
             <div>
-              <p className="text-sm text-gray-500">Win Rate</p>
+              <p className="text-sm text-gray-500">Винрейт</p>
               <h3 className="text-2xl font-bold">78.5%</h3>
             </div>
           </div>
@@ -37,7 +37,7 @@ const Signals = () => {
           <div className="flex items-center space-x-4">
             <div className="p-3 bg-yellow-100 rounded-lg"><AlertTriangle className="w-6 h-6 text-yellow-600" /></div>
             <div>
-              <p className="text-sm text-gray-500">High Risk Signals</p>
+              <p className="text-sm text-gray-500">Рискованные сигналы</p>
               <h3 className="text-2xl font-bold">3</h3>
             </div>
           </div>
@@ -46,18 +46,18 @@ const Signals = () => {
 
       <div className="bg-white rounded-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black overflow-hidden">
         <div className="p-6 border-b-2 border-black">
-          <h2 className="text-xl font-bold">Recent Signals</h2>
+          <h2 className="text-xl font-bold">Последние сигналы</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b-2 border-black">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Pair</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Type</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Price</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Confidence</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Time</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Action</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Пара</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Тип</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Цена</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Уверенность</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Время</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Действие</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -66,7 +66,7 @@ const Signals = () => {
                   <td className="px-6 py-4 font-medium">{signal.pair}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2 py-1 text-xs font-semibold rounded-full ${signal.type === 'Buy' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                      {signal.type}
+                      {signal.type === 'Buy' ? 'Покупка' : 'Продажа'}
                     </span>
                   </td>
                   <td className="px-6 py-4">{signal.price}</td>
@@ -80,7 +80,7 @@ const Signals = () => {
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500">{signal.time}</td>
                   <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-black text-white text-sm rounded-md font-semibold hover:bg-gray-800 transition-colors">Trade</button>
+                    <button className="px-3 py-1 bg-black text-white text-sm rounded-md font-semibold hover:bg-gray-800 transition-colors">Торговать</button>
                   </td>
                 </tr>
               ))}
