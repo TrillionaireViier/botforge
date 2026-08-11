@@ -35,8 +35,8 @@ export default function Footer() {
           <div>
             <h4 className="text-xl font-black uppercase tracking-widest mb-6">Продукт</h4>
             <ul className="space-y-3 font-medium text-gray-400">
-              <li><Link to="/features" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1.5 h-1.5 bg-white block"></span> Функции</Link></li>
-              <li><Link to="/pricing" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1.5 h-1.5 bg-white block"></span> Тарифы</Link></li>
+              <li><a href="#features" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1.5 h-1.5 bg-white block"></span> Функции</a></li>
+              <li><a href="#pricing" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1.5 h-1.5 bg-white block"></span> Тарифы</a></li>
               <li><Link to="/marketplace" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1.5 h-1.5 bg-white block"></span> Маркетплейс</Link></li>
               <li><Link to="/changelog" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1.5 h-1.5 bg-white block"></span> Обновления</Link></li>
             </ul>
