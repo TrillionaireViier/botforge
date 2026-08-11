@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BacktestController;
 
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/register', [AuthController::class, 'register']);
+
+Route::post('/backtest', [BacktestController::class, 'run']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
