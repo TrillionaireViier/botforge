@@ -31,6 +31,20 @@ Route::get('/bots', function () {
     ]);
 });
 
+Route::get('/admin/users', function () {
+    return response()->json([
+        ['id' => 1, 'name' => 'Alex Admin', 'email' => 'admin@example.com', 'role' => 'super_admin', 'createdAt' => '2025-01-10T12:00:00Z', '_count' => ['bots' => 12, 'trades' => 1400]],
+        ['id' => 2, 'name' => 'Ivan Trader', 'email' => 'user@example.com', 'role' => 'user', 'createdAt' => '2026-03-15T08:30:00Z', '_count' => ['bots' => 4, 'trades' => 320]],
+        ['id' => 3, 'name' => 'Support Sarah', 'email' => 'sarah@botforge.com', 'role' => 'admin', 'createdAt' => '2025-11-20T10:15:00Z', '_count' => ['bots' => 0, 'trades' => 0]],
+        ['id' => 4, 'name' => 'Mike Crypto', 'email' => 'mike@crypto.com', 'role' => 'user', 'createdAt' => '2026-05-01T14:45:00Z', '_count' => ['bots' => 8, 'trades' => 890]],
+        ['id' => 5, 'name' => 'Whale John', 'email' => 'john@whale.io', 'role' => 'user', 'createdAt' => '2026-06-10T09:00:00Z', '_count' => ['bots' => 25, 'trades' => 5600]],
+    ]);
+});
+
+Route::patch('/admin/users/{id}/role', function () {
+    return response()->json(['success' => true]);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
