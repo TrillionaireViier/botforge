@@ -18,9 +18,9 @@ const Backtesting = () => {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Trading Pair</label>
                 <select className="w-full p-2 border-2 border-black rounded-md focus:ring-black focus:border-black">
-                  <option>BTC/USDT</option>
-                  <option>ETH/USDT</option>
-                  <option>SOL/USDT</option>
+                  {['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'BNB/USDT', 'XRP/USDT', 'ADA/USDT', 'DOGE/USDT', 'TRX/USDT', 'DOT/USDT', 'MATIC/USDT', 'LTC/USDT', 'BCH/USDT', 'SHIB/USDT', 'LINK/USDT', 'AVAX/USDT', 'XLM/USDT', 'UNI/USDT', 'ATOM/USDT', 'XMR/USDT', 'ETC/USDT', 'ALGO/USDT', 'ICP/USDT', 'FIL/USDT', 'HBAR/USDT', 'VET/USDT', 'NEAR/USDT', 'QNT/USDT', 'APT/USDT', 'ARB/USDT', 'MKR/USDT', 'AAVE/USDT', 'OP/USDT', 'GRT/USDT', 'SNX/USDT', 'RNDR/USDT', 'IMX/USDT', 'STX/USDT', 'INJ/USDT', 'NEO/USDT', 'EOS/USDT'].map((pair) => (
+                    <option key={pair}>{pair}</option>
+                  ))}
                 </select>
               </div>
               <div>
