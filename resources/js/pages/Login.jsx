@@ -15,7 +15,7 @@ export default function Login() {
     if (isRegister) {
       const success = await register(email, password);
       if (!success) {
-        setError('Email already in use or error occurred');
+        setError('Email уже используется или произошла ошибка');
       } else {
         // Auto-login after successful registration
         await login(email, password);
@@ -23,7 +23,7 @@ export default function Login() {
     } else {
       const success = await login(email, password);
       if (!success) {
-        setError('Invalid email or password');
+        setError('Неверный email или пароль');
       }
     }
   };
@@ -40,14 +40,14 @@ export default function Login() {
         </div>
         
         <div className="flex flex-col items-center mb-10 mt-2">
-          <h1 className="text-4xl font-black text-black uppercase tracking-widest text-center">System Access</h1>
+          <h1 className="text-4xl font-black text-black uppercase tracking-widest text-center">Вход в систему</h1>
           <div className="w-16 h-2 bg-black mt-4"></div>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-6">
             <div>
-              <label className="block text-xs font-bold text-black uppercase tracking-widest mb-2">Email / Identifier</label>
+              <label className="block text-xs font-bold text-black uppercase tracking-widest mb-2">Email / Логин</label>
               <input
                 type="email"
                 placeholder="admin@example.com"
@@ -58,7 +58,7 @@ export default function Login() {
             </div>
             
             <div>
-              <label className="block text-xs font-bold text-black uppercase tracking-widest mb-2">Password</label>
+              <label className="block text-xs font-bold text-black uppercase tracking-widest mb-2">Пароль</label>
               <input
                 type="password"
                 placeholder="••••••••"
@@ -72,18 +72,18 @@ export default function Login() {
           </div>
           
           <button type="submit" className="w-full bg-black text-white font-black p-5 uppercase tracking-widest text-xl border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)] hover:bg-white hover:text-black hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all mt-4">
-            {isRegister ? 'Register' : 'Authenticate'}
+            {isRegister ? 'Зарегистрироваться' : 'Войти'}
           </button>
           
           <button type="button" onClick={() => {setIsRegister(!isRegister); setError('');}} className="w-full text-center font-bold text-sm underline hover:text-gray-500 uppercase">
-            {isRegister ? 'Already have an account? Login' : 'Create new account'}
+            {isRegister ? 'Уже есть аккаунт? Войти' : 'Создать новый аккаунт'}
           </button>
         </form>
         
         <div className="mt-10 p-4 border-2 border-black bg-yellow-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-          <h4 className="font-black uppercase tracking-widest text-sm mb-2 text-black">Demo Credentials</h4>
-          <p className="text-black font-medium text-sm mb-1">Admin: Email <strong className="font-black">admin@example.com</strong> / Pass: <strong className="font-black">admin123</strong></p>
-          <p className="text-black font-medium text-sm">User: Email <strong className="font-black">user@example.com</strong> / Pass: <strong className="font-black">user123</strong></p>
+          <h4 className="font-black uppercase tracking-widest text-sm mb-2 text-black">Демо-доступы</h4>
+          <p className="text-black font-medium text-sm mb-1">Админ: Email <strong className="font-black">admin@example.com</strong> / Пароль: <strong className="font-black">admin123</strong></p>
+          <p className="text-black font-medium text-sm">Юзер: Email <strong className="font-black">user@example.com</strong> / Пароль: <strong className="font-black">user123</strong></p>
         </div>
       </div>
     </div>
