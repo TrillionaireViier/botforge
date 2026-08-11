@@ -194,7 +194,7 @@ function AppRoutes() {
       <Route path="/user" element={<ProtectedRoute allowedRole="user"><UserLayout /></ProtectedRoute>}>
         <Route index element={<UserDashboard />} />
         <Route path="bots" element={<TradingBots />} />
-        <Route path="pricing" element={<Pricing />} />
+        <Route path="pricing" element={<Billing />} />
         <Route path="signals" element={<Signals />} />
         <Route path="copy-trading" element={<CopyTrading />} />
         <Route path="backtesting" element={<Backtesting />} />
