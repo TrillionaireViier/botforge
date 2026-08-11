@@ -100,6 +100,14 @@ const Placeholder = ({ title }) => (
   </div>
 );
 
+import Changelog from "./pages/Public/Changelog";
+import ApiReference from "./pages/Public/ApiReference";
+import Guides from "./pages/Public/Guides";
+import Terms from "./pages/Public/Terms";
+import Privacy from "./pages/Public/Privacy";
+import Cookies from "./pages/Public/Cookies";
+import Contact from "./pages/Public/Contact";
+
 const PublicLayout = ({ children }) => (
   <div className="min-h-screen bg-white flex flex-col font-sans">
     <PublicNavbar />
@@ -116,19 +124,17 @@ function AppRoutes() {
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
 
-      {/* Public Footer Links (Placeholders) */}
-      <Route path="/features" element={<PublicLayout><Placeholder title="Функции" /></PublicLayout>} />
-      <Route path="/pricing" element={<PublicLayout><Placeholder title="Тарифы" /></PublicLayout>} />
-      <Route path="/marketplace" element={<PublicLayout><Placeholder title="Маркетплейс" /></PublicLayout>} />
-      <Route path="/changelog" element={<PublicLayout><Placeholder title="Обновления" /></PublicLayout>} />
-      <Route path="/docs" element={<PublicLayout><Placeholder title="Документация" /></PublicLayout>} />
-      <Route path="/api" element={<PublicLayout><Placeholder title="API Reference" /></PublicLayout>} />
-      <Route path="/blog" element={<PublicLayout><Placeholder title="Блог" /></PublicLayout>} />
-      <Route path="/guides" element={<PublicLayout><Placeholder title="Гайды" /></PublicLayout>} />
-      <Route path="/terms" element={<PublicLayout><Placeholder title="Условия сервиса" /></PublicLayout>} />
-      <Route path="/privacy" element={<PublicLayout><Placeholder title="Политика кондф." /></PublicLayout>} />
-      <Route path="/cookies" element={<PublicLayout><Placeholder title="Cookies" /></PublicLayout>} />
-      <Route path="/contact" element={<PublicLayout><Placeholder title="Контакты" /></PublicLayout>} />
+      {/* Public Footer Links */}
+      <Route path="/marketplace" element={<PublicLayout><Marketplace /></PublicLayout>} />
+      <Route path="/changelog" element={<PublicLayout><Changelog /></PublicLayout>} />
+      <Route path="/docs" element={<PublicLayout><Documentation /></PublicLayout>} />
+      <Route path="/api" element={<PublicLayout><ApiReference /></PublicLayout>} />
+      <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
+      <Route path="/guides" element={<PublicLayout><Guides /></PublicLayout>} />
+      <Route path="/terms" element={<PublicLayout><Terms /></PublicLayout>} />
+      <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
+      <Route path="/cookies" element={<PublicLayout><Cookies /></PublicLayout>} />
+      <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
 
       <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><AdminLayout /></ProtectedRoute>}>
         <Route index element={<Dashboard />} />
