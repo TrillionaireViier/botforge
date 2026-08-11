@@ -3,17 +3,17 @@ import { Users, Star, TrendingUp } from 'lucide-react';
 
 const CopyTrading = () => {
   const topTraders = [
-    { id: 1, name: 'CryptoKing', roi: '+145.2%', followers: 1205, risk: 'High', avatar: 'CK' },
-    { id: 2, name: 'SafeGains', roi: '+42.8%', followers: 3420, risk: 'Low', avatar: 'SG' },
-    { id: 3, name: 'AlphaSeeker', roi: '+89.5%', followers: 856, risk: 'Medium', avatar: 'AS' },
+    { id: 1, name: 'CryptoKing', roi: '+145.2%', followers: 1205, risk: 'Высокий', avatar: 'CK' },
+    { id: 2, name: 'SafeGains', roi: '+42.8%', followers: 3420, risk: 'Низкий', avatar: 'SG' },
+    { id: 3, name: 'AlphaSeeker', roi: '+89.5%', followers: 856, risk: 'Средний', avatar: 'AS' },
   ];
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">Copy Trading Marketplace</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Копитрейдинг</h1>
         <button className="px-4 py-2 bg-black text-white rounded-md font-semibold hover:bg-gray-800">
-          My Copied Traders
+          Мои Подписки
         </button>
       </div>
 
@@ -30,10 +30,10 @@ const CopyTrading = () => {
             </div>
             <div className="flex items-center space-x-4 text-sm text-gray-500 mb-6">
               <div className="flex items-center"><Users className="w-4 h-4 mr-1" /> {trader.followers}</div>
-              <div className="flex items-center"><Star className="w-4 h-4 mr-1 text-yellow-500" /> {trader.risk} Risk</div>
+              <div className="flex items-center"><Star className="w-4 h-4 mr-1 text-yellow-500" /> Риск: {trader.risk}</div>
             </div>
             <button className="w-full py-2 bg-blue-600 text-white rounded-md font-bold hover:bg-blue-700 transition-colors border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)]">
-              Copy Trader
+              Скопировать
             </button>
           </div>
         ))}
