@@ -8,6 +8,8 @@ const ApiKeys = () => {
   const [formData, setFormData] = useState({ api_key: '', api_secret: '' });
   const [saving, setSaving] = useState(false);
 
+  const [errorMsg, setErrorMsg] = useState(null);
+
   const fetchKeys = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -16,7 +18,7 @@ const ApiKeys = () => {
       });
       if (res.ok) {
         const data = await res.json();
-        setKeys(data); // Will be null or { api_key: '...', has_secret: true }
+        setKeys(data);
       }
     } catch (error) {
       console.error("Failed to fetch API keys", error);
@@ -32,6 +34,7 @@ const ApiKeys = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     setSaving(true);
+    setErrorMsg(null);
     try {
       const token = localStorage.getItem("token");
       const res = await fetch("/api/trading/keys", {
@@ -47,9 +50,11 @@ const ApiKeys = () => {
         setFormData({ api_key: '', api_secret: '' });
         fetchKeys();
       } else {
-        alert("Ошибка при сохранении ключей");
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.message || "Ошибка при сохранении ключей на сервере (Возможно, вы не авторизованы или БД сброшена)");
       }
     } catch (error) {
+      setErrorMsg("Ошибка сети или сервера");
       console.error(error);
     } finally {
       setSaving(false);
@@ -76,6 +81,17 @@ const ApiKeys = () => {
       {showForm && (
         <form onSubmit={handleSave} className="bg-white p-6 rounded-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black space-y-4">
           <h2 className="text-xl font-bold">Подключение Binance (Testnet)</h2>
+          
+          {errorMsg && (
+            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded shadow-sm flex items-start">
+              <Shield className="w-5 h-5 mr-2 mt-0.5" />
+              <div>
+                <p className="font-bold uppercase tracking-widest text-xs mb-1">Ошибка сохранения</p>
+                <p className="text-sm font-medium">{errorMsg}</p>
+              </div>
+            </div>
+          )}
+
           <div>
             <label className="block font-bold mb-2">API Key</label>
             <input required type="text" value={formData.api_key} onChange={e => setFormData({...formData, api_key: e.target.value})} className="w-full border-2 border-black p-3 rounded" placeholder="Введите API ключ" />
