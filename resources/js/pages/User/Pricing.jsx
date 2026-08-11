@@ -1,107 +1,123 @@
-import React, { useState } from 'react';
-import { Check, Star, Zap, Shield } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { CreditCard, Zap, Check, ShieldCheck, History, AlertCircle } from 'lucide-react';
 
-const Pricing = () => {
-  const [billingCycle, setBillingCycle] = useState('monthly');
+export default function Pricing() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const plans = [
-    {
-      name: 'Базовый',
-      price: billingCycle === 'monthly' ? '$19' : '$190',
-      description: 'Идеально для новичков, начинающих свой путь в крипте.',
-      features: ['До 2 активных ботов', 'Базовые торговые сигналы', 'Поддержка по Email', '1 Подключенная биржа'],
-      icon: <Shield className="w-8 h-8 text-blue-500 mb-4" />,
-      color: 'border-blue-500'
-    },
-    {
-      name: 'Профи',
-      price: billingCycle === 'monthly' ? '$49' : '$490',
-      description: 'Продвинутые функции для серьезных трейдеров.',
-      features: ['До 10 активных ботов', 'Премиум AI сигналы', 'Приоритетная поддержка 24/7', '3 Подключенные биржи', 'Продвинутый бэктестинг'],
-      icon: <Star className="w-8 h-8 text-yellow-500 mb-4" />,
-      color: 'border-yellow-500',
-      popular: true
-    },
-    {
-      name: 'Элит',
-      price: billingCycle === 'monthly' ? '$99' : '$990',
-      description: 'Максимальная мощность для институциональных объемов.',
-      features: ['Безлимитные активные боты', 'API доступ в реальном времени', 'Персональный менеджер', 'Безлимитные биржи', 'Кастомная логика ботов'],
-      icon: <Zap className="w-8 h-8 text-purple-500 mb-4" />,
-      color: 'border-purple-500'
+  const handlePayment = async (provider) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`/api/billing/${provider}`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      
+      if (data.success && data.payment_url) {
+        window.location.href = data.payment_url;
+      } else {
+        setError("Ошибка при создании инвойса. Попробуйте позже.");
+      }
+    } catch (err) {
+      setError("Ошибка сети.");
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto">
+    <div className="animate-in fade-in duration-500 max-w-6xl mx-auto space-y-12">
+      
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-black text-gray-900">Управление подпиской</h1>
-        <p className="text-xl text-gray-500 font-bold max-w-2xl mx-auto">Текущий план: <span className="text-black bg-yellow-300 px-2 py-1 rounded">Профи (Активен)</span></p>
+        <h1 className="text-5xl font-black uppercase tracking-widest text-black">Тарифные Планы</h1>
+        <p className="text-xl font-bold text-gray-600 uppercase max-w-2xl mx-auto">Управляйте подпиской и увеличивайте лимиты своих торговых систем.</p>
+        <div className="w-24 h-2 bg-black mx-auto mt-6"></div>
       </div>
 
-      <div className="flex justify-center">
-        <div className="bg-white p-1 rounded-lg border-2 border-black inline-flex">
-          <button 
-            onClick={() => setBillingCycle('monthly')}
-            className={`px-6 py-2 rounded-md font-bold transition-colors ${billingCycle === 'monthly' ? 'bg-black text-white' : 'hover:bg-gray-100 text-gray-600'}`}
-          >
-            Ежемесячно
-          </button>
-          <button 
-            onClick={() => setBillingCycle('yearly')}
-            className={`px-6 py-2 rounded-md font-bold transition-colors ${billingCycle === 'yearly' ? 'bg-black text-white' : 'hover:bg-gray-100 text-gray-600'}`}
-          >
-            Ежегодно (Экономия 20%)
-          </button>
+      {error && (
+        <div className="bg-red-100 border-l-4 border-red-500 p-4 flex items-start space-x-3 rounded">
+          <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+          <p className="text-red-700 font-bold uppercase">{error}</p>
         </div>
-      </div>
+      )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {plans.map((plan) => (
-          <div key={plan.name} className={`bg-white rounded-2xl p-8 border-4 relative flex flex-col ${plan.color} ${plan.popular ? 'shadow-[8px_8px_0_0_rgba(0,0,0,1)] transform md:-translate-y-4' : 'shadow-[4px_4px_0_0_rgba(0,0,0,1)]'}`}>
-            {plan.popular && (
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-yellow-400 border-2 border-black px-4 py-1 rounded-full font-bold text-sm">
-                Самый популярный
-              </div>
-            )}
-            
-            {plan.icon}
-            <h3 className="text-2xl font-black mb-2">{plan.name}</h3>
-            <div className="mb-4">
-              <span className="text-4xl font-black">{plan.price}</span>
-              <span className="text-gray-500 font-bold">/{billingCycle === 'monthly' ? 'мес' : 'год'}</span>
-            </div>
-            <p className="text-gray-600 font-medium mb-6 h-12">{plan.description}</p>
-            
-            <div className="flex-1">
-              <ul className="space-y-4 mb-8">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start">
-                    <Check className="w-5 h-5 text-green-500 mr-3 shrink-0" />
-                    <span className="font-bold text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <button className={`w-full py-4 rounded-xl font-black text-lg border-2 border-black transition-transform hover:-translate-y-1 ${plan.name === 'Профи' ? 'bg-black text-white' : 'bg-white hover:bg-gray-50'}`}>
-              {plan.name === 'Профи' ? 'Текущий план' : `Перейти на ${plan.name}`}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
+        {/* TRIAL */}
+        <div className="bg-yellow-300 border-4 border-black p-8 flex flex-col shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] md:-translate-y-4 hover:-translate-y-6 transition-all relative z-10">
+          <div className="absolute top-0 right-0 bg-black text-white px-4 py-1 font-black uppercase text-xs tracking-widest border-l-4 border-b-4 border-black">Хит продаж</div>
+          <h3 className="text-2xl font-black uppercase mb-2">Тестовая Неделя</h3>
+          <div className="text-5xl font-black mb-6">$10<span className="text-lg text-gray-800">/7 дней</span></div>
+          
+          <ul className="space-y-4 mb-8 flex-1 font-bold text-sm uppercase">
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> 1 Активный бот</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> 1 API Ключ (Binance)</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Защита от слива</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Бэктестинг</li>
+          </ul>
+          
+          <div className="space-y-3 mt-auto">
+            <button disabled={loading} onClick={() => handlePayment('cryptomus')} className="w-full bg-black text-white border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-white hover:text-black transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
+              <Zap className="w-5 h-5" /> Cryptomus
+            </button>
+            <button disabled={loading} onClick={() => handlePayment('whitebit')} className="w-full bg-white text-black border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-black hover:text-white transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
+              <CreditCard className="w-5 h-5" /> WhiteBIT Pay
             </button>
           </div>
-        ))}
+        </div>
+
+        {/* PRO */}
+        <div className="bg-white border-4 border-black p-8 flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all relative">
+          <h3 className="text-2xl font-black uppercase mb-2">Pro</h3>
+          <div className="text-5xl font-black mb-6">$29<span className="text-lg text-gray-500">/мес</span></div>
+          
+          <ul className="space-y-4 mb-8 flex-1 font-bold text-sm uppercase">
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> До 10 активных ботов</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Спот + Фьючерсы</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Трейлинг стопы</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Доступ в Маркетплейс</li>
+          </ul>
+          
+          <button className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2">
+            Купить Pro
+          </button>
+        </div>
+
+        {/* ULTRA */}
+        <div className="bg-white border-4 border-black p-8 flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all relative">
+          <h3 className="text-2xl font-black uppercase mb-2">Ultra</h3>
+          <div className="text-5xl font-black mb-6">$99<span className="text-lg text-gray-500">/мес</span></div>
+          
+          <ul className="space-y-4 mb-8 flex-1 font-bold text-sm uppercase">
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Безлимит ботов</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> API Доступ</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> AI Сигналы</li>
+            <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Выделенный сервер</li>
+          </ul>
+          
+          <button className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2">
+            Купить Ultra
+          </button>
+        </div>
       </div>
 
-      <div className="bg-red-50 p-6 rounded-xl border-2 border-red-200 mt-12 flex justify-between items-center">
-        <div>
-          <h3 className="font-bold text-red-800 text-lg">Отменить подписку</h3>
-          <p className="text-red-600">Вы потеряете доступ к Pro-функциям в конце вашего расчетного периода.</p>
+      <div className="bg-gray-50 border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <h3 className="font-black uppercase text-2xl flex items-center gap-3 mb-6">
+          <CreditCard className="w-8 h-8" /> Способы Оплаты
+        </h3>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex-1 bg-white border-2 border-black p-6 flex flex-col items-center justify-center gap-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
+            <ShieldCheck className="w-10 h-10 group-hover:text-yellow-400" />
+            <span className="font-bold uppercase tracking-widest text-center">Криптовалюта<br/><span className="text-xs text-gray-500 group-hover:text-gray-300">Cryptomus / WhiteBIT</span></span>
+          </div>
+          <div className="flex-1 bg-white border-2 border-black p-6 flex flex-col items-center justify-center gap-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
+            <CreditCard className="w-10 h-10 group-hover:text-blue-400" />
+            <span className="font-bold uppercase tracking-widest">Банковская Карта (Stripe)</span>
+          </div>
         </div>
-        <button className="px-6 py-2 border-2 border-red-800 text-red-800 font-bold rounded-lg hover:bg-red-100 transition-colors">
-          Отменить план
-        </button>
       </div>
     </div>
   );
-};
-
-export default Pricing;
+}
