@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'balance',
+        'tier',
+        'status',
     ];
 
     /**
@@ -41,5 +45,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'balance' => 'decimal:2',
     ];
+
+    public function trades()
+    {
+        return $this->hasMany(Trade::class);
+    }
+
+    public function supportTickets()
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
 }

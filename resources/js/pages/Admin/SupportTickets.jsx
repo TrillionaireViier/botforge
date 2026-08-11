@@ -95,7 +95,7 @@ const SupportTickets = () => {
               {tickets.map((ticket) => (
                 <tr key={ticket.id} className="hover:bg-gray-50 cursor-pointer">
                   <td className="px-6 py-4">
-                    <p className="font-bold text-blue-600">{ticket.id.split('-')[0].toUpperCase()}</p>
+                    <p className="font-bold text-blue-600">TKT-{ticket.id}</p>
                     <p className="font-bold text-gray-900">{ticket.subject}</p>
                   </td>
                   <td className="px-6 py-4 text-sm font-medium">
@@ -104,7 +104,7 @@ const SupportTickets = () => {
                   </td>
                   <td className="px-6 py-4">
                     <span className="px-2 py-1 text-xs font-black rounded border-2 border-black bg-yellow-200 text-yellow-900">
-                      Стандарт
+                      {ticket.priority?.toUpperCase() || 'СТАНДАРТ'}
                     </span>
                   </td>
                   <td className="px-6 py-4">
@@ -122,7 +122,7 @@ const SupportTickets = () => {
                       <option value="resolved">РЕШЕН</option>
                     </select>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{new Date(ticket.updatedAt).toLocaleString()}</td>
+                  <td className="px-6 py-4 text-sm text-gray-500">{new Date(ticket.updated_at).toLocaleString()}</td>
                   <td className="px-6 py-4">
                     <button className="p-2 bg-black text-white rounded hover:bg-gray-800"><MessageSquare className="w-4 h-4" /></button>
                   </td>

@@ -13,13 +13,18 @@ export default function UserDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const token = localStorage.getItem('botforge_token');
-        const res = await fetch('http://localhost:5000/api/dashboard/stats', {
+        const token = localStorage.getItem('token');
+        const res = await fetch('/api/trading/balance', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
-          const data = await res.json();
-          setStats(data);
+          const balances = await res.json();
+          // Find USDT balance for example
+          const usdt = balances.find(b => b.asset === 'USDT');
+          const usdtBalance = usdt ? parseFloat(usdt.free) + parseFloat(usdt.locked) : 0;
+          setStats({ balance: usdtBalance, totalProfit: 0 }); // Hardcoding totalProfit for now
+        } else {
+          setStats({ balance: 0, totalProfit: 0 });
         }
       } catch (err) {
         console.error('Error fetching stats:', err);
@@ -70,7 +75,7 @@ export default function UserDashboard() {
           <div className="absolute top-0 right-0 w-16 h-16 bg-gray-100 rounded-bl-full -z-10 group-hover:bg-black transition-colors"></div>
           <div className="flex justify-between items-start">
             <div>
-              <p className="font-bold text-sm tracking-widest uppercase">Инвестировано</p>
+              <p className="font-bold text-sm tracking-widest uppercase">Binance Testnet Balance (USDT)</p>
               <p className="text-4xl font-black mt-2">{stats.balance.toLocaleString()} USDT</p>
             </div>
             <div className="p-3 border-2 border-black bg-white group-hover:bg-black group-hover:text-white transition-colors">
@@ -78,7 +83,7 @@ export default function UserDashboard() {
             </div>
           </div>
           <div className="mt-6 flex items-center space-x-2 text-sm">
-            <span className="font-bold uppercase tracking-widest border-2 border-black px-2 py-1 group-hover:bg-black group-hover:text-white transition-colors">Статус: В работе</span>
+            <span className="font-bold uppercase tracking-widest border-2 border-black px-2 py-1 group-hover:bg-black group-hover:text-white transition-colors">Статус: Live</span>
           </div>
         </div>
 
@@ -95,8 +100,25 @@ export default function UserDashboard() {
               <Activity className="w-6 h-6" />
             </div>
           </div>
-          <div className="mt-6 flex items-center space-x-2 text-sm">
+          <div className="mt-6 flex items-center justify-between space-x-2 text-sm">
             <span className="font-bold uppercase tracking-widest border-2 border-black px-2 py-1 group-hover:bg-black group-hover:text-white transition-colors">За всё время</span>
+            <button onClick={async () => {
+              try {
+                const token = localStorage.getItem('token');
+                const res = await fetch('/api/trading/order', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                  body: JSON.stringify({ symbol: 'BTCUSDT', side: 'BUY', quantity: 0.001 })
+                });
+                const data = await res.json();
+                if(res.ok) alert("Тестовый ордер на покупку 0.001 BTC успешно отправлен на Binance Testnet!");
+                else alert("Ошибка: " + data.error);
+              } catch (e) {
+                console.error(e);
+              }
+            }} className="bg-black text-white px-4 py-2 font-bold uppercase hover:bg-white hover:text-black border-2 border-black transition-colors">
+              Тестовая сделка (0.001 BTC)
+            </button>
           </div>
         </div>
       </div>

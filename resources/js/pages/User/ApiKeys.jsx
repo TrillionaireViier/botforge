@@ -2,25 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Key, Plus, Trash2, Eye, EyeOff, Shield, Loader2 } from 'lucide-react';
 
 const ApiKeys = () => {
-  const [keys, setKeys] = useState([]);
+  const [keys, setKeys] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({ api_key: '', api_secret: '' });
+  const [saving, setSaving] = useState(false);
 
   const fetchKeys = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("/api/apikeys", {
+      const res = await fetch("/api/trading/keys", {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.ok) {
         const data = await res.json();
-        const mappedKeys = data.map(k => ({
-          id: k.id,
-          exchange: k.exchange,
-          name: k.name,
-          lastUsed: k.lastUsed,
-          permissions: 'Чтение, Торговля' // Hardcoded for demo since DB doesn't store this yet
-        }));
-        setKeys(mappedKeys);
+        setKeys(data); // Will be null or { api_key: '...', has_secret: true }
       }
     } catch (error) {
       console.error("Failed to fetch API keys", error);
@@ -33,19 +29,30 @@ const ApiKeys = () => {
     fetchKeys();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (!confirm('Вы уверены, что хотите удалить этот API ключ?')) return;
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setSaving(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`/api/apikeys/${id}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` }
+      const res = await fetch("/api/trading/keys", {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` 
+        },
+        body: JSON.stringify(formData)
       });
       if (res.ok) {
-        setKeys(keys.filter(k => k.id !== id));
+        setShowForm(false);
+        setFormData({ api_key: '', api_secret: '' });
+        fetchKeys();
+      } else {
+        alert("Ошибка при сохранении ключей");
       }
     } catch (error) {
-      console.error("Failed to delete key", error);
+      console.error(error);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -53,8 +60,8 @@ const ApiKeys = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">Управление API ключами</h1>
-        <button className="px-4 py-2 bg-black text-white rounded-md font-semibold hover:bg-gray-800 flex items-center">
-          <Plus className="w-5 h-5 mr-2" /> Добавить ключ
+        <button onClick={() => setShowForm(!showForm)} className="px-4 py-2 bg-black text-white rounded-md font-semibold hover:bg-gray-800 flex items-center">
+          <Plus className="w-5 h-5 mr-2" /> Добавить / Обновить ключ
         </button>
       </div>
 
@@ -66,46 +73,48 @@ const ApiKeys = () => {
         </div>
       </div>
 
+      {showForm && (
+        <form onSubmit={handleSave} className="bg-white p-6 rounded-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black space-y-4">
+          <h2 className="text-xl font-bold">Подключение Binance (Testnet)</h2>
+          <div>
+            <label className="block font-bold mb-2">API Key</label>
+            <input required type="text" value={formData.api_key} onChange={e => setFormData({...formData, api_key: e.target.value})} className="w-full border-2 border-black p-3 rounded" placeholder="Введите API ключ" />
+          </div>
+          <div>
+            <label className="block font-bold mb-2">Secret Key</label>
+            <input required type="password" value={formData.api_secret} onChange={e => setFormData({...formData, api_secret: e.target.value})} className="w-full border-2 border-black p-3 rounded" placeholder="Введите Secret ключ" />
+          </div>
+          <button type="submit" disabled={saving} className="bg-black text-white px-6 py-3 font-bold rounded hover:bg-gray-800 disabled:opacity-50">
+            {saving ? 'Сохранение...' : 'Сохранить ключи'}
+          </button>
+        </form>
+      )}
+
       <div className="bg-white rounded-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black overflow-hidden">
         <div className="p-6 border-b-2 border-black">
           <h2 className="text-xl font-bold">Подключенные биржи</h2>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 border-b-2 border-black">
-              <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Биржа / Имя</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Права</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Последнее использование</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Действия</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {keys.map((key) => (
-                <tr key={key.id}>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border-2 border-black">
-                        <Key className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="font-bold">{key.exchange}</p>
-                        <p className="text-sm text-gray-500">{key.name}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 text-sm">{key.permissions}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{key.lastUsed}</td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-2">
-                      <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"><Eye className="w-5 h-5" /></button>
-                      <button onClick={() => handleDelete(key.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"><Trash2 className="w-5 h-5" /></button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="p-6">
+          {loading ? (
+            <div className="flex items-center justify-center p-4"><Loader2 className="animate-spin" /></div>
+          ) : keys ? (
+            <div className="flex items-center justify-between bg-gray-50 border-2 border-black p-4 rounded-lg">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
+                  <Key className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg">Binance Testnet</h3>
+                  <p className="text-gray-600 font-mono text-sm">API Key: {keys.api_key}</p>
+                </div>
+              </div>
+              <div className="flex flex-col items-end">
+                <span className="bg-green-100 text-green-800 px-3 py-1 font-bold text-xs rounded-full border-2 border-black uppercase tracking-wider">Подключено</span>
+              </div>
+            </div>
+          ) : (
+            <div className="text-center text-gray-500 font-bold p-8">Нет подключенных ключей. Пожалуйста, добавьте ключи Binance.</div>
+          )}
         </div>
       </div>
     </div>

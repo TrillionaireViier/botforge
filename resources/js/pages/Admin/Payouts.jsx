@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Plus, Filter, ArrowRight, Settings, Save, CheckCircle, AlertTriangle, RefreshCw, Server, FileText, BarChart3, Database } from 'lucide-react';
 export default function Payouts() {
+  const [payouts, setPayouts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPayouts = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch("/api/admin/payouts", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setPayouts(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch payouts", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPayouts();
+  }, []);
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -35,27 +58,29 @@ export default function Payouts() {
               <tr className="bg-black text-white text-xs uppercase tracking-widest">
                 <th className="p-4 font-black border-r border-gray-700">ID</th>
                 <th className="p-4 font-black border-r border-gray-700">Пользователь</th>
+                <th className="p-4 font-black border-r border-gray-700">Сумма</th>
                 <th className="p-4 font-black border-r border-gray-700">Статус</th>
                 <th className="p-4 font-black border-r border-gray-700">Дата</th>
-                <th className="p-4 font-black border-r border-gray-700">Детали</th>
+                <th className="p-4 font-black border-r border-gray-700">Метод</th>
                 <th className="p-4 font-black text-right">Действия</th>
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                <tr key={i} className="border-b-2 border-gray-200 hover:bg-yellow-100 transition-colors group">
-                  <td className="p-4 font-mono font-bold text-sm">#{i}8X9{i*2}</td>
+              {payouts.map((payout) => (
+                <tr key={payout.id} className="border-b-2 border-gray-200 hover:bg-yellow-100 transition-colors group">
+                  <td className="p-4 font-mono font-bold text-sm">#{payout.id}</td>
                   <td className="p-4">
-                    <div className="font-black text-sm">user_{i}@example.com</div>
-                    <div className="text-xs font-bold text-gray-500 uppercase">Tier {i%3 + 1}</div>
+                    <div className="font-black text-sm">{payout.user?.email || 'Неизвестен'}</div>
+                    <div className="text-xs font-bold text-gray-500 uppercase">{payout.user?.name}</div>
                   </td>
+                  <td className="p-4 font-black text-green-600">${payout.amount}</td>
                   <td className="p-4">
-                    <span className={`inline-block border-2 border-black px-2 py-0.5 text-[10px] font-black uppercase tracking-wider ${i%2===0 ? 'bg-green-300' : 'bg-red-300'}`}>
-                      {i%2===0 ? 'Approved' : 'Pending'}
+                    <span className={`inline-block border-2 border-black px-2 py-0.5 text-[10px] font-black uppercase tracking-wider ${payout.status === 'completed' ? 'bg-green-300' : 'bg-red-300'}`}>
+                      {payout.status.toUpperCase()}
                     </span>
                   </td>
-                  <td className="p-4 font-mono text-sm font-bold text-gray-700">1{i} Oct 2026</td>
-                  <td className="p-4 text-sm font-medium text-gray-600 truncate max-w-[150px]">Обновлен профиль по API</td>
+                  <td className="p-4 font-mono text-sm font-bold text-gray-700">{new Date(payout.created_at).toLocaleDateString()}</td>
+                  <td className="p-4 text-sm font-medium text-gray-600 truncate max-w-[150px]">{payout.method}</td>
                   <td className="p-4 text-right">
                     <button className="text-black font-black uppercase text-xs border-2 border-black px-3 py-1 bg-white opacity-0 group-hover:opacity-100 hover:bg-black hover:text-white transition-all shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                       Смотреть
@@ -63,6 +88,11 @@ export default function Payouts() {
                   </td>
                 </tr>
               ))}
+              {payouts.length === 0 && !loading && (
+                <tr>
+                  <td colSpan="7" className="p-8 text-center font-bold text-gray-500">Нет выплат</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

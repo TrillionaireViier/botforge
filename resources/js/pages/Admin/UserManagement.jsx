@@ -111,10 +111,10 @@ const UserManagement = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 font-bold text-sm">
-                    {user._count?.bots || 0} Ботов, {user._count?.trades || 0} Сделок
+                    {user.trades_count || 0} Сделок
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500 font-medium">
-                    {new Date(user.createdAt).toLocaleDateString()}
+                    {new Date(user.created_at).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4">
                     <select 

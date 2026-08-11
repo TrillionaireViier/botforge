@@ -96,21 +96,21 @@ const BotPerformance = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 font-bold">{bot.pair}</td>
+                  <td className="px-6 py-4 font-bold">Универсальный</td>
                   <td className="px-6 py-4">
-                    <p className="font-medium text-sm">{bot.user?.name || 'Неизвестен'}</p>
-                    <p className="text-xs text-gray-500">{bot.user?.email}</p>
+                    <p className="font-medium text-sm">Система</p>
+                    <p className="text-xs text-gray-500">Авто-Бот</p>
                   </td>
                   <td className="px-6 py-4">
                     <span className={`px-3 py-1 text-xs font-bold rounded-full border-2 border-black ${
-                      bot.status === 'active' ? 'bg-green-100 text-green-800' : 
-                      bot.status === 'stopped' ? 'bg-gray-100 text-gray-800' : 'bg-red-100 text-red-800'
+                      bot.status === 'Active' ? 'bg-green-100 text-green-800' : 
+                      bot.status === 'Stopped' ? 'bg-gray-100 text-gray-800' : 'bg-red-100 text-red-800'
                     }`}>
-                      {bot.status === 'active' ? 'АКТИВЕН' : bot.status === 'stopped' ? 'ОСТАНОВЛЕН' : 'ОШИБКА'}
+                      {bot.status === 'Active' ? 'АКТИВЕН' : bot.status === 'Stopped' ? 'ОСТАНОВЛЕН' : 'ОШИБКА'}
                     </span>
                   </td>
-                  <td className={`px-6 py-4 font-bold ${bot.profit > 0 ? 'text-green-600' : bot.profit < 0 ? 'text-red-600' : ''}`}>
-                    {bot.profit > 0 ? '+' : ''}${bot.profit.toFixed(2)}
+                  <td className={`px-6 py-4 font-bold ${bot.roi > 0 ? 'text-green-600' : bot.roi < 0 ? 'text-red-600' : ''}`}>
+                    {bot.roi > 0 ? '+' : ''}{bot.roi}%
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex space-x-2">

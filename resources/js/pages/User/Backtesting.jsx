@@ -11,6 +11,8 @@ const Backtesting = () => {
   const [strategy, setStrategy] = useState('Grid Bot (Сетка)');
   const [timeframe, setTimeframe] = useState('1h');
   const [capital, setCapital] = useState(10000);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   
   // Results State
   const [results, setResults] = useState(null);
@@ -36,7 +38,9 @@ const Backtesting = () => {
           pair,
           timeframe,
           strategy,
-          capital
+          capital,
+          start_date: startDate,
+          end_date: endDate
         })
       });
 
@@ -94,8 +98,8 @@ const Backtesting = () => {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Период дат (Опционально)</label>
                 <div className="flex space-x-2">
-                  <input type="date" className="w-1/2 p-2 border-2 border-black rounded-md opacity-50 cursor-not-allowed" disabled title="Автоматически используется 1000 последних свечей" />
-                  <input type="date" className="w-1/2 p-2 border-2 border-black rounded-md opacity-50 cursor-not-allowed" disabled title="Автоматически используется 1000 последних свечей" />
+                  <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-1/2 p-2 border-2 border-black rounded-md focus:ring-black focus:border-black" title="Начальная дата" />
+                  <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-1/2 p-2 border-2 border-black rounded-md focus:ring-black focus:border-black" title="Конечная дата" />
                 </div>
               </div>
               <div>

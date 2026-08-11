@@ -2,25 +2,41 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
-
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BacktestController;
+use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\TradingController;
 
-Route::post('/auth/login', [AuthController::class, 'login']);
-Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/backtest', [BacktestController::class, 'run']);
+Route::post('/backtest', [\App\Http\Controllers\BacktestController::class, 'run']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [AuthController::class, 'user']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Trading API Routes
+    Route::get('/trading/keys', [TradingController::class, 'getKeys']);
+    Route::post('/trading/keys', [TradingController::class, 'saveKeys']);
+    Route::get('/trading/balance', [TradingController::class, 'getBalance']);
+    Route::post('/trading/order', [TradingController::class, 'placeOrder']);
+});
+
+Route::get('/admin/users', [AdminController::class, 'getUsers']);
+Route::get('/admin/bots', [AdminController::class, 'getBots']);
+Route::get('/admin/trades', [AdminController::class, 'getTrades']);
+Route::get('/admin/tickets', [AdminController::class, 'getTickets']);
+Route::get('/admin/settings', [AdminController::class, 'getSettings']);
+Route::post('/admin/settings', [AdminController::class, 'updateSettings']);
+Route::get('/admin/integrations', [AdminController::class, 'getIntegrations']);
+Route::get('/admin/payouts', [AdminController::class, 'getPayouts']);
+Route::get('/admin/leads', [AdminController::class, 'getLeads']);
+Route::get('/admin/articles', [AdminController::class, 'getArticles']);
+Route::get('/admin/promocodes', [AdminController::class, 'getPromocodes']);
+
+Route::patch('/admin/users/{id}/role', function () {
+    return response()->json(['success' => true]);
+});
 
 Route::get('/bots', function () {
     return response()->json([
@@ -29,20 +45,6 @@ Route::get('/bots', function () {
         ['id' => 3, 'name' => 'Grid Master', 'strategy' => 'grid', 'pair' => 'SOL/USDT', 'invested' => 5000, 'profit' => 840.10, 'status' => 'active'],
         ['id' => 4, 'name' => 'Arb Sniper', 'strategy' => 'arbitrage', 'pair' => 'XRP/USDT', 'invested' => 800, 'profit' => 12.30, 'status' => 'paused']
     ]);
-});
-
-Route::get('/admin/users', function () {
-    return response()->json([
-        ['id' => 1, 'name' => 'Alex Admin', 'email' => 'admin@example.com', 'role' => 'super_admin', 'createdAt' => '2025-01-10T12:00:00Z', '_count' => ['bots' => 12, 'trades' => 1400]],
-        ['id' => 2, 'name' => 'Ivan Trader', 'email' => 'user@example.com', 'role' => 'user', 'createdAt' => '2026-03-15T08:30:00Z', '_count' => ['bots' => 4, 'trades' => 320]],
-        ['id' => 3, 'name' => 'Support Sarah', 'email' => 'sarah@botforge.com', 'role' => 'admin', 'createdAt' => '2025-11-20T10:15:00Z', '_count' => ['bots' => 0, 'trades' => 0]],
-        ['id' => 4, 'name' => 'Mike Crypto', 'email' => 'mike@crypto.com', 'role' => 'user', 'createdAt' => '2026-05-01T14:45:00Z', '_count' => ['bots' => 8, 'trades' => 890]],
-        ['id' => 5, 'name' => 'Whale John', 'email' => 'john@whale.io', 'role' => 'user', 'createdAt' => '2026-06-10T09:00:00Z', '_count' => ['bots' => 25, 'trades' => 5600]],
-    ]);
-});
-
-Route::patch('/admin/users/{id}/role', function () {
-    return response()->json(['success' => true]);
 });
 
 Route::get('/history', function () {
@@ -63,8 +65,4 @@ Route::get('/apikeys', function () {
 
 Route::delete('/apikeys/{id}', function () {
     return response()->json(['success' => true]);
-});
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
 });
