@@ -29,17 +29,17 @@ export default function Dashboard() {
   }, []);
 
   const stats = [
-    { name: "TOTAL USERS", value: adminStats.userCount.toString(), change: "+12%", icon: Users },
-    { name: "TOTAL BOTS", value: adminStats.botCount.toString(), change: `${adminStats.activeBotCount} Active`, icon: Activity },
-    { name: "TRADE VOLUME", value: `$${adminStats.totalVolume.toLocaleString()}`, change: "+18%", icon: DollarSign },
-    { name: "TOTAL TRADES", value: adminStats.tradeCount.toString(), change: "+2.1%", icon: TrendingUp },
+    { name: "ПОЛЬЗОВАТЕЛИ", value: adminStats.userCount.toString(), change: "+12%", icon: Users },
+    { name: "ВСЕГО БОТОВ", value: adminStats.botCount.toString(), change: `${adminStats.activeBotCount} Активны`, icon: Activity },
+    { name: "ОБЪЕМ ТОРГОВ", value: `$${adminStats.totalVolume.toLocaleString()}`, change: "+18%", icon: DollarSign },
+    { name: "ВСЕГО СДЕЛОК", value: adminStats.tradeCount.toString(), change: "+2.1%", icon: TrendingUp },
   ];
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="border-b border-black pb-4">
-        <h1 className="text-3xl font-black text-black uppercase tracking-widest">PLATFORM OVERVIEW</h1>
-        <p className="text-gray-600 mt-2 font-mono text-sm uppercase">Global system statistics</p>
+        <h1 className="text-3xl font-black text-black uppercase tracking-widest">ОБЗОР ПЛАТФОРМЫ</h1>
+        <p className="text-gray-600 mt-2 font-mono text-sm uppercase">Глобальная статистика системы</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -67,14 +67,14 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white border-2 border-black p-6">
-          <h2 className="text-xl font-black mb-4 uppercase tracking-wider border-b-2 border-black pb-2">Platform Activity</h2>
+          <h2 className="text-xl font-black mb-4 uppercase tracking-wider border-b-2 border-black pb-2">АКТИВНОСТЬ ПЛАТФОРМЫ</h2>
           <div className="flex flex-col items-center justify-center py-8 text-gray-500 font-mono text-sm">
-            Platform analytics charts will be displayed here
+            Здесь будут графики аналитики платформы
           </div>
         </div>
 
         <div className="bg-white border-2 border-black p-6">
-          <h2 className="text-xl font-black mb-4 uppercase tracking-wider border-b-2 border-black pb-2">API Status</h2>
+          <h2 className="text-xl font-black mb-4 uppercase tracking-wider border-b-2 border-black pb-2">СТАТУС API</h2>
           <div className="space-y-4 pt-2">
             {['Binance Spot', 'Binance Futures', 'Bybit'].map((server, i) => (
               <div key={i} className="flex items-center justify-between p-4 border border-black bg-gray-50">
@@ -84,7 +84,7 @@ export default function Dashboard() {
                   </div>
                   <span className="font-bold uppercase tracking-wider">{server}</span>
                 </div>
-                <span className="text-xs font-black uppercase tracking-widest border border-black px-3 py-1 bg-white text-green-600">Online</span>
+                <span className="text-xs font-black uppercase tracking-widest border border-black px-3 py-1 bg-white text-green-600">ОНЛАЙН</span>
               </div>
             ))}
           </div>
