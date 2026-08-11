@@ -2,7 +2,7 @@ import { BookOpen, ArrowRight } from "lucide-react";
 
 export default function Blog() {
   const posts = [
-    { id: 1, title: "Топ-5 алгоритмов для скальпинга в 2024 году", category: "Стратегии", readTime: "5 мин" },
+    { id: 1, title: "Топ-5 алгоритмов для скальпинга в 2026 году", category: "Стратегии", readTime: "5 мин" },
     { id: 2, title: "Как нейросети меняют копитрейдинг", category: "Технологии", readTime: "8 мин" },
     { id: 3, title: "Риск-менеджмент: почему это важнее прибыли", category: "Обучение", readTime: "12 мин" },
   ];
