@@ -43,6 +43,9 @@ import RiskManagement from "./pages/User/RiskManagement";
 import UserSettings from "./pages/User/UserSettings";
 import Watchlist from "./pages/User/Watchlist";
 
+import PublicNavbar from "./components/layout/PublicNavbar";
+import Footer from "./components/layout/Footer";
+
 import Configurator from "./pages/User/Configurator";
 import Marketplace from "./pages/User/Marketplace";
 import Billing from "./pages/User/Billing";
@@ -97,11 +100,35 @@ const Placeholder = ({ title }) => (
   </div>
 );
 
+const PublicLayout = ({ children }) => (
+  <div className="min-h-screen bg-white flex flex-col font-sans">
+    <PublicNavbar />
+    <main className="flex-1 pt-24 pb-12">
+      {children}
+    </main>
+    <Footer />
+  </div>
+);
+
 function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
+
+      {/* Public Footer Links (Placeholders) */}
+      <Route path="/features" element={<PublicLayout><Placeholder title="Функции" /></PublicLayout>} />
+      <Route path="/pricing" element={<PublicLayout><Placeholder title="Тарифы" /></PublicLayout>} />
+      <Route path="/marketplace" element={<PublicLayout><Placeholder title="Маркетплейс" /></PublicLayout>} />
+      <Route path="/changelog" element={<PublicLayout><Placeholder title="Обновления" /></PublicLayout>} />
+      <Route path="/docs" element={<PublicLayout><Placeholder title="Документация" /></PublicLayout>} />
+      <Route path="/api" element={<PublicLayout><Placeholder title="API Reference" /></PublicLayout>} />
+      <Route path="/blog" element={<PublicLayout><Placeholder title="Блог" /></PublicLayout>} />
+      <Route path="/guides" element={<PublicLayout><Placeholder title="Гайды" /></PublicLayout>} />
+      <Route path="/terms" element={<PublicLayout><Placeholder title="Условия сервиса" /></PublicLayout>} />
+      <Route path="/privacy" element={<PublicLayout><Placeholder title="Политика кондф." /></PublicLayout>} />
+      <Route path="/cookies" element={<PublicLayout><Placeholder title="Cookies" /></PublicLayout>} />
+      <Route path="/contact" element={<PublicLayout><Placeholder title="Контакты" /></PublicLayout>} />
 
       <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><AdminLayout /></ProtectedRoute>}>
         <Route index element={<Dashboard />} />
