@@ -12,17 +12,32 @@ export default function Pricing() {
       const token = localStorage.getItem("token");
       const res = await fetch(`/api/billing/${provider}`, {
         method: 'POST',
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       });
-      const data = await res.json();
       
-      if (data.success && data.payment_url) {
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseErr) {
+        console.error("Non-JSON response:", text);
+        setError("Ошибка сервера (ответ не в JSON). Посмотрите консоль. Возможно Laravel упал с 500 ошибкой.");
+        setLoading(false);
+        return;
+      }
+      
+      if (res.ok && data.success && data.payment_url) {
         window.location.href = data.payment_url;
       } else {
-        setError("Ошибка при создании инвойса. Попробуйте позже.");
+        setError(data.message || "Ошибка при создании инвойса. Попробуйте позже.");
       }
     } catch (err) {
-      setError("Ошибка сети.");
+      console.error(err);
+      setError("Ошибка сети: " + err.message);
     } finally {
       setLoading(false);
     }
