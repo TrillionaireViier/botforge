@@ -7,12 +7,12 @@ export default function Pricing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handlePayment = async (provider) => {
+  const handlePayment = async (provider, plan = 'trial') => {
     setLoading(true);
     setError(null);
     try {
       const token = localStorage.getItem("botforge_token");
-      const res = await fetch(`/api/invoice/${provider}`, {
+      const res = await fetch(`/api/invoice/${provider}?plan=${plan}`, {
         method: 'POST',
         headers: { 
           'Authorization': `Bearer ${token}`,
@@ -81,8 +81,8 @@ export default function Pricing() {
                 Недоступно
               </button>
             ) : (
-              <button disabled={loading} onClick={() => handlePayment('nowpayments')} className="w-full bg-blue-600 text-white border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
-                <Zap className="w-5 h-5" /> NOWPayments
+              <button disabled={loading} onClick={() => handlePayment('nowpayments', 'trial')} className="w-full bg-blue-600 text-white border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
+                <Zap className="w-5 h-5" /> Купить за $10
               </button>
             )}
           </div>
@@ -109,7 +109,7 @@ export default function Pricing() {
               Младший тариф
             </button>
           ) : (
-            <button className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2">
+            <button disabled={loading} onClick={() => handlePayment('nowpayments', 'pro')} className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2 disabled:opacity-50">
               Купить Pro
             </button>
           )}
@@ -132,7 +132,7 @@ export default function Pricing() {
               Ваш тариф
             </button>
           ) : (
-            <button className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2">
+            <button disabled={loading} onClick={() => handlePayment('nowpayments', 'ultra')} className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2 disabled:opacity-50">
               Купить Ultra
             </button>
           )}
@@ -144,13 +144,9 @@ export default function Pricing() {
           <CreditCard className="w-8 h-8" /> Способы Оплаты
         </h3>
         <div className="flex flex-col sm:flex-row gap-4">
-          <div className="flex-1 bg-white border-2 border-black p-6 flex flex-col items-center justify-center gap-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
-            <ShieldCheck className="w-10 h-10 group-hover:text-yellow-400" />
-            <span className="font-bold uppercase tracking-widest text-center">Криптовалюта<br/><span className="text-xs text-gray-500 group-hover:text-gray-300">NOWPayments</span></span>
-          </div>
-          <div className="flex-1 bg-white border-2 border-black p-6 flex flex-col items-center justify-center gap-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
-            <CreditCard className="w-10 h-10 group-hover:text-blue-400" />
-            <span className="font-bold uppercase tracking-widest">Банковская Карта (Stripe)</span>
+          <div className="flex-1 bg-white border-2 border-black p-6 flex flex-col items-center justify-center gap-4 group">
+            <ShieldCheck className="w-10 h-10 text-yellow-400" />
+            <span className="font-bold uppercase tracking-widest text-center text-sm">Оплата Криптовалютой<br/><span className="text-xs text-gray-500">Через шлюз NOWPayments</span></span>
           </div>
         </div>
       </div>

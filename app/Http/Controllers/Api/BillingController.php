@@ -149,11 +149,68 @@ class BillingController extends Controller
      */
     public function payWithNowpayments(Request $request)
     {
-        // As requested, always return the static link instead of generating a new invoice dynamically.
-        return response()->json([
-            'success' => true,
-            'payment_url' => 'https://nowpayments.io/payment?iid=5689224948',
-            'order_id' => 'static_payment'
+        $user = $request->user();
+        $plan = $request->input('plan', 'trial'); // trial, pro, ultra
+        
+        $amounts = [
+            'trial' => 10.00,
+            'pro' => 29.00,
+            'ultra' => 99.00
+        ];
+        
+        $amount = $amounts[$plan] ?? 10.00;
+        $orderId = uniqid("{$plan}_");
+
+        Payment::create([
+            'user_id' => $user->id,
+            'order_id' => $orderId,
+            'provider' => 'nowpayments',
+            'amount' => $amount,
+            'status' => 'pending'
         ]);
+
+        $apiKey = env('NOWPAYMENTS_API_KEY', '44TG0PT-Y5J4K0J-N1SGNXS-NE1AJ58');
+
+        $payload = [
+            'price_amount' => $amount,
+            'price_currency' => 'usd',
+            'order_id' => $orderId,
+            'order_description' => "BotForge {$plan} Subscription",
+            'success_url' => url('/app/user'),
+            'cancel_url' => url('/app/user/pricing')
+        ];
+
+        try {
+            $response = Http::withHeaders([
+                'x-api-key' => $apiKey,
+                'Content-Type' => 'application/json'
+            ])->post('https://api.nowpayments.io/v1/invoice', $payload);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                return response()->json([
+                    'success' => true,
+                    'payment_url' => $data['invoice_url'],
+                    'order_id' => $orderId
+                ]);
+            }
+
+            Log::error("NOWPayments API Error: " . $response->body());
+            
+            // Fallback to static link if API fails
+            if ($plan === 'trial') {
+                return response()->json([
+                    'success' => true,
+                    'payment_url' => 'https://nowpayments.io/payment?iid=5689224948',
+                    'order_id' => 'static_payment'
+                ]);
+            }
+            
+            return response()->json(['success' => false, 'message' => 'Ошибка при создании счета NOWPayments'], 500);
+
+        } catch (\Exception $e) {
+            Log::error("NOWPayments Request Failed: " . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Network error'], 500);
+        }
     }
 }
