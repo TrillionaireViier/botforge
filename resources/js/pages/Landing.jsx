@@ -47,19 +47,19 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white">
+    <div className="min-h-screen bg-gray-900 text-white font-sans selection:bg-black selection:text-white">
       <PublicNavbar />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto text-center border-b-2 border-black">
         <motion.div initial="hidden" animate="visible" variants={fadeIn}>
-          <div className="inline-block border-2 border-black bg-white px-4 py-2 uppercase tracking-widest text-xs font-black text-black mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div className="inline-block border-2 border-black bg-gray-900 px-4 py-2 uppercase tracking-widest text-xs font-black text-white mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             Ультимативный No-Code Конфигуратор
           </div>
           
           <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">
             Автоматизируй <br/>
-            <span className="text-black bg-white px-2 border-4 border-black inline-block mt-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">Свою Прибыль</span>
+            <span className="text-white bg-gray-900 px-2 border-4 border-black inline-block mt-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">Свою Прибыль</span>
           </h1>
           
           <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-wide">
@@ -75,7 +75,7 @@ export default function Landing() {
             </Link>
             <a 
               href="#pricing" 
-              className="w-full sm:w-auto bg-white hover:bg-gray-200 text-black font-black uppercase tracking-widest py-5 px-10 border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center text-lg"
+              className="w-full sm:w-auto bg-gray-900 hover:bg-gray-200 text-white font-black uppercase tracking-widest py-5 px-10 border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center text-lg"
             >
               Смотреть Тарифы
             </a>
@@ -92,8 +92,8 @@ export default function Landing() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <Activity className="w-12 h-12 text-black mb-6" />
+            <div className="bg-gray-900 border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <Activity className="w-12 h-12 text-white mb-6" />
               <h3 className="text-2xl font-black uppercase tracking-widest mb-4">Технические Фильтры</h3>
               <p className="text-gray-700 font-medium leading-relaxed">
                 Подключайте индикаторы RSI, MACD и Bollinger Bands, чтобы ваш бот входил в сделку только при идеальных условиях.
@@ -108,8 +108,8 @@ export default function Landing() {
               </p>
             </div>
 
-            <div className="bg-white border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <Layers className="w-12 h-12 text-black mb-6" />
+            <div className="bg-gray-900 border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <Layers className="w-12 h-12 text-white mb-6" />
               <h3 className="text-2xl font-black uppercase tracking-widest mb-4">Умные Сетки</h3>
               <p className="text-gray-700 font-medium leading-relaxed">
                 Используйте логарифмический или арифметический шаг сетки в комбинации с множителями объема Мартингейла.
@@ -120,7 +120,7 @@ export default function Landing() {
       </section>
 
       {/* Bots Showcase Section */}
-      <section className="py-24 px-6 border-b-2 border-black bg-white">
+      <section className="py-24 px-6 border-b-2 border-black bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Готовые Торговые Боты</h2>
@@ -180,7 +180,7 @@ export default function Landing() {
       </section>
 
       {/* How it Works Block */}
-      <section id="how-it-works" className="py-24 px-6 border-b-2 border-black bg-white">
+      <section id="how-it-works" className="py-24 px-6 border-b-2 border-black bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Как Запустить Бота</h2>
@@ -208,7 +208,7 @@ export default function Landing() {
       </section>
 
       {/* Architecture Features */}
-      <section className="py-24 px-6 border-b-2 border-black bg-white">
+      <section className="py-24 px-6 border-b-2 border-black bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Создано для Масштабирования</h2>
@@ -250,28 +250,28 @@ export default function Landing() {
 
             {/* Бэкенд Block */}
             <div className="border-4 border-black p-10 bg-black text-white shadow-[12px_12px_0px_0px_rgba(200,200,200,1)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white rotate-45 translate-x-16 -translate-y-16"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gray-900 rotate-45 translate-x-16 -translate-y-16"></div>
               <h3 className="text-3xl font-black uppercase mb-6 flex items-center gap-3">
-                <span className="w-4 h-4 bg-white block"></span>
+                <span className="w-4 h-4 bg-gray-900 block"></span>
                 Бэкенд
               </h3>
               <ul className="space-y-6">
                 <li className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-black mt-1 shrink-0">1</div>
+                  <div className="w-8 h-8 bg-gray-900 text-white flex items-center justify-center font-black mt-1 shrink-0">1</div>
                   <div>
                     <h4 className="text-xl font-black uppercase mb-1">Мгновенное Исполнение</h4>
                     <p className="text-gray-400 font-medium">Node.js Express сервер обеспечивает передачу торговых сигналов по API бирж с миллисекундной задержкой.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-black mt-1 shrink-0">2</div>
+                  <div className="w-8 h-8 bg-gray-900 text-white flex items-center justify-center font-black mt-1 shrink-0">2</div>
                   <div>
                     <h4 className="text-xl font-black uppercase mb-1">Безопасная База Данных</h4>
                     <p className="text-gray-400 font-medium">Архитектура на PostgreSQL/SQLite безопасно хранит ваши настройки, токены и зашифрованные данные.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-black mt-1 shrink-0">3</div>
+                  <div className="w-8 h-8 bg-gray-900 text-white flex items-center justify-center font-black mt-1 shrink-0">3</div>
                   <div>
                     <h4 className="text-xl font-black uppercase mb-1">Бесперебойная Работа 24/7</h4>
                     <p className="text-gray-400 font-medium">Фоновые процессы постоянно отслеживают WebSocket-потоки для корректировки стопов и сеток, даже когда вы спите.</p>
@@ -284,7 +284,7 @@ export default function Landing() {
       </section>
       
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-6 border-b-2 border-black bg-white">
+      <section id="pricing" className="py-24 px-6 border-b-2 border-black bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Тарифы</h2>
@@ -292,40 +292,40 @@ export default function Landing() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <div className="border-2 border-black bg-gray-900 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
               <h3 className="text-2xl font-black uppercase mb-2">Бесплатный</h3>
               <div className="text-4xl font-black mb-6">$0<span className="text-lg text-gray-500">/мес</span></div>
               <ul className="space-y-4 mb-8 flex-1 font-medium text-gray-700">
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> 1 Активный бот</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Спотовая торговля</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Базовые индикаторы</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> 1 Активный бот</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Спотовая торговля</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Базовые индикаторы</li>
               </ul>
-              <Link to="/login" className="w-full text-center bg-white text-black border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-100 transition-colors">Войти / Регистрация</Link>
+              <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-100 transition-colors">Войти / Регистрация</Link>
             </div>
 
             <div className="border-4 border-black bg-yellow-300 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col transform md:-translate-y-4 relative">
               <div className="absolute top-0 right-0 bg-black text-white px-3 py-1 font-black uppercase text-xs tracking-widest border-l-2 border-b-2 border-black">Популярный</div>
               <h3 className="text-2xl font-black uppercase mb-2">Про</h3>
               <div className="text-4xl font-black mb-6">$29<span className="text-lg text-gray-800">/мес</span></div>
-              <ul className="space-y-4 mb-8 flex-1 font-medium text-black">
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> До 10 активных ботов</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Спот и Фьючерсы</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Трейлинг стопы</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Продвинутые индикаторы</li>
+              <ul className="space-y-4 mb-8 flex-1 font-medium text-white">
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> До 10 активных ботов</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Спот и Фьючерсы</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Трейлинг стопы</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Продвинутые индикаторы</li>
               </ul>
               <Link to="/login" className="w-full text-center bg-black text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]">Войти / Регистрация</Link>
             </div>
 
-            <div className="border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <div className="border-2 border-black bg-gray-900 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
               <h3 className="text-2xl font-black uppercase mb-2">Ультра</h3>
               <div className="text-4xl font-black mb-6">$99<span className="text-lg text-gray-500">/мес</span></div>
               <ul className="space-y-4 mb-8 flex-1 font-medium text-gray-700">
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Неограниченно ботов</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> API Доступ</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Персональный менеджер</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Копитрейдинг</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Неограниченно ботов</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> API Доступ</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Персональный менеджер</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Копитрейдинг</li>
               </ul>
-              <Link to="/login" className="w-full text-center bg-white text-black border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-100 transition-colors">Войти / Регистрация</Link>
+              <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-100 transition-colors">Войти / Регистрация</Link>
             </div>
           </div>
         </div>
@@ -338,7 +338,7 @@ export default function Landing() {
           
           <div className="space-y-2">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden transition-all duration-300">
+              <div key={idx} className="bg-gray-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden transition-all duration-300">
                 <button 
                   className="w-full text-left p-3 flex justify-between items-center font-bold uppercase text-sm"
                   onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
