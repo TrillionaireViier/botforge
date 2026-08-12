@@ -12,4 +12,18 @@ if (isset($_SERVER['REQUEST_URI']) && str_starts_with($_SERVER['REQUEST_URI'], '
     $_SERVER['REQUEST_URI'] = '/api' . $_SERVER['REQUEST_URI'];
 }
 
+// Ensure Authorization header is available for Sanctum
+if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    if (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+        $_SERVER['HTTP_AUTHORIZATION'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+    } elseif (function_exists('getallheaders')) {
+        $headers = getallheaders();
+        if (isset($headers['Authorization'])) {
+            $_SERVER['HTTP_AUTHORIZATION'] = $headers['Authorization'];
+        } elseif (isset($headers['authorization'])) {
+            $_SERVER['HTTP_AUTHORIZATION'] = $headers['authorization'];
+        }
+    }
+}
+
 require __DIR__ . '/../public/index.php';
