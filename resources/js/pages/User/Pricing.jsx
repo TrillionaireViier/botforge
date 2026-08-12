@@ -9,7 +9,7 @@ export default function Pricing() {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch(`/api/invoice/${provider}`, {
         method: 'POST',
         headers: { 
