@@ -15,20 +15,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        // HACK for demo without a database on Vercel
-        if ($request->email === 'admin@example.com' && $request->password === 'admin123') {
-            return response()->json([
-                'user' => ['id' => 1, 'name' => 'Admin User', 'email' => 'admin@example.com', 'role' => 'admin'],
-                'token' => 'fake_admin_token_123'
-            ]);
-        }
-        
-        if ($request->email === 'user@example.com' && $request->password === 'user123') {
-            return response()->json([
-                'user' => ['id' => 2, 'name' => 'Demo User', 'email' => 'user@example.com', 'role' => 'user'],
-                'token' => 'fake_user_token_123'
-            ]);
-        }
+        // Fake demo hacks removed. Real users will be used.
 
         try {
             $user = User::where('email', $request->email)->first();
