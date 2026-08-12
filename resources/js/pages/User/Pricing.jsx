@@ -10,7 +10,7 @@ export default function Pricing() {
     setError(null);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`/api/billing/${provider}`, {
+      const res = await fetch(`/api/invoice/${provider}`, {
         method: 'POST',
         headers: { 
           'Authorization': `Bearer ${token}`,

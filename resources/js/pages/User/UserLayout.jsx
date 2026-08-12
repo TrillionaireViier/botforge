@@ -16,9 +16,7 @@ export default function UserLayout() {
     { name: "Дашборд", path: "/user", icon: LayoutDashboard },
     { name: "Торговые боты", path: "/user/bots", icon: Bot },
     { name: "Тарифы", path: "/user/pricing", icon: CreditCard },
-    // { name: "Сигналы AI", path: "/user/signals", icon: Activity },
-    // { name: "Копитрейдинг", path: "/user/copy-trading", icon: Users },
-    // { name: "Бэктестинг", path: "/user/backtesting", icon: Database },
+
     { name: "Мой Портфель", path: "/user/portfolio", icon: Briefcase },
     { name: "API Ключи", path: "/user/apikeys", icon: Key },
     { name: "Риск-менеджмент", path: "/user/risks", icon: ShieldAlert },
