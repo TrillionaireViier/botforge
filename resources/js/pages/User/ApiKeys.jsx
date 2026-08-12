@@ -12,7 +12,7 @@ const ApiKeys = () => {
 
   const fetchKeys = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch("/api/trading/keys", {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -36,7 +36,7 @@ const ApiKeys = () => {
     setSaving(true);
     setErrorMsg(null);
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch("/api/trading/keys", {
         method: 'POST',
         headers: { 

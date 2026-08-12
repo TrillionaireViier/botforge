@@ -8,7 +8,7 @@ const LeadCRM = () => {
   useEffect(() => {
     const fetchLeads = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("botforge_token");
         const res = await fetch("/api/admin/leads", {
           headers: { Authorization: `Bearer ${token}` }
         });

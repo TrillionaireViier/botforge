@@ -7,7 +7,7 @@ const UserManagement = () => {
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch("/api/admin/users", {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -28,7 +28,7 @@ const UserManagement = () => {
 
   const handleRoleChange = async (userId, newRole) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch(`/api/admin/users/${userId}/role`, {
         method: "PATCH",
         headers: { 

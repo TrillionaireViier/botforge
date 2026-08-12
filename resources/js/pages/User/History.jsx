@@ -8,7 +8,7 @@ const History = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("botforge_token");
         const res = await fetch("/api/history", {
           headers: { Authorization: `Bearer ${token}` }
         });

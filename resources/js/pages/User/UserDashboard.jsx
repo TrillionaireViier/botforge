@@ -13,7 +13,7 @@ export default function UserDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('botforge_token');
         const res = await fetch('/api/trading/balance', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -104,7 +104,7 @@ export default function UserDashboard() {
             <span className="font-bold uppercase tracking-widest border-2 border-black px-2 py-1 group-hover:bg-black group-hover:text-white transition-colors">За всё время</span>
             <button onClick={async () => {
               try {
-                const token = localStorage.getItem('token');
+                const token = localStorage.getItem('botforge_token');
                 const res = await fetch('/api/trading/order', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },

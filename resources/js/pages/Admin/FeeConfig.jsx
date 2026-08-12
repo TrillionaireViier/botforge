@@ -13,7 +13,7 @@ const FeeConfig = () => {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("botforge_token");
         const res = await fetch("/api/admin/settings", {
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -40,7 +40,7 @@ const FeeConfig = () => {
 
   const handleSave = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       await fetch("/api/admin/settings", {
         method: "POST",
         headers: { 

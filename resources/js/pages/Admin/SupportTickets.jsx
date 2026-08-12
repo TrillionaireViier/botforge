@@ -7,7 +7,7 @@ const SupportTickets = () => {
 
   const fetchTickets = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch("/api/admin/tickets", {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -28,7 +28,7 @@ const SupportTickets = () => {
 
   const handleStatusChange = async (ticketId, newStatus) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch(`/api/admin/tickets/${ticketId}/status`, {
         method: "PATCH",
         headers: { 

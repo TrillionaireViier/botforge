@@ -8,7 +8,7 @@ const NewsCMS = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("botforge_token");
         const res = await fetch("/api/admin/articles", {
           headers: { Authorization: `Bearer ${token}` }
         });

@@ -13,7 +13,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("botforge_token");
         const res = await fetch("http://localhost:5000/api/admin/stats", {
           headers: { Authorization: `Bearer ${token}` }
         });

@@ -62,7 +62,7 @@ export default function Portfolio() {
   useEffect(() => {
     const fetchBots = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("botforge_token");
         const res = await fetch("/api/bots", {
           headers: { Authorization: `Bearer ${token}` }
         });

@@ -7,7 +7,7 @@ const BotPerformance = () => {
 
   const fetchBots = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch("/api/admin/bots", {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -28,7 +28,7 @@ const BotPerformance = () => {
 
   const handleToggleStatus = async (botId, currentStatus) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const newStatus = currentStatus === 'active' ? 'stopped' : 'active';
       setBots(bots.map(b => b.id === botId ? { ...b, status: newStatus } : b));
     } catch (error) {

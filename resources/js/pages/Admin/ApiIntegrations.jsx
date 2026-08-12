@@ -8,7 +8,7 @@ const ApiIntegrations = () => {
   useEffect(() => {
     const fetchIntegrations = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("botforge_token");
         const res = await fetch("/api/admin/integrations", {
           headers: { Authorization: `Bearer ${token}` }
         });

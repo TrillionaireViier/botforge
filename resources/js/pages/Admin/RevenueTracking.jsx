@@ -8,7 +8,7 @@ const RevenueTracking = () => {
   useEffect(() => {
     const fetchTrades = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("botforge_token");
         const res = await fetch("/api/admin/trades", {
           headers: { Authorization: `Bearer ${token}` }
         });

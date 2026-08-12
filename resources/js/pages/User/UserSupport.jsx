@@ -7,7 +7,7 @@ const UserSupport = () => {
 
   const fetchTickets = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch("/api/support", {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -37,7 +37,7 @@ const UserSupport = () => {
     if (!subject) return;
 
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("botforge_token");
       const res = await fetch("/api/support", {
         method: "POST",
         headers: { 
