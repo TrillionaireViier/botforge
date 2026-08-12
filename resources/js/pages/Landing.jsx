@@ -62,7 +62,7 @@ export default function Landing() {
             <span className="text-white bg-gray-900 px-2 border-4 border-black inline-block mt-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">Свою Прибыль</span>
           </h1>
           
-          <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-wide">
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-wide">
             Создавайте сложные Grid-стратегии, настраивайте технические индикаторы и управляйте рисками с помощью трейлинг-стопов. Мгновенное подключение к Binance, Bybit и OKX.
           </p>
           
@@ -87,7 +87,7 @@ export default function Landing() {
       <section id="features" className="py-24 px-6 border-b-2 border-black bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Профессиональные Инструменты</h2>
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black">Профессиональные Инструменты</h2>
             <p className="text-gray-600 font-bold uppercase tracking-widest text-lg max-w-2xl mx-auto">Всё необходимое для создания прибыльных автоматизированных систем без написания единой строчки кода.</p>
           </div>
 
@@ -294,38 +294,38 @@ export default function Landing() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="border-2 border-black bg-gray-900 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
               <h3 className="text-2xl font-black uppercase mb-2">Бесплатный</h3>
-              <div className="text-4xl font-black mb-6">$0<span className="text-lg text-gray-500">/мес</span></div>
-              <ul className="space-y-4 mb-8 flex-1 font-medium text-gray-700">
+              <div className="text-4xl font-black mb-6">$0<span className="text-lg text-gray-400">/мес</span></div>
+              <ul className="space-y-4 mb-8 flex-1 font-medium text-gray-300">
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> 1 Активный бот</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Спотовая торговля</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Базовые индикаторы</li>
               </ul>
-              <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-100 transition-colors">Войти / Регистрация</Link>
+              <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors">Войти / Регистрация</Link>
             </div>
 
-            <div className="border-4 border-black bg-yellow-300 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col transform md:-translate-y-4 relative">
+            <div className="border-4 border-black bg-yellow-300 text-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col transform md:-translate-y-4 relative">
               <div className="absolute top-0 right-0 bg-black text-white px-3 py-1 font-black uppercase text-xs tracking-widest border-l-2 border-b-2 border-black">Популярный</div>
-              <h3 className="text-2xl font-black uppercase mb-2">Про</h3>
-              <div className="text-4xl font-black mb-6">$29<span className="text-lg text-gray-800">/мес</span></div>
-              <ul className="space-y-4 mb-8 flex-1 font-medium text-white">
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> До 10 активных ботов</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Спот и Фьючерсы</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Трейлинг стопы</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Продвинутые индикаторы</li>
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">Про</h3>
+              <div className="text-4xl font-black mb-6 text-black">$29<span className="text-lg text-gray-800">/мес</span></div>
+              <ul className="space-y-4 mb-8 flex-1 font-medium text-black">
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> До 10 активных ботов</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Спот и Фьючерсы</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Трейлинг стопы</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Продвинутые индикаторы</li>
               </ul>
               <Link to="/login" className="w-full text-center bg-black text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]">Войти / Регистрация</Link>
             </div>
 
             <div className="border-2 border-black bg-gray-900 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
               <h3 className="text-2xl font-black uppercase mb-2">Ультра</h3>
-              <div className="text-4xl font-black mb-6">$99<span className="text-lg text-gray-500">/мес</span></div>
-              <ul className="space-y-4 mb-8 flex-1 font-medium text-gray-700">
+              <div className="text-4xl font-black mb-6">$99<span className="text-lg text-gray-400">/мес</span></div>
+              <ul className="space-y-4 mb-8 flex-1 font-medium text-gray-300">
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Неограниченно ботов</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> API Доступ</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Персональный менеджер</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Копитрейдинг</li>
               </ul>
-              <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-100 transition-colors">Войти / Регистрация</Link>
+              <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors">Войти / Регистрация</Link>
             </div>
           </div>
         </div>
