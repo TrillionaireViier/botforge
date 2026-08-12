@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Billing API Routes
     Route::post('/invoice/cryptomus', [\App\Http\Controllers\Api\BillingController::class, 'payWithCryptomus']);
     Route::post('/invoice/whitebit', [\App\Http\Controllers\Api\BillingController::class, 'payWithWhitebit']);
+    Route::post('/invoice/nowpayments', [\App\Http\Controllers\Api\BillingController::class, 'payWithNowpayments']);
 });
 
 Route::get('/admin/users', [AdminController::class, 'getUsers']);

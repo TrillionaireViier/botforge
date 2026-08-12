@@ -143,4 +143,65 @@ class BillingController extends Controller
             return response()->json(['success' => false, 'message' => 'Network error'], 500);
         }
     }
+
+    /**
+     * Create a payment invoice for NOWPayments
+     */
+    public function payWithNowpayments(Request $request)
+    {
+        $user = $request->user();
+        $orderId = uniqid('order_');
+        $amount = 10.00;
+
+        Payment::create([
+            'user_id' => $user->id,
+            'order_id' => $orderId,
+            'provider' => 'nowpayments',
+            'amount' => $amount,
+            'status' => 'pending'
+        ]);
+
+        $apiKey = env('NOWPAYMENTS_API_KEY', '');
+
+        if (!$apiKey) {
+            Log::warning("NOWPayments API key is not set. Using mock URL.");
+            return response()->json([
+                'success' => true,
+                'payment_url' => "https://nowpayments.io/payment/?iid=test_{$orderId}",
+                'order_id' => $orderId
+            ]);
+        }
+
+        $payload = [
+            'price_amount' => $amount,
+            'price_currency' => 'usd',
+            'order_id' => $orderId,
+            'success_url' => url('/app/user'),
+            'cancel_url' => url('/app/user/pricing'),
+            'ipn_callback_url' => url('/api/webhooks/nowpayments'),
+        ];
+
+        try {
+            $response = Http::withHeaders([
+                'x-api-key' => $apiKey,
+                'Content-Type' => 'application/json'
+            ])->post('https://api.nowpayments.io/v1/invoice', $payload);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                return response()->json([
+                    'success' => true,
+                    'payment_url' => $data['invoice_url'],
+                    'order_id' => $orderId
+                ]);
+            }
+
+            Log::error("NOWPayments API Error: " . $response->body());
+            return response()->json(['success' => false, 'message' => 'Failed to create NOWPayments invoice'], 500);
+
+        } catch (\Exception $e) {
+            Log::error("NOWPayments Request Failed: " . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Network error'], 500);
+        }
+    }
 }

@@ -80,6 +80,9 @@ export default function Pricing() {
             <button disabled={loading} onClick={() => handlePayment('whitebit')} className="w-full bg-white text-black border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-black hover:text-white transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
               <CreditCard className="w-5 h-5" /> WhiteBIT Pay
             </button>
+            <button disabled={loading} onClick={() => handlePayment('nowpayments')} className="w-full bg-blue-600 text-white border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
+              <Zap className="w-5 h-5" /> NOWPayments
+            </button>
           </div>
         </div>
 
@@ -125,7 +128,7 @@ export default function Pricing() {
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 bg-white border-2 border-black p-6 flex flex-col items-center justify-center gap-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
             <ShieldCheck className="w-10 h-10 group-hover:text-yellow-400" />
-            <span className="font-bold uppercase tracking-widest text-center">Криптовалюта<br/><span className="text-xs text-gray-500 group-hover:text-gray-300">Cryptomus / WhiteBIT</span></span>
+            <span className="font-bold uppercase tracking-widest text-center">Криптовалюта<br/><span className="text-xs text-gray-500 group-hover:text-gray-300">Cryptomus / WhiteBIT / NOWPayments</span></span>
           </div>
           <div className="flex-1 bg-white border-2 border-black p-6 flex flex-col items-center justify-center gap-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
             <CreditCard className="w-10 h-10 group-hover:text-blue-400" />
