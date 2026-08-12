@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { CreditCard, Zap, Check, ShieldCheck, History, AlertCircle } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Pricing() {
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -74,9 +76,15 @@ export default function Pricing() {
           </ul>
           
           <div className="space-y-3 mt-auto">
-            <button disabled={loading} onClick={() => handlePayment('nowpayments')} className="w-full bg-blue-600 text-white border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
-              <Zap className="w-5 h-5" /> NOWPayments
-            </button>
+            {user?.tier !== 'Free' ? (
+              <button disabled className="w-full bg-gray-400 text-white border-4 border-black font-black uppercase tracking-widest py-3 flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] cursor-not-allowed">
+                Недоступно
+              </button>
+            ) : (
+              <button disabled={loading} onClick={() => handlePayment('nowpayments')} className="w-full bg-blue-600 text-white border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
+                <Zap className="w-5 h-5" /> NOWPayments
+              </button>
+            )}
           </div>
         </div>
 
@@ -92,9 +100,19 @@ export default function Pricing() {
             <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Доступ в Маркетплейс</li>
           </ul>
           
-          <button className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2">
-            Купить Pro
-          </button>
+          {user?.tier === 'Pro' ? (
+            <button disabled className="w-full mt-auto bg-green-400 text-black border-4 border-black font-black uppercase tracking-widest py-4 flex justify-center gap-2 cursor-not-allowed">
+              Ваш тариф
+            </button>
+          ) : user?.tier === 'Ultra' ? (
+            <button disabled className="w-full mt-auto bg-gray-300 text-gray-500 border-4 border-black font-black uppercase tracking-widest py-4 flex justify-center gap-2 cursor-not-allowed">
+              Младший тариф
+            </button>
+          ) : (
+            <button className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2">
+              Купить Pro
+            </button>
+          )}
         </div>
 
         {/* ULTRA */}
@@ -109,9 +127,15 @@ export default function Pricing() {
             <li className="flex items-center gap-3"><Check className="w-5 h-5 text-black"/> Выделенный сервер</li>
           </ul>
           
-          <button className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2">
-            Купить Ultra
-          </button>
+          {user?.tier === 'Ultra' ? (
+            <button disabled className="w-full mt-auto bg-green-400 text-black border-4 border-black font-black uppercase tracking-widest py-4 flex justify-center gap-2 cursor-not-allowed">
+              Ваш тариф
+            </button>
+          ) : (
+            <button className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2">
+              Купить Ultra
+            </button>
+          )}
         </div>
       </div>
 
