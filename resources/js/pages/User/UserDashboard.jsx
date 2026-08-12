@@ -62,7 +62,7 @@ export default function UserDashboard() {
           <p className="font-mono text-sm mb-4 text-gray-300">Выберите сумму для вывода. Средства поступят на ваш привязанный кошелек в течение 24 часов.</p>
           <div className="flex flex-col sm:flex-row gap-4">
             <input type="number" placeholder="Сумма в USDT" className="border-2 border-white bg-black px-4 py-2 font-mono focus:outline-none flex-1 placeholder-gray-500" />
-            <button className="bg-white text-black font-bold uppercase tracking-widest px-6 py-2 hover:bg-gray-200 transition-colors">
+            <button className="bg-white text-black text-black font-bold uppercase tracking-widest px-6 py-2 hover:bg-gray-200 transition-colors">
               Подтвердить
             </button>
           </div>
@@ -71,7 +71,7 @@ export default function UserDashboard() {
 
       {/* Анимированные карточки */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white border-2 border-black p-6 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
+        <div className="bg-white text-black border-2 border-black p-6 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-16 h-16 bg-gray-100 rounded-bl-full -z-10 group-hover:bg-black transition-colors"></div>
           <div className="flex justify-between items-start">
             <div>
@@ -87,7 +87,7 @@ export default function UserDashboard() {
           </div>
         </div>
 
-        <div className="bg-white border-2 border-black p-6 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
+        <div className="bg-white text-black border-2 border-black p-6 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-16 h-16 bg-gray-100 rounded-bl-full -z-10 group-hover:bg-black transition-colors"></div>
           <div className="flex justify-between items-start">
             <div>
@@ -168,7 +168,7 @@ export default function UserDashboard() {
       </div>
 
       {/* Управление пулом и тарифами */}
-      <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-white text-black border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <h2 className="text-xl font-black mb-4 uppercase tracking-wider border-b-4 border-black pb-4">Управление пулом и тарифом</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
@@ -201,13 +201,13 @@ export default function UserDashboard() {
         </div>
       </div>
 
-      <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-white text-black border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <h2 className="text-xl font-black mb-4 uppercase tracking-wider border-b-4 border-black pb-4">Мои ключи</h2>
         
         <div className="space-y-4 pt-2">
           {/* Binance Block */}
           {editingBinance || binanceKey ? (
-            <div className="bg-gray-50 border-2 border-black p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors hover:bg-gray-100">
+            <div className="bg-gray-50 text-black border-2 border-black p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors hover:bg-gray-100">
               <div className="flex-1">
                 <p className="font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
                   <span className="w-2 h-2 bg-black inline-block animate-pulse"></span> Binance
@@ -250,7 +250,7 @@ export default function UserDashboard() {
               </div>
             </div>
           ) : (
-            <div onClick={() => setEditingBinance(true)} className="bg-white border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center text-center hover:border-black transition-colors group cursor-pointer">
+            <div onClick={() => setEditingBinance(true)} className="bg-white text-black border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center text-center hover:border-black transition-colors group cursor-pointer">
               <div className="w-12 h-12 bg-gray-100 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors mb-3 border-2 border-transparent group-hover:border-black">
                 <ArrowUpRight className="w-6 h-6 group-hover:scale-125 transition-transform" />
               </div>
@@ -260,7 +260,7 @@ export default function UserDashboard() {
 
           {/* Bybit Block */}
           {editingBybit || bybitKey ? (
-            <div className="bg-gray-50 border-2 border-black p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors hover:bg-gray-100">
+            <div className="bg-gray-50 text-black border-2 border-black p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors hover:bg-gray-100">
               <div className="flex-1">
                 <p className="font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
                   <span className="w-2 h-2 border-2 border-black bg-white inline-block"></span> Bybit
@@ -303,7 +303,7 @@ export default function UserDashboard() {
               </div>
             </div>
           ) : (
-            <div onClick={() => setEditingBybit(true)} className="bg-white border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center text-center hover:border-black transition-colors group cursor-pointer">
+            <div onClick={() => setEditingBybit(true)} className="bg-white text-black border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center text-center hover:border-black transition-colors group cursor-pointer">
               <div className="w-12 h-12 bg-gray-100 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors mb-3 border-2 border-transparent group-hover:border-black">
                 <ArrowUpRight className="w-6 h-6 group-hover:scale-125 transition-transform" />
               </div>
@@ -314,7 +314,7 @@ export default function UserDashboard() {
         </div>
       </div>
 
-      <div className="bg-yellow-300 border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-yellow-300 text-black border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <h2 className="text-lg font-black mb-4 uppercase tracking-wider border-b-4 border-black pb-4 text-black">Инструкция: Как создать ключи</h2>
         
         <div className="space-y-6 text-sm">
@@ -349,7 +349,7 @@ export default function UserDashboard() {
         </div>
       </div>
 
-      <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-white text-black border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <div className="flex flex-col md:flex-row md:items-center justify-between border-b-4 border-black pb-4 mb-6 gap-4">
           <h2 className="text-xl font-black uppercase tracking-wider">История операций</h2>
           <div className="flex flex-wrap gap-2">
@@ -488,7 +488,7 @@ export default function UserDashboard() {
             <p className="font-mono text-sm text-gray-300">Приглашайте друзей и получайте 10% от их прибыли пожизненно. Ваш уникальный код для приглашения:</p>
             <div className="flex gap-2">
               <input type="text" readOnly value="https://botforge.com/ref/user123" className="border-2 border-white bg-black px-4 py-2 font-mono text-sm w-full outline-none text-gray-300" />
-              <button className="bg-white text-black font-bold uppercase text-sm px-4 py-2 hover:bg-gray-200 transition-colors">
+              <button className="bg-white text-black text-black font-bold uppercase text-sm px-4 py-2 hover:bg-gray-200 transition-colors">
                 Скопировать
               </button>
             </div>

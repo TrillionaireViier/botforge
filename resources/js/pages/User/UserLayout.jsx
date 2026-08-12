@@ -105,7 +105,7 @@ export default function UserLayout() {
       <main className={`flex-1 flex flex-col overflow-y-auto ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         
         {/* Trial / Subscription Banner */}
-        {user && (!user.trial_ends_at || new Date(user.trial_ends_at) < new Date()) && (
+        {user && user.role !== 'admin' && user.tier !== 'Pro' && user.tier !== 'Ultra' && (!user.trial_ends_at || new Date(user.trial_ends_at) < new Date()) && (
           <div className="bg-red-500 text-white p-4 border-b-4 border-black text-center shadow-[0_4px_0_0_rgba(0,0,0,1)] z-20">
             <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">

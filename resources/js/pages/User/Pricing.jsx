@@ -61,7 +61,7 @@ export default function Pricing() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
         {/* TRIAL */}
-        <div className="bg-yellow-300 border-4 border-black p-8 flex flex-col shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] md:-translate-y-4 hover:-translate-y-6 transition-all relative z-10">
+        <div className="bg-yellow-300 text-black border-4 border-black p-8 flex flex-col shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] md:-translate-y-4 hover:-translate-y-6 transition-all relative z-10">
           <div className="absolute top-0 right-0 bg-black text-white px-4 py-1 font-black uppercase text-xs tracking-widest border-l-4 border-b-4 border-black">Хит продаж</div>
           <h3 className="text-2xl font-black uppercase mb-2">Тестовая Неделя</h3>
           <div className="text-5xl font-black mb-6">$10<span className="text-lg text-gray-800">/7 дней</span></div>
@@ -81,7 +81,7 @@ export default function Pricing() {
         </div>
 
         {/* PRO */}
-        <div className="bg-white border-4 border-black p-8 flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all relative">
+        <div className="bg-white text-black border-4 border-black p-8 flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all relative">
           <h3 className="text-2xl font-black uppercase mb-2">Pro</h3>
           <div className="text-5xl font-black mb-6">$29<span className="text-lg text-gray-500">/мес</span></div>
           
@@ -98,7 +98,7 @@ export default function Pricing() {
         </div>
 
         {/* ULTRA */}
-        <div className="bg-white border-4 border-black p-8 flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all relative">
+        <div className="bg-white text-black border-4 border-black p-8 flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all relative">
           <h3 className="text-2xl font-black uppercase mb-2">Ultra</h3>
           <div className="text-5xl font-black mb-6">$99<span className="text-lg text-gray-500">/мес</span></div>
           
@@ -115,7 +115,7 @@ export default function Pricing() {
         </div>
       </div>
 
-      <div className="bg-gray-50 border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-gray-50 text-black border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <h3 className="font-black uppercase text-2xl flex items-center gap-3 mb-6">
           <CreditCard className="w-8 h-8" /> Способы Оплаты
         </h3>
