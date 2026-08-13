@@ -12,13 +12,14 @@ export default function Pricing() {
     setError(null);
     try {
       const token = localStorage.getItem("botforge_token");
-      const res = await fetch(`/api/invoice/${provider}?plan=${plan}`, {
+      const res = await fetch(`/api/invoice/${provider}`, {
         method: 'POST',
         headers: { 
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ plan })
       });
       
       const text = await res.text();
