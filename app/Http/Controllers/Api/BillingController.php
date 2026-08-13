@@ -213,4 +213,44 @@ class BillingController extends Controller
             return response()->json(['success' => false, 'message' => 'Network error'], 500);
         }
     }
+
+    /**
+     * Test Upgrade - directly upgrades user tier without payment
+     */
+    public function testUpgrade(Request $request)
+    {
+        $user = $request->user();
+        $plan = $request->input('plan', 'trial');
+        
+        $newTier = 'Free';
+        if ($plan === 'pro') $newTier = 'Pro';
+        if ($plan === 'ultra') $newTier = 'Ultra';
+        if ($plan === 'trial') $newTier = 'Pro'; // Trial gives Pro features
+        
+        $user->tier = $newTier;
+        $user->save();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Тариф успешно изменен (Тест)',
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Test Reset - resets user tier to Free
+     */
+    public function testReset(Request $request)
+    {
+        $user = $request->user();
+        
+        $user->tier = 'Free';
+        $user->save();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Тариф сброшен до Free (Тест)',
+            'user' => $user
+        ]);
+    }
 }
