@@ -83,16 +83,6 @@ export default function Pricing() {
         <h1 className="text-5xl font-black uppercase tracking-widest text-black">Тарифные Планы</h1>
         <p className="text-xl font-bold text-gray-600 uppercase max-w-2xl mx-auto">Управляйте подпиской и увеличивайте лимиты своих торговых систем.</p>
         <div className="w-24 h-2 bg-black mx-auto mt-6"></div>
-        
-        {user?.tier !== 'Free' && (
-          <button 
-            disabled={loading} 
-            onClick={handleReset} 
-            className="mt-6 mx-auto bg-red-500 text-white font-black uppercase tracking-widest py-2 px-6 border-2 border-black hover:bg-red-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center gap-2 text-sm"
-          >
-            Сбросить на Free (Тест)
-          </button>
-        )}
       </div>
 
       {error && (
@@ -122,8 +112,8 @@ export default function Pricing() {
                 Недоступно
               </button>
             ) : (
-              <button disabled={loading} onClick={() => handlePayment('test', 'trial')} className="w-full bg-blue-600 text-white border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
-                <Zap className="w-5 h-5" /> (Тест) Купить за $10
+              <button disabled={loading} onClick={() => handlePayment('nowpayments', 'trial')} className="w-full bg-blue-600 text-white border-4 border-black font-black uppercase tracking-widest py-3 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] disabled:opacity-50">
+                <Zap className="w-5 h-5" /> Купить за $10
               </button>
             )}
           </div>
@@ -150,8 +140,8 @@ export default function Pricing() {
               Младший тариф
             </button>
           ) : (
-            <button disabled={loading} onClick={() => handlePayment('test', 'pro')} className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2 disabled:opacity-50">
-              (Тест) Купить Pro
+            <button disabled={loading} onClick={() => handlePayment('nowpayments', 'pro')} className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2 disabled:opacity-50">
+              Купить Pro
             </button>
           )}
         </div>
@@ -173,8 +163,8 @@ export default function Pricing() {
               Ваш тариф
             </button>
           ) : (
-            <button disabled={loading} onClick={() => handlePayment('test', 'ultra')} className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2 disabled:opacity-50">
-              (Тест) Купить Ultra
+            <button disabled={loading} onClick={() => handlePayment('nowpayments', 'ultra')} className="w-full mt-auto bg-white text-black border-4 border-black font-black uppercase tracking-widest py-4 hover:bg-black hover:text-white transition-colors flex justify-center gap-2 disabled:opacity-50">
+              Купить Ultra
             </button>
           )}
         </div>
