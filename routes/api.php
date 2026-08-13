@@ -14,6 +14,7 @@ Route::post('/backtest', [\App\Http\Controllers\BacktestController::class, 'run'
 // Webhook Routes (Public)
 Route::post('/webhooks/cryptomus', [\App\Http\Controllers\Api\WebhookController::class, 'cryptomusWebhook']);
 Route::post('/webhooks/whitebit', [\App\Http\Controllers\Api\WebhookController::class, 'whitebitWebhook']);
+Route::post('/webhooks/nowpayments', [\App\Http\Controllers\Api\WebhookController::class, 'nowpaymentsWebhook']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);

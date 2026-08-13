@@ -82,7 +82,39 @@ class WebhookController extends Controller
     }
 
     /**
-     * Process successful payment and activate trial
+     * Handle NOWPayments Webhook
+     */
+    public function nowpaymentsWebhook(Request $request)
+    {
+        $payload = $request->all();
+        Log::info('NOWPayments Webhook received: ', $payload);
+
+        $ipnSecret = env('NOWPAYMENTS_IPN_SECRET', '');
+        $sign = $request->header('x-nowpayments-sig');
+
+        if (!$ipnSecret || !$sign) {
+            Log::error('NOWPayments Webhook: Missing IPN Secret or signature header');
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        ksort($payload);
+        $sortedData = json_encode($payload);
+        $expectedSign = hash_hmac('sha512', $sortedData, $ipnSecret);
+
+        if ($sign !== $expectedSign) {
+            Log::error('NOWPayments Webhook: Invalid signature');
+            return response()->json(['message' => 'Invalid signature'], 401);
+        }
+
+        if (isset($payload['payment_status']) && $payload['payment_status'] === 'finished') {
+            $this->processSuccessfulPayment($payload['order_id'], 'nowpayments');
+        }
+
+        return response()->json(['message' => 'OK']);
+    }
+
+    /**
+     * Process successful payment and activate trial or subscription
      */
     private function processSuccessfulPayment($orderId, $provider)
     {
@@ -96,15 +128,28 @@ class WebhookController extends Controller
 
             $user = User::find($payment->user_id);
             if ($user) {
-                // If trial already active, extend it. Otherwise, set it from now.
-                $currentEnd = $user->trial_ends_at && new \DateTime($user->trial_ends_at) > now() 
-                    ? new \Carbon\Carbon($user->trial_ends_at) 
-                    : now();
+                // Determine plan from orderId prefix (e.g., 'pro_12345', 'ultra_12345', 'trial_12345')
+                $plan = 'trial';
+                if (str_starts_with($orderId, 'pro_')) $plan = 'pro';
+                if (str_starts_with($orderId, 'ultra_')) $plan = 'ultra';
+                if (str_starts_with($orderId, 'trial_')) $plan = 'trial';
                 
-                $user->trial_ends_at = $currentEnd->addDays(7);
+                if ($plan === 'trial') {
+                    $user->tier = 'Pro'; // Trial gives Pro features
+                    $currentEnd = $user->trial_ends_at && new \DateTime($user->trial_ends_at) > now() 
+                        ? new \Carbon\Carbon($user->trial_ends_at) 
+                        : now();
+                    $user->trial_ends_at = $currentEnd->addDays(7);
+                    Log::info("Activated 7-day trial subscription for user {$user->id} via {$provider}");
+                } else if ($plan === 'pro') {
+                    $user->tier = 'Pro';
+                    Log::info("Activated Pro subscription for user {$user->id} via {$provider}");
+                } else if ($plan === 'ultra') {
+                    $user->tier = 'Ultra';
+                    Log::info("Activated Ultra subscription for user {$user->id} via {$provider}");
+                }
+                
                 $user->save();
-
-                Log::info("Activated 7-day subscription for user {$user->id} via {$provider} (Order: {$orderId})");
             }
         } else {
             Log::warning("Webhook received for unknown or already processed order: {$orderId} via {$provider}");
