@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -11,6 +11,28 @@ export function AuthProvider({ children }) {
   });
   
   const navigate = useNavigate();
+
+  // Automatically sync user with backend on load
+  useEffect(() => {
+    const token = localStorage.getItem('botforge_token');
+    if (token) {
+      fetch(`${API_URL}/user`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.id) {
+          // Frontend tier sync after webhook updates it in DB
+          setUser(data);
+          localStorage.setItem('botforge_user', JSON.stringify(data));
+        }
+      })
+      .catch(err => console.error('Failed to sync user:', err));
+    }
+  }, []);
 
   const login = async (email, password) => {
     try {
@@ -57,7 +79,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, setUser, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
