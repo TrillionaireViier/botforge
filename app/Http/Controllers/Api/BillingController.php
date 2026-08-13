@@ -177,7 +177,8 @@ class BillingController extends Controller
             'order_id' => $orderId,
             'order_description' => "BotForge {$plan} Subscription",
             'success_url' => url('/app/user'),
-            'cancel_url' => url('/app/user/pricing')
+            'cancel_url' => url('/app/user/pricing'),
+            'ipn_callback_url' => url('/api/webhooks/nowpayments')
         ];
 
         try {
