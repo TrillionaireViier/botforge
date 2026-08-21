@@ -47,17 +47,17 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans selection:bg-black selection:text-white">
+    <div className="min-h-screen bg-gray-900 text-white font-sans selection:bg-black selection:text-white overflow-x-hidden w-full">
       <PublicNavbar />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto text-center border-b-2 border-black">
         <motion.div initial="hidden" animate="visible" variants={fadeIn}>
-          <div className="inline-block border-2 border-black bg-gray-900 px-4 py-2 uppercase tracking-widest text-xs font-black text-white mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div className="inline-block border-2 border-black bg-gray-900 px-4 py-2 uppercase tracking-widest text-xs font-black text-white mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] max-w-full break-words">
             Ультимативный No-Code Конфигуратор
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none break-words">
             Автоматизируй <br/>
             <span className="text-white bg-gray-900 px-2 border-4 border-black inline-block mt-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">Свою Прибыль</span>
           </h1>
@@ -86,9 +86,9 @@ export default function Landing() {
       {/* Features Grid */}
       <section id="features" className="py-24 px-6 border-b-2 border-black bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black">Профессиональные Инструменты</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-lg max-w-2xl mx-auto">Всё необходимое для создания прибыльных автоматизированных систем без написания единой строчки кода.</p>
+          <div className="text-center mb-16 px-2">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black break-words break-all sm:break-normal hyphens-auto">Профессиональные Инструменты</h2>
+            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Всё необходимое для создания прибыльных автоматизированных систем без написания единой строчки кода.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -122,9 +122,9 @@ export default function Landing() {
       {/* Bots Showcase Section */}
       <section className="py-24 px-6 border-b-2 border-black bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Готовые Торговые Боты</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-lg max-w-2xl mx-auto">Выберите проверенную стратегию или создайте свою с нуля.</p>
+          <div className="text-center mb-16 px-2">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words break-all sm:break-normal hyphens-auto">Готовые Торговые Боты</h2>
+            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Выберите проверенную стратегию или создайте свою с нуля.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -182,9 +182,9 @@ export default function Landing() {
       {/* How it Works Block */}
       <section id="how-it-works" className="py-24 px-6 border-b-2 border-black bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Как Запустить Бота</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-lg max-w-2xl mx-auto">От идеи до реализации за три простых шага.</p>
+          <div className="text-center mb-16 px-2">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words break-all sm:break-normal hyphens-auto">Как Запустить Бота</h2>
+            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">От идеи до реализации за три простых шага.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -210,9 +210,9 @@ export default function Landing() {
       {/* Architecture Features */}
       <section className="py-24 px-6 border-b-2 border-black bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Создано для Масштабирования</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-lg max-w-2xl mx-auto">Надежная бэкенд инфраструктура в сочетании с молниеносным фронтендом.</p>
+          <div className="text-center mb-16 px-2">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words break-all sm:break-normal hyphens-auto">Создано для Масштабирования</h2>
+            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Надежная бэкенд инфраструктура в сочетании с молниеносным фронтендом.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
@@ -286,9 +286,9 @@ export default function Landing() {
       {/* Pricing Section */}
       <section id="pricing" className="py-24 px-6 border-b-2 border-black bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Тарифы</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-lg max-w-2xl mx-auto">Выберите подходящий план для ваших торговых амбиций.</p>
+          <div className="text-center mb-16 px-2">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words break-all sm:break-normal hyphens-auto">Тарифы</h2>
+            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Выберите подходящий план для ваших торговых амбиций.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -332,8 +332,8 @@ export default function Landing() {
       </section>
       <section className="py-24 px-6 bg-gray-50">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">FAQ</h2>
+          <div className="text-center mb-16 px-2">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words">FAQ</h2>
           </div>
           
           <div className="space-y-2">
