@@ -32,10 +32,10 @@ export default function UserLayout() {
   ];
 
   return (
-    <div className={`min-h-screen font-mono flex flex-col md:flex-row ${isDarkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-black'}`}>
+    <div className={`min-h-screen w-full overflow-x-hidden font-mono flex flex-col md:flex-row ${isDarkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-black'}`}>
       
       {/* Sidebar (Left) */}
-      <aside className={`w-full md:w-80 border-r-2 flex flex-col min-h-screen ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-black'}`}>
+      <aside className={`w-full md:w-80 border-b-2 md:border-b-0 md:border-r-2 flex flex-col md:min-h-screen ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-black'}`}>
         
         {/* Animated Profile Card */}
         <div className="p-6 border-b-2 border-black bg-black text-white relative overflow-hidden group">
@@ -57,7 +57,7 @@ export default function UserLayout() {
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 p-6 space-y-3 overflow-y-auto">
+        <nav className="flex-1 p-6 space-y-3 overflow-y-auto max-h-[50vh] md:max-h-none">
           <p className={`text-xs font-bold uppercase tracking-widest mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} style={{ animation: `slideInLeft 0.5s ease-out both` }}>Меню управления</p>
           {navItems.map((item, index) => (
             <Link
@@ -102,7 +102,7 @@ export default function UserLayout() {
       </aside>
 
       {/* Main Content Area */}
-      <main className={`flex-1 flex flex-col overflow-y-auto ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <main className={`flex-1 flex flex-col overflow-y-auto overflow-x-hidden ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         
         {/* Trial / Subscription Banner */}
         {user && user.role !== 'admin' && user.tier !== 'Pro' && user.tier !== 'Ultra' && (!user.trial_ends_at || new Date(user.trial_ends_at) < new Date()) && (

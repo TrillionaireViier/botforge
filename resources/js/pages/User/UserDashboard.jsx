@@ -100,8 +100,8 @@ export default function UserDashboard() {
               <Activity className="w-6 h-6" />
             </div>
           </div>
-          <div className="mt-6 flex items-center justify-between space-x-2 text-sm">
-            <span className="font-bold uppercase tracking-widest border-2 border-black px-2 py-1 group-hover:bg-black group-hover:text-white transition-colors">За всё время</span>
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+            <span className="font-bold uppercase tracking-widest border-2 border-black px-2 py-1 group-hover:bg-black group-hover:text-white transition-colors w-full sm:w-auto text-center">За всё время</span>
             <button onClick={async () => {
               try {
                 const token = localStorage.getItem('botforge_token');
@@ -113,10 +113,8 @@ export default function UserDashboard() {
                 const data = await res.json();
                 if(res.ok) alert("Тестовый ордер на покупку 0.001 BTC успешно отправлен на Binance Testnet!");
                 else alert("Ошибка: " + data.error);
-              } catch (e) {
-                console.error(e);
               }
-            }} className="bg-black text-white px-4 py-2 font-bold uppercase hover:bg-white hover:text-black border-2 border-black transition-colors">
+            }} className="bg-black text-white px-4 py-2 font-bold uppercase hover:bg-white hover:text-black border-2 border-black transition-colors w-full sm:w-auto">
               Тестовая сделка (0.001 BTC)
             </button>
           </div>
