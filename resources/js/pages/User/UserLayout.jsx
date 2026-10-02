@@ -50,8 +50,8 @@ export default function UserLayout() {
             </div>
             
             <div>
-              <p className="font-black text-xl uppercase tracking-widest leading-none">user123</p>
-              <p className="text-xs font-bold uppercase tracking-widest mt-1 bg-white text-black inline-block px-2 py-0.5">VIP Инвестор</p>
+              <p className="font-black text-xl uppercase tracking-widest leading-none truncate max-w-[150px]">{user?.name || user?.email?.split('@')[0] || 'User'}</p>
+              <p className="text-xs font-bold uppercase tracking-widest mt-1 bg-white text-black inline-block px-2 py-0.5">{user?.tier || 'VIP Инвестор'}</p>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function UserLayout() {
       <main className={`flex-1 flex flex-col overflow-y-auto overflow-x-hidden ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         
         {/* Trial / Subscription Banner */}
-        {user && user.role !== 'admin' && user.tier !== 'Pro' && user.tier !== 'Ultra' && (!user.trial_ends_at || new Date(user.trial_ends_at) < new Date()) && (
+        {user && user.status === 'Inactive' && (
           <div className="bg-red-500 text-white p-4 border-b-4 border-black text-center shadow-[0_4px_0_0_rgba(0,0,0,1)] z-20">
             <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">

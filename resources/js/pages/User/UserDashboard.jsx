@@ -112,7 +112,9 @@ export default function UserDashboard() {
                 });
                 const data = await res.json();
                 if(res.ok) alert("Тестовый ордер на покупку 0.001 BTC успешно отправлен на Binance Testnet!");
-                else alert("Ошибка: " + data.error);
+                else alert("Ошибка: " + (data.error || data.message || "Не удалось совершить сделку"));
+              } catch (err) {
+                alert("Ошибка: " + err.message);
               }
             }} className="bg-black text-white px-4 py-2 font-bold uppercase hover:bg-white hover:text-black border-2 border-black transition-colors w-full sm:w-auto">
               Тестовая сделка (0.001 BTC)
