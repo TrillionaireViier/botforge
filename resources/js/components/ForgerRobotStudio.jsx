@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RobotForgeIcon from './RobotForgeIcon';
-import { Bot, Flame, Plus, Play, Pause, Trash2 } from 'lucide-react';
+import { Bot, Flame, Play, Pause, Trash2, Zap, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function ForgerRobotStudio() {
   const [isStriking, setIsStriking] = useState(false);
-  const [sparks, setSparks] = useState(false);
+  const [strikePhase, setStrikePhase] = useState(0); // 0, 1, 2, 3
+  const [sparks, setSparks] = useState([]);
+  const [lastForgedBot, setLastForgedBot] = useState(null);
   const [robots, setRobots] = useState([
     { id: 1, name: "AlphaGrid Bot v4.2", strategy: "Grid Spot BTC/USDT", status: "Active", pnl: "+18.4%", trades: 142, icon: "🤖" },
     { id: 2, name: "Quantum HFT Scalper", strategy: "Futures Scalping ETH/USDT", status: "Active", pnl: "+24.8%", trades: 310, icon: "⚡" },
@@ -15,16 +17,44 @@ export default function ForgerRobotStudio() {
   const [strategySelect, setStrategySelect] = useState("Grid Spot");
   const [pairSelect, setPairSelect] = useState("BTC/USDT");
 
+  const generateSparkParticles = () => {
+    const newSparks = Array.from({ length: 12 }).map((_, i) => ({
+      id: Math.random(),
+      angle: (i * 30) + (Math.random() * 15 - 7.5),
+      dist: 60 + Math.random() * 80,
+      size: Math.random() > 0.5 ? 'text-2xl' : 'text-xl',
+      symbol: ["⚡", "✨", "💥", "🔥", "⭐"][Math.floor(Math.random() * 5)]
+    }));
+    setSparks(newSparks);
+  };
+
   const forgeNewRobot = () => {
+    if (isStriking) return;
     setIsStriking(true);
-    setSparks(true);
+    setLastForgedBot(null);
 
+    // Strike 1
+    setStrikePhase(1);
+    generateSparkParticles();
+
+    // Strike 2
     setTimeout(() => {
-      setSparks(false);
-    }, 800);
+      setStrikePhase(2);
+      generateSparkParticles();
+    }, 450);
 
+    // Strike 3
+    setTimeout(() => {
+      setStrikePhase(3);
+      generateSparkParticles();
+    }, 900);
+
+    // Assembly Complete
     setTimeout(() => {
       setIsStriking(false);
+      setStrikePhase(0);
+      setSparks([]);
+
       const name = botNameInput.trim() || `ForgeBot #${Math.floor(100 + Math.random() * 900)}`;
       const icons = ["🤖", "⚡", "🔥", "🛡️", "🚀", "⚙️"];
       const randomIcon = icons[Math.floor(Math.random() * icons.length)];
@@ -40,8 +70,9 @@ export default function ForgerRobotStudio() {
       };
 
       setRobots([newBot, ...robots]);
+      setLastForgedBot(newBot);
       setBotNameInput("");
-    }, 1200);
+    }, 1400);
   };
 
   const toggleBotStatus = (id) => {
@@ -59,61 +90,87 @@ export default function ForgerRobotStudio() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b-4 border-black pb-6 mb-8 gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <div className="p-2 border-2 border-black bg-yellow-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            <div className="p-2 border-2 border-black bg-yellow-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
               <RobotForgeIcon className="w-8 h-8" />
             </div>
-            <h2 className="text-2xl font-black uppercase tracking-widest text-black">Робот-Кузнец (Robot Forger)</h2>
+            <h2 className="text-2xl font-black uppercase tracking-widest text-black">Робот-Кузнец (Forge Bot Animator)</h2>
           </div>
           <p className="text-gray-600 font-mono text-sm mt-2">
-            Кузница AI-ботов на наковальне. Нажмите "Сковать Бота" для запуска анимации молота и генерации нового робота!
+            Анимированная кузница роботов. Молот робота бьет по наковальне, выбивает искры и кует новых автономных AI-ботов!
           </p>
         </div>
 
         <div className="bg-black text-white px-4 py-2 border-2 border-black font-mono text-xs uppercase font-bold flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          Скованно ботов в кузнице: {robots.length}
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+          Сковано ботов: {robots.length}
         </div>
       </div>
 
-      {/* Forger Anvil Interactive Stage */}
-      <div className="bg-gray-900 border-4 border-black p-8 rounded-xl text-white mb-8 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+      {/* Forger Anvil Interactive Animated Stage */}
+      <div className="bg-gray-950 border-4 border-black p-8 rounded-xl text-white mb-8 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-[inset_0_0_40px_rgba(0,0,0,0.8)]">
         
         {/* Animated Forger Graphic Stage */}
-        <div className="flex-1 flex flex-col items-center justify-center relative min-h-[220px]">
+        <div className="flex-1 flex flex-col items-center justify-center relative min-h-[260px] w-full">
           
-          {/* Spark Particles Effect */}
-          {sparks && (
-            <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-              <div className="w-48 h-48 rounded-full bg-yellow-400/20 blur-xl animate-ping"></div>
-              <span className="absolute -top-4 text-4xl animate-bounce">⚡</span>
-              <span className="absolute top-2 left-10 text-3xl animate-ping">💥</span>
-              <span className="absolute top-4 right-10 text-3xl animate-ping">✨</span>
-              <span className="absolute bottom-4 left-16 text-3xl animate-ping">🔥</span>
-            </div>
-          )}
+          {/* Molten Glow Backdrop */}
+          <div className={`absolute w-48 h-48 rounded-full transition-all duration-300 pointer-events-none ${
+            isStriking ? 'bg-yellow-500/40 blur-2xl scale-125' : 'bg-orange-600/10 blur-xl scale-100'
+          }`}></div>
 
-          {/* Robot Anvil Visual */}
-          <div className={`transition-transform duration-300 ${isStriking ? 'scale-110 rotate-2' : ''}`}>
-            <RobotForgeIcon className={`w-36 h-36 ${isStriking ? 'text-yellow-400 animate-bounce' : 'text-white'}`} isDark={true} />
+          {/* Flying Spark Particles */}
+          {sparks.map((s) => {
+            const rad = (s.angle * Math.PI) / 180;
+            const tx = Math.cos(rad) * s.dist;
+            const ty = Math.sin(rad) * s.dist;
+            return (
+              <span
+                key={s.id}
+                style={{
+                  transform: `translate(${tx}px, ${ty}px)`,
+                  transition: 'all 0.4s cubic-bezier(0.1, 0.8, 0.3, 1)',
+                  opacity: isStriking ? 1 : 0
+                }}
+                className={`absolute ${s.size} pointer-events-none animate-ping z-20`}
+              >
+                {s.symbol}
+              </span>
+            );
+          })}
+
+          {/* Hammering Robot Visual Animation */}
+          <div className={`relative transition-all duration-200 z-10 ${
+            strikePhase === 1 ? 'scale-125 rotate-6 translate-y-2' :
+            strikePhase === 2 ? 'scale-125 -rotate-6 translate-y-3' :
+            strikePhase === 3 ? 'scale-130 rotate-12 translate-y-4' : 'scale-100 rotate-0'
+          }`}>
+            <RobotForgeIcon className={`w-40 h-40 transition-colors duration-200 ${
+              isStriking ? 'text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]' : 'text-white'
+            }`} isDark={true} />
           </div>
 
-          <div className="mt-4 font-mono text-center">
+          {/* Impact Status Indicator */}
+          <div className="mt-4 font-mono text-center z-10">
             {isStriking ? (
-              <span className="text-yellow-400 font-black text-lg uppercase tracking-widest animate-pulse">
-                🔨 КУЕМ НОВОГО AI БОТА НА НАКОВАЛЬНЕ... 💥
-              </span>
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-yellow-400 font-black text-xl uppercase tracking-widest animate-pulse">
+                  {strikePhase === 1 && "🔨 УДАР #1: КОВКА КОРПУСА! 💥"}
+                  {strikePhase === 2 && "🔨 УДАР #2: УСТАНОВКА ПРОЦЕССОРА AI! ⚡"}
+                  {strikePhase === 3 && "💥 УДАР #3: ЗАПУСК ИСПОЛНЕНИЯ СЕТКИ! ✨"}
+                </span>
+                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Температура наковальни: 1450°C</span>
+              </div>
             ) : (
-              <span className="text-gray-400 text-xs font-bold uppercase tracking-widest">
-                Кузнец ready to forge new trading bots
+              <span className="text-gray-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-yellow-400" /> Робот-Кузнец готов к ковке новых алгоритмов
               </span>
             )}
           </div>
         </div>
 
         {/* Forge Controls */}
-        <div className="w-full md:w-96 bg-gray-800 border-2 border-gray-700 p-6 rounded-lg space-y-4">
-          <h3 className="font-black uppercase tracking-wider text-lg text-white flex items-center gap-2">
-            <Flame className="w-5 h-5 text-yellow-400" /> Параметры Кузницы
+        <div className="w-full md:w-96 bg-gray-900 border-2 border-gray-700 p-6 rounded-lg space-y-4 shadow-xl z-10">
+          <h3 className="font-black uppercase tracking-wider text-lg text-white flex items-center gap-2 border-b border-gray-800 pb-3">
+            <Flame className="w-5 h-5 text-yellow-400 animate-pulse" /> Настройки Робота-Кузнеца
           </h3>
 
           <div>
@@ -123,7 +180,7 @@ export default function ForgerRobotStudio() {
               value={botNameInput}
               onChange={(e) => setBotNameInput(e.target.value)}
               placeholder="e.g. Forged Bot Alpha #1"
-              className="w-full bg-gray-900 border-2 border-gray-600 px-3 py-2 text-sm font-mono text-white outline-none focus:border-yellow-400"
+              className="w-full bg-black border-2 border-gray-700 px-3 py-2 text-sm font-mono text-white outline-none focus:border-yellow-400 transition-colors"
             />
           </div>
 
@@ -133,7 +190,7 @@ export default function ForgerRobotStudio() {
               <select 
                 value={strategySelect}
                 onChange={(e) => setStrategySelect(e.target.value)}
-                className="w-full bg-gray-900 border-2 border-gray-600 px-2 py-2 text-xs font-mono text-white outline-none"
+                className="w-full bg-black border-2 border-gray-700 px-2 py-2 text-xs font-mono text-white outline-none"
               >
                 <option value="Grid Spot">Grid Spot</option>
                 <option value="Futures Scalp">Futures Scalp</option>
@@ -143,11 +200,11 @@ export default function ForgerRobotStudio() {
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase tracking-widest text-gray-400 block mb-1">Пара</label>
+              <label className="text-xs font-bold uppercase tracking-widest text-gray-400 block mb-1">Торговая Пара</label>
               <select 
                 value={pairSelect}
                 onChange={(e) => setPairSelect(e.target.value)}
-                className="w-full bg-gray-900 border-2 border-gray-600 px-2 py-2 text-xs font-mono text-white outline-none"
+                className="w-full bg-black border-2 border-gray-700 px-2 py-2 text-xs font-mono text-white outline-none"
               >
                 <option value="BTC/USDT">BTC/USDT</option>
                 <option value="ETH/USDT">ETH/USDT</option>
@@ -161,15 +218,37 @@ export default function ForgerRobotStudio() {
             disabled={isStriking}
             onClick={forgeNewRobot}
             className={`w-full py-4 font-black uppercase tracking-widest text-sm border-2 border-black flex items-center justify-center gap-2 transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] ${
-              isStriking ? 'bg-yellow-500 text-black cursor-wait' : 'bg-yellow-400 text-black hover:bg-yellow-300 hover:translate-x-0.5 hover:translate-y-0.5'
+              isStriking ? 'bg-yellow-500 text-black cursor-wait animate-pulse' : 'bg-yellow-400 text-black hover:bg-yellow-300 hover:translate-x-0.5 hover:translate-y-0.5'
             }`}
           >
             <Flame className="w-5 h-5" />
-            <span>{isStriking ? 'Ковка в процессе...' : '🔨 Сковать Нового Бота'}</span>
+            <span>{isStriking ? '🔨 Ковка в процессе...' : '🔨 Сковать Нового Бота'}</span>
           </button>
         </div>
 
       </div>
+
+      {/* Newly Forged Robot Alert Card */}
+      {lastForgedBot && (
+        <div className="bg-yellow-300 border-4 border-black p-6 mb-8 animate-in fade-in slide-in-from-top-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-4xl">{lastForgedBot.icon}</span>
+              <div>
+                <span className="text-xs font-black uppercase tracking-widest bg-black text-white px-2 py-0.5 inline-block mb-1">Успешно Скован!</span>
+                <h4 className="text-xl font-black uppercase tracking-wider text-black">{lastForgedBot.name}</h4>
+                <p className="font-mono text-xs text-gray-800">{lastForgedBot.strategy} — Подключен к HFT исполнению</p>
+              </div>
+            </div>
+            <button 
+              onClick={() => setLastForgedBot(null)}
+              className="text-xs font-black uppercase tracking-widest border-2 border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition-colors"
+            >
+              Закрыть
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* List of Forged Robots */}
       <div>
