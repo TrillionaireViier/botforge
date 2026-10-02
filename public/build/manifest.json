@@ -1,16 +1,16 @@
 {
   "resources/js/index.css": {
-    "file": "assets/index-CK3-Z_xy.css",
+    "file": "assets/index-DouZa3mS.css",
     "src": "resources/js/index.css",
     "isEntry": true
   },
   "resources/js/main.jsx": {
-    "file": "assets/main-Cg7VTdfN.js",
+    "file": "assets/main-ugz46lkd.js",
     "name": "main",
     "src": "resources/js/main.jsx",
     "isEntry": true,
     "css": [
-      "assets/index-CK3-Z_xy.css"
+      "assets/index-DouZa3mS.css"
     ]
   }
 }
