@@ -47,7 +47,7 @@ export default function UserLayout() {
           <div className="flex items-center space-x-4 relative z-10 group-hover:scale-105 transition-transform duration-300">
             <div className="relative">
               <div className="w-14 h-14 border-2 border-white rounded-full bg-black flex items-center justify-center overflow-hidden group-hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-shadow p-2">
-                <RobotForgeIcon className="w-9 h-9 text-white" isDark={true} />
+                <RobotForgeIcon className="w-9 h-9 text-white" isDark={true} animated={true} />
               </div>
               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-black rounded-full animate-bounce"></div>
             </div>

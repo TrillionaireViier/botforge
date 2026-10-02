@@ -7,8 +7,8 @@ export default function PublicNavbar() {
     <nav className="border-b-2 border-black bg-white sticky top-0 z-50">
       <div className="flex items-center justify-between p-4 md:p-6 max-w-7xl mx-auto w-full h-20">
         <Link to="/" className="flex items-center gap-3">
-          <div className="bg-white p-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
-            <RobotForgeIcon className="w-7 h-7" />
+          <div className="bg-yellow-300 p-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
+            <RobotForgeIcon className="w-8 h-8" animated={true} />
           </div>
           <span className="text-2xl font-black uppercase tracking-widest text-black">BotForge</span>
         </Link>
