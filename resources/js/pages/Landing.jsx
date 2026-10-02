@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Zap, Activity, Layers, ArrowRight, ChevronRight } from 'lucide-react';
 import PublicNavbar from '../components/layout/PublicNavbar';
 import Footer from '../components/layout/Footer';
+import ForgerRobotStudio from '../components/ForgerRobotStudio';
 import { useState } from 'react';
 
 const fadeIn = {
@@ -66,7 +67,7 @@ export default function Landing() {
             Создавайте сложные Grid-стратегии, настраивайте технические индикаторы и управляйте рисками с помощью трейлинг-стопов. Мгновенное подключение к Binance, Bybit и OKX.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <Link 
               to="/login" 
               className="w-full sm:w-auto bg-black hover:bg-gray-800 text-white font-black uppercase tracking-widest py-5 px-10 border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-3 text-lg"
@@ -79,6 +80,11 @@ export default function Landing() {
             >
               Смотреть Тарифы
             </a>
+          </div>
+
+          {/* Animated Forger Robot Studio on First Screen */}
+          <div className="text-left mt-8">
+            <ForgerRobotStudio autoAnimate={true} />
           </div>
         </motion.div>
       </section>

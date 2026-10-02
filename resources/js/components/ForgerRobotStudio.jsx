@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import RobotForgeIcon from './RobotForgeIcon';
 import { Bot, Flame, Play, Pause, Trash2, Zap, Sparkles, CheckCircle2 } from 'lucide-react';
 
-export default function ForgerRobotStudio() {
+export default function ForgerRobotStudio({ autoAnimate = false }) {
   const [isStriking, setIsStriking] = useState(false);
   const [strikePhase, setStrikePhase] = useState(0); // 0, 1, 2, 3
   const [sparks, setSparks] = useState([]);
@@ -16,6 +16,22 @@ export default function ForgerRobotStudio() {
   const [botNameInput, setBotNameInput] = useState("");
   const [strategySelect, setStrategySelect] = useState("Grid Spot");
   const [pairSelect, setPairSelect] = useState("BTC/USDT");
+
+  // Auto-Strike Animation effect for Landing Page
+  useEffect(() => {
+    if (!autoAnimate) return;
+    const interval = setInterval(() => {
+      forgeNewRobot();
+    }, 3800);
+    // Initial trigger
+    const initialTimer = setTimeout(() => {
+      forgeNewRobot();
+    }, 600);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(initialTimer);
+    };
+  }, [autoAnimate]);
 
   const generateSparkParticles = () => {
     const newSparks = Array.from({ length: 12 }).map((_, i) => ({
