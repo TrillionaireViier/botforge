@@ -54,11 +54,11 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
   const [lastForgedBot, setLastForgedBot] = useState(null);
 
   const [robots, setRobots] = useState([
-    { id: 1, name: "CyberForge Titan 3000", strategy: "Grid Spot BTC/USDT", status: "Active", pnl: "+24.5%", trades: 142, icon: "🤖", skin: "A" },
-    { id: 2, name: "Quantum Plasma Scalper", strategy: "Futures Scalping ETH/USDT", status: "Active", pnl: "+34.2%", trades: 310, icon: "⚡", skin: "B" },
-    { id: 3, name: "Inferno Magma Dragon", strategy: "DCA Accumulator SOL/USDT", status: "Active", pnl: "+29.1%", trades: 89, icon: "🔥", skin: "C" },
-    { id: 4, name: "Matrix Cyber-Sentinel", strategy: "HFT Micro-Grid SOL/USDT", status: "Active", pnl: "+37.8%", trades: 512, icon: "🟢", skin: "D" },
-    { id: 5, name: "Golden Sovereign Monarch", strategy: "Arbitrage VIP Gold BTC/USDT", status: "Active", pnl: "+44.0%", trades: 890, icon: "👑", skin: "E" }
+    { id: 1, name: "CyberForge Titan 3000", strategy: "Grid Spot BTC/USDT", status: "Active", pnl: "+24.5%", trades: 142, icon: "🤖", skin: "A", variantId: "A1" },
+    { id: 2, name: "Quantum Plasma Scalper", strategy: "Futures Scalping ETH/USDT", status: "Active", pnl: "+34.2%", trades: 310, icon: "⚡", skin: "B", variantId: "B1" },
+    { id: 3, name: "Inferno Magma Dragon", strategy: "DCA Accumulator SOL/USDT", status: "Active", pnl: "+29.1%", trades: 89, icon: "🔥", skin: "C", variantId: "C1" },
+    { id: 4, name: "Matrix Cyber-Sentinel", strategy: "HFT Micro-Grid SOL/USDT", status: "Active", pnl: "+37.8%", trades: 512, icon: "🟢", skin: "D", variantId: "D1" },
+    { id: 5, name: "Golden Sovereign Monarch", strategy: "Arbitrage VIP Gold BTC/USDT", status: "Active", pnl: "+44.0%", trades: 890, icon: "👑", skin: "E", variantId: "E1" }
   ]);
 
   const [botNameInput, setBotNameInput] = useState("");
@@ -141,7 +141,8 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         pnl: currentVariantData.pnl,
         trades: Math.floor(10 + Math.random() * 80),
         icon: currentVariantData.icon,
-        skin: currentVariantData.skin
+        skin: currentVariantData.skin,
+        variantId: currentVariantData.id
       };
 
       setRobots([newBot, ...robots]);
@@ -228,8 +229,10 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
                     : 'bg-white text-gray-800 border-gray-300 hover:border-black hover:bg-gray-100'
                 }`}
               >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-base">{item.icon}</span>
+                <div className="flex items-center justify-between mb-1 w-full">
+                  <div className="w-7 h-7 flex items-center justify-center overflow-visible">
+                    <RobotForgeIcon variant={item.id} className="w-6 h-6" animated={isSelected} />
+                  </div>
                   <span className="text-[9px] font-black uppercase px-1 bg-black text-white">{item.id}</span>
                 </div>
                 <div className="font-black text-[11px] uppercase truncate">{item.name}</div>
@@ -414,9 +417,11 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             <div key={bot.id} className="bg-gray-50 border-2 border-black p-3 flex flex-col justify-between hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">{bot.icon}</span>
+                  <div className="w-6 h-6 flex items-center justify-center overflow-visible">
+                    <RobotForgeIcon variant={bot.variantId || 'A1'} className="w-6 h-6" animated={true} />
+                  </div>
                   <span className="text-[9px] font-black uppercase px-1.5 py-0.5 border border-black bg-black text-white">
-                    Скин {bot.skin}
+                    {bot.variantId || `Скин ${bot.skin}`}
                   </span>
                 </div>
                 <h4 className="font-black text-xs uppercase tracking-wider truncate">{bot.name}</h4>
