@@ -172,7 +172,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           <div>
             <div className="flex items-center gap-3">
               <div className="p-2 border-2 border-black bg-yellow-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
-                <RobotForgeIcon className="w-8 h-8" variant={currentVariantData.skin} animated={true} />
+                <RobotForgeIcon className="w-8 h-8" variant={currentVariantData.id} animated={true} />
               </div>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
@@ -284,7 +284,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           }`}>
             <RobotForgeIcon className={`w-44 h-44 transition-all duration-200 ${
               isStriking ? 'drop-shadow-[0_0_30px_rgba(255,255,255,0.9)]' : ''
-            }`} isDark={true} variant={currentVariantData.skin} animated={true} />
+            }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
 
           {/* Impact Status Indicator */}
