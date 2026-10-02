@@ -2,8 +2,11 @@ export default function RobotForgeIcon({
   className = "w-8 h-8", 
   isDark = false, 
   animated = true,
-  variant = "A" // "A" | "B" | "C" | "D" | "E"
+  variant = "A", // "A" | "B" | "C" | "D" | "E"
+  anvilVariant = null // If provided, overrides anvil model: "A" | "B" | "C" | "D" | "E"
 }) {
+  const activeAnvil = anvilVariant || variant;
+
   if (variant === "B") {
     // VARIANT B: Quantum Sphere Drone & Orbital Plasma Forge
     return (
@@ -29,14 +32,14 @@ export default function RobotForgeIcon({
         {/* 3 Plasma Laser Emitters */}
         <path d="M18 30 L28 42 M46 30 L36 42 M32 28 V42" stroke="#00f0ff" strokeWidth="2.5" strokeDasharray="6 3" className="animate-beam" />
 
-        {/* Floating Energy Monolith Anvil */}
-        <polygon points="20,44 44,44 38,56 26,56" fill="#00f0ff" opacity="0.8" />
-        <ellipse cx="32" cy="44" rx="14" ry="4" fill="#a855f7" />
-        <rect x="24" y="56" width="16" height="4" rx="2" fill="#00f0ff" />
-        
-        {/* Quantum Orbs */}
-        <circle cx="16" cy="38" r="2.5" fill="#a855f7" className="animate-ping" />
-        <circle cx="48" cy="38" r="2.5" fill="#00f0ff" className="animate-ping" />
+        {/* ANVIL MODEL B: Quantum Levitating Monolith */}
+        <polygon points="16,42 48,42 42,52 22,52" fill="#090d16" stroke="#00f0ff" strokeWidth="1.5" />
+        <ellipse cx="32" cy="42" rx="16" ry="5" fill="#00f0ff" opacity="0.8" />
+        <ellipse cx="32" cy="42" rx="9" ry="2.5" fill="#a855f7" />
+        {/* Magnetic Field Pillars */}
+        <rect x="24" y="52" width="16" height="6" rx="2" fill="#00f0ff" stroke="#a855f7" strokeWidth="1" />
+        <circle cx="18" cy="38" r="2.5" fill="#a855f7" className="animate-ping" />
+        <circle cx="46" cy="38" r="2.5" fill="#00f0ff" className="animate-ping" />
       </svg>
     );
   }
@@ -71,10 +74,13 @@ export default function RobotForgeIcon({
           <polygon points="46,14 52,14 49,20" fill="#facc15" />
         </g>
 
-        {/* Magma Spiked Anvil Base */}
-        <polygon points="10,48 54,48 48,36 16,36" fill="#991b1b" stroke="#f97316" strokeWidth="1.5" />
-        <polygon points="16,36 22,30 28,36 34,30 40,36 46,30 50,36" fill="#f97316" className="animate-lava" />
-        <rect x="20" y="48" width="24" height="10" fill="#450a0a" stroke="#f97316" />
+        {/* ANVIL MODEL C: Volcanic Lava Altar Anvil */}
+        <polygon points="8,48 56,48 50,34 14,34" fill="#450a0a" stroke="#f97316" strokeWidth="2" />
+        <polygon points="14,34 20,28 26,34 32,28 38,34 44,28 50,34" fill="#f97316" className="animate-lava" />
+        <rect x="18" y="48" width="28" height="10" fill="#7f1d1d" stroke="#ef4444" strokeWidth="1.5" />
+        {/* Spikes */}
+        <polygon points="10,48 6,40 14,44" fill="#dc2626" />
+        <polygon points="54,48 58,40 50,44" fill="#dc2626" />
 
         {/* Fire Sparks */}
         <circle cx="28" cy="26" r="2" fill="#facc15" className="animate-bounce" />
@@ -112,14 +118,14 @@ export default function RobotForgeIcon({
         <path d="M44 18 L54 28 L42 36" stroke="#22c55e" strokeWidth="2.5" strokeLineCap="round" />
 
         {/* Triple Welding Laser Beams */}
-        <path d="M22 36 L32 46 M42 36 L32 46 M32 22 V46" stroke="#4ade80" strokeWidth="2" strokeDasharray="3 3" className="animate-laser" />
+        <path d="M22 36 L32 44 M42 36 L32 44 M32 22 V44" stroke="#4ade80" strokeWidth="2" strokeDasharray="3 3" className="animate-laser" />
 
-        {/* Matrix Holographic Anvil Grid */}
-        <rect x="14" y="46" width="36" height="12" rx="2" fill="#022c22" stroke="#22c55e" strokeWidth="1.5" />
-        <path d="M14 50 H50 M14 54 H50 M26 46 V58 M38 46 V58" stroke="#15803d" strokeWidth="1" />
-        
-        {/* Green Matrix Sparks */}
-        <rect x="30" y="44" width="4" height="4" fill="#4ade80" className="animate-ping" />
+        {/* ANVIL MODEL D: Cyber Matrix Holographic Lattice Platform */}
+        <rect x="12" y="44" width="40" height="14" rx="3" fill="#022c22" stroke="#22c55e" strokeWidth="2" />
+        <path d="M12 48 H52 M12 52 H52 M24 44 V58 M40 44 V58" stroke="#15803d" strokeWidth="1.5" />
+        <circle cx="24" cy="48" r="1.5" fill="#4ade80" />
+        <circle cx="40" cy="48" r="1.5" fill="#4ade80" />
+        <rect x="28" y="42" width="8" height="3" fill="#4ade80" className="animate-ping" />
       </svg>
     );
   }
@@ -153,10 +159,11 @@ export default function RobotForgeIcon({
           <polygon points="46,3 48,7 52,8 48,9 46,13 44,9 40,8 44,7" fill="#ffffff" />
         </g>
 
-        {/* Imperial Diamond Pedestal Anvil */}
-        <polygon points="16,46 48,46 40,34 24,34" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
-        <polygon points="32,34 38,40 32,46 26,40" fill="#38bdf8" className="animate-diamond" />
-        <rect x="20" y="46" width="24" height="10" rx="2" fill="#ca8a04" stroke="#78350f" />
+        {/* ANVIL MODEL E: Sovereign Gold & Diamond Pedestal */}
+        <polygon points="14,46 50,46 42,32 22,32" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+        <polygon points="32,32 39,39 32,46 25,39" fill="#38bdf8" stroke="#0284c7" strokeWidth="1.5" className="animate-diamond" />
+        <rect x="18" y="46" width="28" height="10" rx="3" fill="#eab308" stroke="#78350f" strokeWidth="1.5" />
+        <circle cx="32" cy="51" r="2.5" fill="#ffffff" />
 
         {/* Gold Coins & Star Particles */}
         <polygon points="20,28 22,30 25,30 23,32 24,35 20,33 17,35 18,32 16,30 19,30" fill="#facc15" className="animate-ping" />
@@ -165,7 +172,7 @@ export default function RobotForgeIcon({
     );
   }
 
-  // DEFAULT VARIANT A: CyberForge Titan (Heavy Hydraulic Blacksmith)
+  // DEFAULT VARIANT A: CyberForge Titan with Industrial Double-Horn Anvil
   const strokeColor = isDark ? "#ffffff" : "#000000";
   const fillColor = isDark ? "#ffffff" : "#000000";
 
@@ -199,10 +206,11 @@ export default function RobotForgeIcon({
         <rect x="34" y="6" width="18" height="12" rx="2" fill="#ffe600" stroke={strokeColor} strokeWidth="2" transform="rotate(-30 43 12)" />
       </g>
 
-      {/* Industrial Anvil */}
-      <path d="M12 46 H52 L46 36 H54 V32 H22 L12 36 Z" fill={fillColor} stroke={strokeColor} strokeWidth="2" />
-      <path d="M24 46 V56 H40 V46" fill={fillColor} />
-      <rect x="18" y="56" width="28" height="4" rx="1" fill="#ffe600" stroke={strokeColor} />
+      {/* ANVIL MODEL A: Reinforced Heavy Industrial Double-Horn Anvil */}
+      <path d="M10 46 H54 L48 34 H58 V30 H20 L10 34 Z" fill={fillColor} stroke={strokeColor} strokeWidth="2" />
+      <path d="M22 46 V56 H42 V46" fill={fillColor} stroke={strokeColor} strokeWidth="1.5" />
+      <rect x="16" y="56" width="32" height="4" rx="1.5" fill="#ffe600" stroke={strokeColor} strokeWidth="1.5" />
+      <line x1="22" y1="34" x2="48" y2="34" stroke="#ffe600" strokeWidth="2" />
 
       {/* Flying Heavy Sparks */}
       <g className="animate-titan-spark">
