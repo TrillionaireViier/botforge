@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
-import { Zap, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
+import RobotForgeIcon from '../RobotForgeIcon';
 
 export default function PublicNavbar() {
   return (
     <nav className="border-b-2 border-black bg-white sticky top-0 z-50">
       <div className="flex items-center justify-between p-4 md:p-6 max-w-7xl mx-auto w-full h-20">
-        <div className="flex items-center gap-3">
-          <div className="bg-white p-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-            <Zap className="w-6 h-6 text-black" />
+        <Link to="/" className="flex items-center gap-3">
+          <div className="bg-white p-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
+            <RobotForgeIcon className="w-7 h-7" />
           </div>
-          <span className="text-2xl font-black uppercase tracking-widest text-black">BotForgee</span>
-        </div>
+          <span className="text-2xl font-black uppercase tracking-widest text-black">BotForge</span>
+        </Link>
         
         <div className="hidden md:flex gap-8">
           <a href="#features" className="text-sm font-bold uppercase tracking-widest text-black hover:underline underline-offset-4">Функции</a>

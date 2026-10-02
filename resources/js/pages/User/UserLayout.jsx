@@ -6,6 +6,7 @@ import {
   Moon, Sun
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
+import RobotForgeIcon from "../../components/RobotForgeIcon";
 
 export default function UserLayout() {
   const { user, logout } = useAuth();
@@ -16,7 +17,9 @@ export default function UserLayout() {
     { name: "Дашборд", path: "/user", icon: LayoutDashboard },
     { name: "Торговые боты", path: "/user/bots", icon: Bot },
     { name: "Тарифы", path: "/user/pricing", icon: CreditCard },
-
+    { name: "Сигналы AI", path: "/user/signals", icon: Activity },
+    { name: "Копитрейдинг", path: "/user/copy-trading", icon: Users },
+    { name: "Бэктестинг", path: "/user/backtesting", icon: Database },
     { name: "Мой Портфель", path: "/user/portfolio", icon: Briefcase },
     { name: "API Ключи", path: "/user/apikeys", icon: Key },
     { name: "Риск-менеджмент", path: "/user/risks", icon: ShieldAlert },
@@ -32,10 +35,10 @@ export default function UserLayout() {
   ];
 
   return (
-    <div className={`min-h-screen w-full overflow-x-hidden font-mono flex flex-col md:flex-row ${isDarkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-black'}`}>
+    <div className={`min-h-screen font-mono flex flex-col md:flex-row ${isDarkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-black'}`}>
       
       {/* Sidebar (Left) */}
-      <aside className={`w-full md:w-80 border-b-2 md:border-b-0 md:border-r-2 flex flex-col md:min-h-screen ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-black'}`}>
+      <aside className={`w-full md:w-80 border-r-2 flex flex-col min-h-screen ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-black'}`}>
         
         {/* Animated Profile Card */}
         <div className="p-6 border-b-2 border-black bg-black text-white relative overflow-hidden group">
@@ -43,21 +46,21 @@ export default function UserLayout() {
           
           <div className="flex items-center space-x-4 relative z-10 group-hover:scale-105 transition-transform duration-300">
             <div className="relative">
-              <div className="w-14 h-14 border-2 border-white rounded-full bg-black flex items-center justify-center overflow-hidden group-hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-shadow">
-                <UserCircle className="w-10 h-10 text-white animate-pulse" />
+              <div className="w-14 h-14 border-2 border-white rounded-full bg-black flex items-center justify-center overflow-hidden group-hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-shadow p-2">
+                <RobotForgeIcon className="w-9 h-9 text-white" isDark={true} />
               </div>
               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-black rounded-full animate-bounce"></div>
             </div>
             
             <div>
-              <p className="font-black text-xl uppercase tracking-widest leading-none truncate max-w-[150px]">{user?.name || user?.email?.split('@')[0] || 'User'}</p>
-              <p className="text-xs font-bold uppercase tracking-widest mt-1 bg-white text-black inline-block px-2 py-0.5">{user?.tier || 'VIP Инвестор'}</p>
+              <p className="font-black text-xl uppercase tracking-widest leading-none">BotForge</p>
+              <p className="text-xs font-bold uppercase tracking-widest mt-1 bg-white text-black inline-block px-2 py-0.5">VIP Инвестор</p>
             </div>
           </div>
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 p-6 space-y-3 overflow-y-auto max-h-[50vh] md:max-h-none">
+        <nav className="flex-1 p-6 space-y-3 overflow-y-auto">
           <p className={`text-xs font-bold uppercase tracking-widest mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} style={{ animation: `slideInLeft 0.5s ease-out both` }}>Меню управления</p>
           {navItems.map((item, index) => (
             <Link
@@ -102,31 +105,15 @@ export default function UserLayout() {
       </aside>
 
       {/* Main Content Area */}
-      <main className={`flex-1 flex flex-col overflow-y-auto overflow-x-hidden ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
-        
-        {/* Trial / Subscription Banner */}
-        {user && user.status === 'Inactive' && (
-          <div className="bg-red-500 text-white p-4 border-b-4 border-black text-center shadow-[0_4px_0_0_rgba(0,0,0,1)] z-20">
-            <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
-              <div className="flex items-center space-x-3">
-                <ShieldAlert className="w-6 h-6 animate-pulse" />
-                <span className="font-bold uppercase tracking-widest text-sm sm:text-base">
-                  Ваша подписка или тестовый период не активны.
-                </span>
-              </div>
-              <Link 
-                to="/user/pricing" 
-                className="bg-black text-white px-6 py-2 uppercase font-black tracking-widest text-sm hover:bg-white hover:text-black border-2 border-transparent hover:border-black transition-colors"
-              >
-                Оплатить $10
-              </Link>
-            </div>
-          </div>
-        )}
-
+      <main className={`flex-1 overflow-y-auto ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* Mobile Header */}
         <header className={`md:hidden p-4 flex items-center justify-between border-b-2 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-black'}`}>
-          <span className="font-black text-xl uppercase tracking-widest">Кабинет</span>
+          <div className="flex items-center space-x-2">
+            <div className={`p-1 border-2 flex items-center justify-center ${isDarkMode ? 'border-white bg-gray-900' : 'border-black bg-white'}`}>
+              <RobotForgeIcon className="w-6 h-6" isDark={isDarkMode} />
+            </div>
+            <span className="font-black text-xl uppercase tracking-widest">BotForge</span>
+          </div>
           <div className="flex items-center space-x-2">
             <button onClick={() => setIsDarkMode(!isDarkMode)} className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-200 text-gray-800'}`}>
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
