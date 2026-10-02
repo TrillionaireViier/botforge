@@ -2,222 +2,324 @@ export default function RobotForgeIcon({
   className = "w-8 h-8", 
   isDark = false, 
   animated = true,
-  variant = "A", // "A" | "B" | "C" | "D" | "E"
-  anvilVariant = null // If provided, overrides anvil model: "A" | "B" | "C" | "D" | "E"
+  variant = "A1" // Can be "A1".."A6", "B1".."B6", "C1".."C6", "D1".."D6", "E1".."E6" or fallback "A", "B", "C", "D", "E"
 }) {
-  const activeAnvil = anvilVariant || variant;
+  const strokeColor = isDark ? "#ffffff" : "#000000";
+  const v = variant.toUpperCase();
 
-  if (variant === "B") {
-    // VARIANT B: Quantum Sphere Drone & Orbital Plasma Forge
+  // Category B1 - B6: Quantum & Plasma Orbs
+  if (v.startsWith('B') || v === 'QUANTUM') {
+    if (v === 'B2') { // Nebula Cosmic Voyager
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="18" r="12" fill="#030712" stroke="#38bdf8" strokeWidth="2" />
+          <ellipse cx="32" cy="18" rx="18" ry="5" stroke="#c084fc" strokeWidth="1.5" transform="rotate(-15 32 18)" />
+          <circle cx="32" cy="18" r="4" fill="#38bdf8" />
+          <path d="M22 30 L32 42 M42 30 L32 42" stroke="#c084fc" strokeWidth="2.5" />
+          <polygon points="18,44 46,44 38,56 26,56" fill="#0c4a6e" stroke="#38bdf8" strokeWidth="1.5" />
+          <ellipse cx="32" cy="44" rx="14" ry="4" fill="#38bdf8" />
+        </svg>
+      );
+    }
+    if (v === 'B3') { // Aether Flux Oscillator
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <path d="M16 16 Q 24 8, 32 16 T 48 16" stroke="#2dd4bf" strokeWidth="2.5" fill="none" />
+          <rect x="22" y="10" width="20" height="12" rx="3" fill="#0f766e" stroke="#2dd4bf" strokeWidth="1.5" />
+          <circle cx="32" cy="16" r="3" fill="#ccfbf1" />
+          <path d="M28 22 L38 12 L44 18" stroke="#2dd4bf" strokeWidth="3" />
+          <rect x="14" y="44" width="36" height="12" rx="3" fill="#134e4a" stroke="#2dd4bf" strokeWidth="2" />
+          <path d="M14 50 H50" stroke="#ccfbf1" strokeWidth="1.5" strokeDasharray="3 2" />
+        </svg>
+      );
+    }
+    if (v === 'B4') { // Glitch Overlord AI
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <rect x="18" y="6" width="28" height="16" rx="2" fill="#3b0764" stroke="#a855f7" strokeWidth="2" />
+          <rect x="22" y="10" width="8" height="8" fill="#f43f5e" />
+          <rect x="34" y="10" width="8" height="8" fill="#00f0ff" />
+          <path d="M28 22 L40 12 L48 20" stroke="#a855f7" strokeWidth="3.5" />
+          <rect x="12" y="44" width="40" height="14" fill="#1e1b4b" stroke="#a855f7" strokeWidth="2" />
+          <rect x="20" y="48" width="8" height="6" fill="#f43f5e" />
+          <rect x="36" y="48" width="8" height="6" fill="#00f0ff" />
+        </svg>
+      );
+    }
+    if (v === 'B5') { // Spectre Zero-Slippage HFT
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <path d="M18 20 C18 10, 46 10, 46 20 C46 28, 18 28, 18 20 Z" fill="#0284c7" opacity="0.8" stroke="#38bdf8" strokeWidth="2" />
+          <circle cx="26" cy="18" r="2.5" fill="#ffffff" />
+          <circle cx="38" cy="18" r="2.5" fill="#ffffff" />
+          <path d="M28 24 L42 12" stroke="#38bdf8" strokeWidth="3" />
+          <ellipse cx="32" cy="46" rx="18" ry="6" fill="#0369a1" stroke="#38bdf8" strokeWidth="2" />
+          <ellipse cx="32" cy="46" rx="10" ry="3" fill="#7dd3fc" />
+        </svg>
+      );
+    }
+    if (v === 'B6') { // Eclipse Dark Matter
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="18" r="13" fill="#000000" stroke="#6366f1" strokeWidth="3" />
+          <circle cx="32" cy="18" r="6" fill="#818cf8" />
+          <path d="M26 24 L44 8 L48 16" stroke="#6366f1" strokeWidth="3.5" />
+          <ellipse cx="32" cy="46" rx="18" ry="7" fill="#1e1b4b" stroke="#818cf8" strokeWidth="2" />
+          <circle cx="32" cy="46" r="4" fill="#6366f1" />
+        </svg>
+      );
+    }
+    // Default B1 Quantum Plasma
     return (
-      <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <style>{`
-          @keyframes orbPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.15) rotate(180deg); }
-          }
-          @keyframes rayBeam {
-            0%, 100% { opacity: 0.3; stroke-dashoffset: 20; }
-            50% { opacity: 1; stroke-dashoffset: 0; }
-          }
-          .animate-orb { transform-origin: 32px 20px; animation: ${animated ? 'orbPulse 2s infinite linear' : 'none'}; }
-          .animate-beam { animation: ${animated ? 'rayBeam 1.2s infinite ease-in-out' : 'none'}; }
-        `}</style>
-        {/* Floating Concentric Rings */}
-        <circle cx="32" cy="20" r="16" stroke="#00f0ff" strokeWidth="1.5" strokeDasharray="4 2" className="animate-orb" />
-        <circle cx="32" cy="20" r="11" fill="#090d16" stroke="#a855f7" strokeWidth="2" />
-        {/* Quantum Core Eye */}
-        <circle cx="32" cy="20" r="4" fill="#00f0ff" className="animate-pulse" />
-
-        {/* 3 Plasma Laser Emitters */}
-        <path d="M18 30 L28 42 M46 30 L36 42 M32 28 V42" stroke="#00f0ff" strokeWidth="2.5" strokeDasharray="6 3" className="animate-beam" />
-
-        {/* ANVIL MODEL B: Quantum Levitating Monolith */}
-        <polygon points="16,42 48,42 42,52 22,52" fill="#090d16" stroke="#00f0ff" strokeWidth="1.5" />
-        <ellipse cx="32" cy="42" rx="16" ry="5" fill="#00f0ff" opacity="0.8" />
-        <ellipse cx="32" cy="42" rx="9" ry="2.5" fill="#a855f7" />
-        {/* Magnetic Field Pillars */}
-        <rect x="24" y="52" width="16" height="6" rx="2" fill="#00f0ff" stroke="#a855f7" strokeWidth="1" />
-        <circle cx="18" cy="38" r="2.5" fill="#a855f7" className="animate-ping" />
-        <circle cx="46" cy="38" r="2.5" fill="#00f0ff" className="animate-ping" />
+      <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="20" r="14" stroke="#00f0ff" strokeWidth="2" strokeDasharray="4 2" />
+        <circle cx="32" cy="20" r="9" fill="#090d16" stroke="#a855f7" strokeWidth="2" />
+        <circle cx="32" cy="20" r="4" fill="#00f0ff" />
+        <path d="M18 30 L28 42 M46 30 L36 42" stroke="#00f0ff" strokeWidth="2.5" />
+        <polygon points="16,42 48,42 42,54 22,54" fill="#090d16" stroke="#00f0ff" strokeWidth="1.5" />
+        <ellipse cx="32" cy="42" rx="16" ry="5" fill="#00f0ff" />
       </svg>
     );
   }
 
-  if (variant === "C") {
-    // VARIANT C: Inferno Dragon Beast & Magma Crusher Jaw
+  // Category C1 - C6: Inferno & Magma Beasts
+  if (v.startsWith('C') || v === 'INFERNO') {
+    if (v === 'C2') { // Solar Flare Sun-Grid
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="18" r="10" fill="#f97316" stroke="#facc15" strokeWidth="2" />
+          <path d="M32 4 V8 M32 28 V32 M18 18 H14 M50 18 H46 M22 8 L25 11 M39 25 L42 28" stroke="#facc15" strokeWidth="2" />
+          <path d="M26 24 L42 12 L46 20" stroke="#f97316" strokeWidth="3.5" />
+          <polygon points="12,46 52,46 44,34 20,34" fill="#c2410c" stroke="#facc15" strokeWidth="2" />
+          <circle cx="32" cy="40" r="4" fill="#facc15" />
+        </svg>
+      );
+    }
+    if (v === 'C3') { // Supernova Spark Tracker
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <polygon points="32,4 36,14 46,14 38,20 42,30 32,24 22,30 26,20 18,14 28,14" fill="#ef4444" stroke="#facc15" strokeWidth="1.5" />
+          <circle cx="32" cy="17" r="4" fill="#ffffff" />
+          <path d="M26 24 L40 10" stroke="#facc15" strokeWidth="3" />
+          <polygon points="14,46 50,46 42,34 22,34" fill="#7f1d1d" stroke="#ef4444" strokeWidth="2" />
+          <polygon points="22,34 27,40 32,34 37,40 42,34" fill="#facc15" />
+        </svg>
+      );
+    }
+    if (v === 'C4') { // Zeus Lightning Flash Buyer
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <polygon points="28,2 36,2 30,12 38,12 24,24 28,14 20,14" fill="#facc15" stroke="#b45309" strokeWidth="1.5" />
+          <circle cx="28" cy="13" r="3" fill="#ffffff" />
+          <path d="M28 22 L44 10 L48 18" stroke="#facc15" strokeWidth="3.5" />
+          <polygon points="10,48 54,48 44,36 20,36" fill="#78350f" stroke="#facc15" strokeWidth="2" />
+          <line x1="14" y1="42" x2="50" y2="42" stroke="#facc15" strokeWidth="3" />
+        </svg>
+      );
+    }
+    if (v === 'C5') { // Firestorm Martingale Grid
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <rect x="14" y="8" width="36" height="14" rx="4" fill="#991b1b" stroke="#f97316" strokeWidth="2" />
+          <circle cx="22" cy="15" r="3" fill="#facc15" />
+          <circle cx="32" cy="15" r="3" fill="#f97316" />
+          <circle cx="42" cy="15" r="3" fill="#ef4444" />
+          <path d="M26 22 L42 12" stroke="#f97316" strokeWidth="4" />
+          <polygon points="10,48 54,48 46,36 18,36" fill="#7f1d1d" stroke="#f97316" strokeWidth="2" />
+          <rect x="22" y="48" width="20" height="8" fill="#450a0a" stroke="#f97316" />
+        </svg>
+      );
+    }
+    if (v === 'C6') { // Volcano Core Eruptor
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <polygon points="20,22 32,6 44,22" fill="#7f1d1d" stroke="#ef4444" strokeWidth="2" />
+          <circle cx="32" cy="15" r="4" fill="#facc15" />
+          <path d="M26 22 L42 10 L46 18" stroke="#ef4444" strokeWidth="3.5" />
+          <polygon points="8,48 56,48 46,34 18,34" fill="#450a0a" stroke="#ef4444" strokeWidth="2" />
+          <ellipse cx="32" cy="34" rx="14" ry="4" fill="#f97316" />
+        </svg>
+      );
+    }
+    // Default C1 Inferno Magma Dragon
     return (
-      <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <style>{`
-          @keyframes dragonChomp {
-            0%, 100% { transform: rotate(0deg); }
-            40% { transform: rotate(-25deg); }
-            60% { transform: rotate(10deg); }
-          }
-          @keyframes lavaFaint {
-            0%, 100% { fill: #ef4444; }
-            50% { fill: #f97316; }
-          }
-          .animate-jaw { transform-origin: 20px 24px; animation: ${animated ? 'dragonChomp 1s infinite cubic-bezier(0.6, -0.2, 0.2, 1.2)' : 'none'}; }
-          .animate-lava { animation: ${animated ? 'lavaFaint 1.5s infinite ease-in-out' : 'none'}; }
-        `}</style>
-        {/* Dragon Horns & Head */}
+      <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
         <polygon points="12,6 18,16 6,14" fill="#dc2626" />
         <polygon points="28,6 22,16 34,14" fill="#dc2626" />
         <rect x="10" y="14" width="20" height="14" rx="4" fill="#7f1d1d" stroke="#f97316" strokeWidth="2" />
         <circle cx="17" cy="20" r="3" fill="#facc15" />
-
-        {/* Animated Spiked Jaw Crusher Arm */}
-        <g className="animate-jaw">
-          <path d="M26 24 L46 16" stroke="#f97316" strokeWidth="4" strokeLineCap="round" />
-          <polygon points="44,8 58,16 48,24" fill="#dc2626" stroke="#facc15" strokeWidth="1.5" />
-          <polygon points="46,14 52,14 49,20" fill="#facc15" />
-        </g>
-
-        {/* ANVIL MODEL C: Volcanic Lava Altar Anvil */}
-        <polygon points="8,48 56,48 50,34 14,34" fill="#450a0a" stroke="#f97316" strokeWidth="2" />
-        <polygon points="14,34 20,28 26,34 32,28 38,34 44,28 50,34" fill="#f97316" className="animate-lava" />
-        <rect x="18" y="48" width="28" height="10" fill="#7f1d1d" stroke="#ef4444" strokeWidth="1.5" />
-        {/* Spikes */}
-        <polygon points="10,48 6,40 14,44" fill="#dc2626" />
-        <polygon points="54,48 58,40 50,44" fill="#dc2626" />
-
-        {/* Fire Sparks */}
-        <circle cx="28" cy="26" r="2" fill="#facc15" className="animate-bounce" />
-        <circle cx="40" cy="22" r="2.5" fill="#f97316" className="animate-ping" />
+        <path d="M26 24 L46 16" stroke="#f97316" strokeWidth="4" />
+        <polygon points="44,8 58,16 48,24" fill="#dc2626" stroke="#facc15" strokeWidth="1.5" />
+        <polygon points="10,48 54,48 48,36 16,36" fill="#991b1b" stroke="#f97316" strokeWidth="1.5" />
       </svg>
     );
   }
 
-  if (variant === "D") {
-    // VARIANT D: Cyberpunk Hex-Spider & Multi-Torch Welder
+  // Category D1 - D6: Cyber Matrix & Lasers
+  if (v.startsWith('D') || v === 'MATRIX') {
+    if (v === 'D2') { // Hyperion Laser Sniper
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="16" r="12" fill="#052e16" stroke="#22c55e" strokeWidth="2" />
+          <circle cx="32" cy="16" r="7" stroke="#4ade80" strokeWidth="1.5" />
+          <circle cx="32" cy="16" r="3" fill="#f43f5e" />
+          <line x1="32" y1="28" x2="32" y2="44" stroke="#4ade80" strokeWidth="3" strokeDasharray="4 2" />
+          <rect x="12" y="44" width="40" height="12" rx="3" fill="#022c22" stroke="#22c55e" strokeWidth="2" />
+          <circle cx="32" cy="50" r="4" fill="#f43f5e" />
+        </svg>
+      );
+    }
+    if (v === 'D3') { // Cyberpunk Neon Samurai
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <path d="M16 10 L32 2 L48 10 L44 20 L20 20 Z" fill="#052e16" stroke="#4ade80" strokeWidth="2" />
+          <rect x="22" y="13" width="20" height="4" fill="#22c55e" />
+          <path d="M26 20 L46 6 L52 12" stroke="#4ade80" strokeWidth="3" />
+          <polygon points="14,46 50,46 44,34 20,34" fill="#022c22" stroke="#22c55e" strokeWidth="2" />
+          <line x1="20" y1="34" x2="44" y2="46" stroke="#4ade80" strokeWidth="2" />
+        </svg>
+      );
+    }
+    if (v === 'D4') { // Phantom Shadow Stealth
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <polygon points="32,4 16,14 20,24 44,24 48,14" fill="#0f172a" stroke="#38bdf8" strokeWidth="2" />
+          <rect x="22" y="14" width="20" height="3" fill="#38bdf8" />
+          <path d="M26 24 L42 12 M38 24 L48 16" stroke="#38bdf8" strokeWidth="2.5" />
+          <rect x="14" y="44" width="36" height="12" rx="2" fill="#1e293b" stroke="#38bdf8" strokeWidth="2" />
+          <line x1="14" y1="50" x2="50" y2="50" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4 2" />
+        </svg>
+      );
+    }
+    if (v === 'D5') { // Apex Orderbook Sweeper
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <rect x="18" y="8" width="28" height="14" rx="3" fill="#042f2e" stroke="#14b8a6" strokeWidth="2" />
+          <rect x="22" y="12" width="6" height="6" fill="#14b8a6" />
+          <rect x="30" y="12" width="6" height="6" fill="#14b8a6" />
+          <rect x="38" y="12" width="6" height="6" fill="#14b8a6" />
+          <path d="M26 22 L40 10 M38 22 L46 16" stroke="#14b8a6" strokeWidth="3" />
+          <rect x="12" y="44" width="40" height="14" rx="2" fill="#134e4a" stroke="#14b8a6" strokeWidth="2" />
+          <rect x="16" y="47" width="8" height="8" fill="#14b8a6" />
+          <rect x="28" y="47" width="8" height="8" fill="#2dd4bf" />
+          <rect x="40" y="47" width="8" height="8" fill="#5eead4" />
+        </svg>
+      );
+    }
+    if (v === 'D6') { // Pulse Engine MACD 9000
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <rect x="16" y="6" width="32" height="18" rx="4" fill="#064e3b" stroke="#34d399" strokeWidth="2" />
+          <path d="M20 15 Q 26 8, 32 15 T 44 15" stroke="#34d399" strokeWidth="2" fill="none" />
+          <path d="M28 24 L42 12" stroke="#34d399" strokeWidth="3.5" />
+          <rect x="12" y="44" width="40" height="12" rx="2" fill="#022c22" stroke="#34d399" strokeWidth="2" />
+          <rect x="16" y="48" width="6" height="5" fill="#34d399" />
+          <rect x="24" y="46" width="6" height="7" fill="#34d399" />
+          <rect x="32" y="47" width="6" height="6" fill="#10b981" />
+          <rect x="40" y="49" width="6" height="4" fill="#047857" />
+        </svg>
+      );
+    }
+    // Default D1 Matrix Cyber-Sentinel
     return (
-      <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <style>{`
-          @keyframes spiderLaser {
-            0%, 100% { stroke-dashoffset: 0; opacity: 0.4; }
-            50% { stroke-dashoffset: 15; opacity: 1; }
-          }
-          @keyframes hexPulse {
-            0%, 100% { fill: #15803d; }
-            50% { fill: #22c55e; }
-          }
-          .animate-laser { animation: ${animated ? 'spiderLaser 0.8s infinite linear' : 'none'}; }
-          .animate-hex { animation: ${animated ? 'hexPulse 1.2s infinite ease-in-out' : 'none'}; }
-        `}</style>
-        {/* Hexagonal Cyber Head */}
-        <polygon points="20,6 32,2 44,6 44,18 32,22 20,18" fill="#052e16" stroke="#22c55e" strokeWidth="2" className="animate-hex" />
-        {/* 4 Cyber Spider Optics */}
+      <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+        <polygon points="20,6 32,2 44,6 44,18 32,22 20,18" fill="#052e16" stroke="#22c55e" strokeWidth="2" />
         <circle cx="26" cy="10" r="2" fill="#4ade80" />
         <circle cx="38" cy="10" r="2" fill="#4ade80" />
-        <circle cx="28" cy="16" r="1.5" fill="#f43f5e" />
-        <circle cx="36" cy="16" r="1.5" fill="#f43f5e" />
-
-        {/* Multi-Joint Spider Arms holding Welder */}
-        <path d="M20 18 L10 28 L22 36" stroke="#22c55e" strokeWidth="2.5" strokeLineCap="round" />
-        <path d="M44 18 L54 28 L42 36" stroke="#22c55e" strokeWidth="2.5" strokeLineCap="round" />
-
-        {/* Triple Welding Laser Beams */}
-        <path d="M22 36 L32 44 M42 36 L32 44 M32 22 V44" stroke="#4ade80" strokeWidth="2" strokeDasharray="3 3" className="animate-laser" />
-
-        {/* ANVIL MODEL D: Cyber Matrix Holographic Lattice Platform */}
-        <rect x="12" y="44" width="40" height="14" rx="3" fill="#022c22" stroke="#22c55e" strokeWidth="2" />
-        <path d="M12 48 H52 M12 52 H52 M24 44 V58 M40 44 V58" stroke="#15803d" strokeWidth="1.5" />
-        <circle cx="24" cy="48" r="1.5" fill="#4ade80" />
-        <circle cx="40" cy="48" r="1.5" fill="#4ade80" />
-        <rect x="28" y="42" width="8" height="3" fill="#4ade80" className="animate-ping" />
+        <path d="M20 18 L10 28 L22 36" stroke="#22c55e" strokeWidth="2.5" />
+        <path d="M44 18 L54 28 L42 36" stroke="#22c55e" strokeWidth="2.5" />
+        <rect x="12" y="44" width="40" height="14" rx="2" fill="#022c22" stroke="#22c55e" strokeWidth="2" />
       </svg>
     );
   }
 
-  if (variant === "E") {
-    // VARIANT E: Imperial Sovereign Monarch & Crown Scepter
+  // Category E1 - E6: Imperial Golden Sovereigns
+  if (v.startsWith('E') || v === 'IMPERIAL') {
+    if (v === 'E2') { // Chronos Time Weaver
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <polygon points="20,4 44,4 32,14 44,24 20,24 32,14" fill="#eab308" stroke="#78350f" strokeWidth="1.5" />
+          <circle cx="32" cy="14" r="3" fill="#ffffff" />
+          <path d="M28 24 L42 12 L48 18" stroke="#eab308" strokeWidth="3.5" />
+          <polygon points="14,46 50,46 42,32 22,32" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+          <circle cx="32" cy="39" r="5" fill="#ca8a04" />
+        </svg>
+      );
+    }
+    if (v === 'E3') { // Omega Protocol X
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <path d="M20 22 C20 10, 44 10, 44 22 H38 C38 14, 26 14, 26 22 Z" fill="#eab308" stroke="#78350f" strokeWidth="2" />
+          <rect x="18" y="20" width="8" height="4" fill="#eab308" />
+          <rect x="38" y="20" width="8" height="4" fill="#eab308" />
+          <path d="M28 22 L44 10 M36 22 L48 14 M40 22 L52 18" stroke="#eab308" strokeWidth="2.5" />
+          <rect x="14" y="44" width="36" height="12" rx="3" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
+          <polygon points="32,44 38,50 32,56 26,50" fill="#38bdf8" />
+        </svg>
+      );
+    }
+    if (v === 'E4') { // Cyber Kraken Arbitrage
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="14" r="10" fill="#ca8a04" stroke="#eab308" strokeWidth="2" />
+          <circle cx="28" cy="12" r="2" fill="#ffffff" />
+          <circle cx="36" cy="12" r="2" fill="#ffffff" />
+          <path d="M18 20 Q 22 28, 26 22 T 34 22 T 42 22 T 48 20" stroke="#eab308" strokeWidth="3" fill="none" />
+          <polygon points="14,46 50,46 42,34 22,34" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+        </svg>
+      );
+    }
+    if (v === 'E5') { // Astral Beacon Whale Tracker
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <path d="M16 18 C16 10, 48 10, 48 18 C48 24, 32 26, 16 18 Z" fill="#0284c7" stroke="#eab308" strokeWidth="2" />
+          <path d="M48 18 L56 12 L54 22 Z" fill="#0284c7" />
+          <circle cx="26" cy="16" r="2" fill="#ffffff" />
+          <path d="M28 22 L44 10" stroke="#eab308" strokeWidth="3.5" />
+          <ellipse cx="32" cy="46" rx="18" ry="6" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+          <circle cx="32" cy="46" r="4" fill="#0284c7" />
+        </svg>
+      );
+    }
+    if (v === 'E6') { // Omni Mind AI Overlord
+      return (
+        <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
+          <path d="M18 20 C18 10, 46 10, 46 20 Z" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+          <circle cx="26" cy="15" r="2.5" fill="#38bdf8" />
+          <circle cx="38" cy="15" r="2.5" fill="#38bdf8" />
+          <circle cx="32" cy="10" r="2.5" fill="#10b981" />
+          <line x1="26" y1="15" x2="38" y2="15" stroke="#ca8a04" strokeWidth="1.5" />
+          <line x1="26" y1="15" x2="32" y2="10" stroke="#ca8a04" strokeWidth="1.5" />
+          <line x1="38" y1="15" x2="32" y2="10" stroke="#ca8a04" strokeWidth="1.5" />
+          <path d="M28 22 L44 10 L48 16" stroke="#eab308" strokeWidth="3.5" />
+          <polygon points="14,46 50,46 42,32 22,32" fill="#eab308" stroke="#78350f" strokeWidth="2" />
+          <polygon points="32,32 38,39 32,46 26,39" fill="#ffffff" />
+        </svg>
+      );
+    }
+    // Default E1 Golden Sovereign Monarch
     return (
-      <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <style>{`
-          @keyframes scepterStrike {
-            0%, 100% { transform: rotate(0deg); }
-            45% { transform: rotate(-35deg) translate(-4px, -8px); }
-            65% { transform: rotate(15deg) translate(3px, 5px); }
-          }
-          @keyframes diamondSparkle {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.4); opacity: 1; }
-          }
-          .animate-scepter { transform-origin: 24px 22px; animation: ${animated ? 'scepterStrike 1.2s infinite ease-in-out' : 'none'}; }
-          .animate-diamond { transform-origin: 32px 42px; animation: ${animated ? 'diamondSparkle 1.5s infinite ease-in-out' : 'none'}; }
-        `}</style>
-        {/* Crown & Imperial Royal Helmet */}
+      <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
         <polygon points="16,8 20,2 26,8 32,1 38,8 44,2 48,8" fill="#eab308" stroke="#78350f" strokeWidth="1" />
         <rect x="18" y="8" width="28" height="14" rx="3" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
-        <rect x="22" y="13" width="20" height="4" rx="2" fill="#0284c7" />
-
-        {/* Animated Royal Scepter Hammer */}
-        <g className="animate-scepter">
-          <path d="M28 22 L44 10" stroke="#eab308" strokeWidth="4.5" strokeLineCap="round" />
-          <circle cx="46" cy="8" r="6" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-          <polygon points="46,3 48,7 52,8 48,9 46,13 44,9 40,8 44,7" fill="#ffffff" />
-        </g>
-
-        {/* ANVIL MODEL E: Sovereign Gold & Diamond Pedestal */}
+        <path d="M28 22 L44 10" stroke="#eab308" strokeWidth="4.5" />
         <polygon points="14,46 50,46 42,32 22,32" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-        <polygon points="32,32 39,39 32,46 25,39" fill="#38bdf8" stroke="#0284c7" strokeWidth="1.5" className="animate-diamond" />
-        <rect x="18" y="46" width="28" height="10" rx="3" fill="#eab308" stroke="#78350f" strokeWidth="1.5" />
-        <circle cx="32" cy="51" r="2.5" fill="#ffffff" />
-
-        {/* Gold Coins & Star Particles */}
-        <polygon points="20,28 22,30 25,30 23,32 24,35 20,33 17,35 18,32 16,30 19,30" fill="#facc15" className="animate-ping" />
-        <polygon points="46,26 48,28 51,28 49,30 50,33 46,31 43,33 44,30 42,28 45,28" fill="#facc15" className="animate-ping" />
+        <polygon points="32,32 39,39 32,46 25,39" fill="#38bdf8" />
       </svg>
     );
   }
 
-  // DEFAULT VARIANT A: CyberForge Titan with Industrial Double-Horn Anvil
-  const strokeColor = isDark ? "#ffffff" : "#000000";
-  const fillColor = isDark ? "#ffffff" : "#000000";
-
+  // DEFAULT VARIANT A1: CyberForge Titan 3000
   return (
-    <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <style>{`
-        @keyframes titanStrike {
-          0%, 100% { transform: rotate(0deg); }
-          40% { transform: rotate(-38deg) translate(-4px, -6px); }
-          60% { transform: rotate(20deg) translate(2px, 4px); }
-        }
-        @keyframes titanSpark {
-          0%, 45%, 85%, 100% { opacity: 0; transform: scale(0.6); }
-          60% { opacity: 1; transform: scale(1.4); }
-        }
-        .animate-titan-hammer { transform-origin: 24px 24px; animation: ${animated ? 'titanStrike 1.1s infinite ease-in-out' : 'none'}; }
-        .animate-titan-spark { transform-origin: 32px 30px; animation: ${animated ? 'titanSpark 1.1s infinite ease-in-out' : 'none'}; }
-      `}</style>
-      
-      {/* Heavy Rectangular Block Head */}
+    <svg className={`${className} overflow-visible`} viewBox="0 0 64 64" fill="none">
       <rect x="6" y="8" width="18" height="15" rx="3" fill="#ffe600" stroke={strokeColor} strokeWidth="2" />
       <rect x="10" y="13" width="10" height="4" fill="#000000" />
       <circle cx="15" cy="15" r="1.5" fill="#00f0ff" />
-      
-      {/* Heavy Hydraulic Neck & Arm */}
-      <path d="M15 23 V30 M15 30 L26 24" stroke={strokeColor} strokeWidth="4" strokeLineCap="round" />
-
-      {/* Hydraulic Piston Hammer */}
-      <g className="animate-titan-hammer">
-        <path d="M26 24 L38 14" stroke={strokeColor} strokeWidth="4.5" strokeLineCap="round" />
-        <rect x="34" y="6" width="18" height="12" rx="2" fill="#ffe600" stroke={strokeColor} strokeWidth="2" transform="rotate(-30 43 12)" />
-      </g>
-
-      {/* ANVIL MODEL A: Reinforced Heavy Industrial Double-Horn Anvil */}
-      <path d="M10 46 H54 L48 34 H58 V30 H20 L10 34 Z" fill={fillColor} stroke={strokeColor} strokeWidth="2" />
-      <path d="M22 46 V56 H42 V46" fill={fillColor} stroke={strokeColor} strokeWidth="1.5" />
+      <path d="M15 23 V30 M15 30 L26 24" stroke={strokeColor} strokeWidth="4" />
+      <path d="M26 24 L38 14" stroke={strokeColor} strokeWidth="4.5" />
+      <rect x="34" y="6" width="18" height="12" rx="2" fill="#ffe600" stroke={strokeColor} strokeWidth="2" transform="rotate(-30 43 12)" />
+      <path d="M10 46 H54 L48 34 H58 V30 H20 L10 34 Z" fill="#ffffff" stroke={strokeColor} strokeWidth="2" />
       <rect x="16" y="56" width="32" height="4" rx="1.5" fill="#ffe600" stroke={strokeColor} strokeWidth="1.5" />
-      <line x1="22" y1="34" x2="48" y2="34" stroke="#ffe600" strokeWidth="2" />
-
-      {/* Flying Heavy Sparks */}
-      <g className="animate-titan-spark">
-        <path d="M30 28 L20 16 M36 28 L38 12 M42 32 L54 20" stroke="#ff0055" strokeWidth="3.5" strokeLineCap="round" />
-        <circle cx="20" cy="16" r="2" fill="#ffe600" />
-        <circle cx="38" cy="12" r="2" fill="#ffe600" />
-      </g>
     </svg>
   );
 }
