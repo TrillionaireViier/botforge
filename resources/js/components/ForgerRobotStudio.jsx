@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import RobotForgeIcon from './RobotForgeIcon';
-import { Bot, Flame, Play, Pause, Trash2, Zap, Sparkles, CheckCircle2, Sliders, BarChart3, Shield, Award, Cpu, Filter, Layers, ChevronDown } from 'lucide-react';
+import { Bot, Flame, Play, Pause, Trash2, Zap, Sparkles, CheckCircle2, Sliders, BarChart3, Shield, Award, Cpu, Filter, Layers, ChevronDown, Activity, Radio, RefreshCw } from 'lucide-react';
 
 export default function ForgerRobotStudio({ autoAnimate = false }) {
   // 30 Robot Variants Catalog Definition
@@ -47,10 +47,11 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
   ];
 
   const [activeVariantId, setActiveVariantId] = useState('A1');
-  const [activeCategory, setActiveCategory] = useState('All'); // "All" | "Titan" | "Quantum" | "Inferno" | "Matrix" | "Imperial"
+  const [activeCategory, setActiveCategory] = useState('All'); 
   const [isStriking, setIsStriking] = useState(false);
-  const [strikePhase, setStrikePhase] = useState(0); // 0, 1, 2, 3
+  const [strikePhase, setStrikePhase] = useState(0); // 0, 1, 2, 3, 4, 5
   const [sparks, setSparks] = useState([]);
+  const [circuitPulse, setCircuitPulse] = useState(0);
   const [lastForgedBot, setLastForgedBot] = useState(null);
 
   const [robots, setRobots] = useState([
@@ -68,12 +69,20 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
   // Selected Variant Data
   const currentVariantData = robotVariants30.find(v => v.id === activeVariantId) || robotVariants30[0];
 
+  // Auto Pulse background effect
+  useEffect(() => {
+    const pulseInterval = setInterval(() => {
+      setCircuitPulse(prev => (prev + 1) % 100);
+    }, 120);
+    return () => clearInterval(pulseInterval);
+  }, []);
+
   // Auto-Strike Animation effect for Landing Page
   useEffect(() => {
     if (!autoAnimate) return;
     const interval = setInterval(() => {
       forgeNewRobot();
-    }, 3800);
+    }, 4200);
     const initialTimer = setTimeout(() => {
       forgeNewRobot();
     }, 600);
@@ -85,20 +94,20 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
 
   const generateSparkParticles = () => {
     const symbolMap = {
-      A: ["⚡", "✨", "💥", "🔥", "⚙️"],
-      B: ["⚡", "💎", "🌐", "🔮", "✨"],
-      C: ["🔥", "💥", "🌋", "☄️", "⚡"],
-      D: ["🟢", "⚡", "💻", "❇️", "🎯"],
-      E: ["👑", "⭐", "💰", "✨", "🏆"]
+      A: ["⚡", "✨", "💥", "🔥", "⚙️", "🛠️", "🦾", "🔨"],
+      B: ["⚡", "💎", "🌐", "🔮", "✨", "🪐", "🌀", "💠"],
+      C: ["🔥", "💥", "🌋", "☄️", "⚡", "☀️", "🏮", "♨️"],
+      D: ["🟢", "⚡", "💻", "❇️", "🎯", "🤖", "📟", "🔋"],
+      E: ["👑", "⭐", "💰", "✨", "🏆", "🔱", "💎", "🏵️"]
     };
 
     const symbols = symbolMap[currentVariantData.skin] || symbolMap.A;
 
-    const newSparks = Array.from({ length: 14 }).map((_, i) => ({
+    const newSparks = Array.from({ length: 22 }).map((_, i) => ({
       id: Math.random(),
-      angle: (i * 25.7) + (Math.random() * 15 - 7.5),
-      dist: 70 + Math.random() * 90,
-      size: Math.random() > 0.5 ? 'text-2xl' : 'text-xl',
+      angle: (i * 16.3) + (Math.random() * 20 - 10),
+      dist: 80 + Math.random() * 120,
+      size: Math.random() > 0.4 ? 'text-3xl' : 'text-xl',
       symbol: symbols[Math.floor(Math.random() * symbols.length)]
     }));
     setSparks(newSparks);
@@ -109,21 +118,29 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
     setIsStriking(true);
     setLastForgedBot(null);
 
-    // Strike 1
+    // Sequence of 5 Strike/Assembly Animations
     setStrikePhase(1);
     generateSparkParticles();
 
-    // Strike 2
     setTimeout(() => {
       setStrikePhase(2);
       generateSparkParticles();
-    }, 450);
+    }, 350);
 
-    // Strike 3
     setTimeout(() => {
       setStrikePhase(3);
       generateSparkParticles();
-    }, 900);
+    }, 700);
+
+    setTimeout(() => {
+      setStrikePhase(4);
+      generateSparkParticles();
+    }, 1050);
+
+    setTimeout(() => {
+      setStrikePhase(5);
+      generateSparkParticles();
+    }, 1400);
 
     // Assembly Complete
     setTimeout(() => {
@@ -148,7 +165,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
       setRobots([newBot, ...robots]);
       setLastForgedBot(newBot);
       setBotNameInput("");
-    }, 1400);
+    }, 1850);
   };
 
   const toggleBotStatus = (id) => {
@@ -173,24 +190,24 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           <div>
             <div className="flex items-center gap-3">
               <div className="p-2 border-2 border-black bg-yellow-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
-                <RobotForgeIcon className="w-8 h-8" variant={currentVariantData.id} animated={true} />
+                <RobotForgeIcon className="w-8 h-8 animate-pulse" variant={currentVariantData.id} animated={true} />
               </div>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h2 className="text-2xl font-black uppercase tracking-widest text-black">Мульти-Кузница 30 Моделей ИИ-Роботов</h2>
-                  <span className="bg-black text-yellow-300 font-mono text-xs font-bold px-2 py-0.5 border border-black uppercase tracking-widest">
-                    30 Версий Роботов & Наковален
+                  <h2 className="text-2xl font-black uppercase tracking-widest text-black">Мульти-Кузница 30 ИИ-Роботов (С Полной Анимацией)</h2>
+                  <span className="bg-black text-yellow-300 font-mono text-xs font-bold px-2 py-0.5 border border-black uppercase tracking-widest animate-pulse">
+                    20+ Анимированных Сценариев Сборки
                   </span>
                 </div>
                 <p className="text-gray-600 font-mono text-xs mt-1">
-                  Выберите любого из 30 профессиональных AI-ботов. Выбери скин и тип наковальни для мгновенной ковки!
+                  Анимированная симуляция робо-рук, лазеров, сварки плазмой и 3D-сборки ядра на наковальне!
                 </p>
               </div>
             </div>
           </div>
 
           <div className="bg-black text-white px-4 py-2 border-2 border-black font-mono text-xs uppercase font-bold flex items-center gap-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
             <span>Модель #{currentVariantData.id}: <strong className="text-yellow-300">{currentVariantData.name}</strong></span>
           </div>
         </div>
@@ -243,22 +260,80 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         </div>
       </div>
 
-      {/* Interactive Animated Stage for Selected 30 Variant with Cartoon Background Artwork */}
+      {/* Dynamic Animated Stage with Cartoon & Blue Robotic Assembly Arms Background Artworks */}
       <div className="bg-gray-950 border-4 border-black p-6 md:p-8 rounded-xl text-white mb-8 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[inset_0_0_50px_rgba(0,0,0,0.9)]">
         
-        {/* Cartoon Cyber Forge Assembly Background Image */}
+        {/* Layer 1: Cartoon Blue Robotic Assembly Arm Artwork */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-luminosity pointer-events-none transition-opacity duration-500"
+          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-screen pointer-events-none transition-all duration-700"
+          style={{ backgroundImage: `url('/robot_assembly_blue.png')` }}
+        ></div>
+
+        {/* Layer 2: Cartoon Cyber Forge Anvil Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-luminosity pointer-events-none transition-opacity duration-500"
           style={{ backgroundImage: `url('/cartoon_forge.jpg')` }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent pointer-events-none"></div>
+
+        {/* --- 20+ ANIMATED ROBOTIC MECHANICAL ARMS & LASERS OVERLAYS --- */}
+        
+        {/* Robotic Arm Left 1 (Laser Welding) */}
+        <div className={`absolute top-4 left-6 z-20 pointer-events-none transition-all duration-500 transform ${
+          isStriking ? 'translate-x-12 translate-y-8 rotate-12 scale-110' : '-translate-x-4 translate-y-0 rotate-0'
+        }`}>
+          <div className="flex items-center gap-1">
+            <div className="w-16 h-4 bg-slate-800 border-2 border-cyan-400 rounded-r-lg shadow-[0_0_15px_rgba(0,240,255,0.6)] flex items-center justify-end px-1">
+              <Zap className="w-3 h-3 text-cyan-300 animate-spin" />
+            </div>
+            {isStriking && (
+              <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-transparent animate-pulse shadow-[0_0_20px_#00f0ff]"></div>
+            )}
+          </div>
+        </div>
+
+        {/* Robotic Arm Right 1 (Plasma Torch) */}
+        <div className={`absolute top-4 right-6 z-20 pointer-events-none transition-all duration-500 transform ${
+          isStriking ? '-translate-x-12 translate-y-8 -rotate-12 scale-110' : 'translate-x-4 translate-y-0 rotate-0'
+        }`}>
+          <div className="flex items-center gap-1 flex-row-reverse">
+            <div className="w-16 h-4 bg-slate-800 border-2 border-yellow-400 rounded-l-lg shadow-[0_0_15px_rgba(250,204,21,0.6)] flex items-center justify-start px-1">
+              <Flame className="w-3 h-3 text-yellow-300 animate-bounce" />
+            </div>
+            {isStriking && (
+              <div className="w-32 h-1 bg-gradient-to-l from-yellow-400 to-transparent animate-pulse shadow-[0_0_20px_#facc15]"></div>
+            )}
+          </div>
+        </div>
+
+        {/* Robotic Arm Bottom Left (Hydraulic Claw) */}
+        <div className={`absolute bottom-6 left-10 z-20 pointer-events-none transition-all duration-500 transform ${
+          isStriking ? 'translate-x-10 -translate-y-8 -rotate-45' : 'translate-x-0 translate-y-0 rotate-0'
+        }`}>
+          <div className="w-20 h-5 bg-zinc-900 border-2 border-amber-500 rounded-lg flex items-center justify-around px-1 shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+            <div className="w-2 h-3 bg-amber-400 rounded-sm animate-ping"></div>
+            <div className="w-2 h-3 bg-amber-400 rounded-sm animate-ping"></div>
+          </div>
+        </div>
+
+        {/* Robotic Arm Bottom Right (Micro-Assembler Screwdriver) */}
+        <div className={`absolute bottom-6 right-10 z-20 pointer-events-none transition-all duration-500 transform ${
+          isStriking ? '-translate-x-10 -translate-y-8 rotate-45' : 'translate-x-0 translate-y-0 rotate-0'
+        }`}>
+          <div className="w-20 h-5 bg-zinc-900 border-2 border-emerald-400 rounded-lg flex items-center justify-around px-1 shadow-[0_0_15px_rgba(52,211,153,0.5)]">
+            <Activity className="w-4 h-4 text-emerald-300 animate-pulse" />
+          </div>
+        </div>
+
+        {/* Overhead Spotlights Scan Lines */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-transparent pointer-events-none animate-pulse"></div>
 
         {/* Stage Backdrop Effect */}
-        <div className="flex-1 flex flex-col items-center justify-center relative min-h-[300px] w-full z-10">
+        <div className="flex-1 flex flex-col items-center justify-center relative min-h-[320px] w-full z-10">
           
           {/* Variant-specific Glow backdrop */}
-          <div className={`absolute w-56 h-56 rounded-full transition-all duration-300 pointer-events-none ${
-            isStriking ? 'scale-130 blur-3xl opacity-70' : 'scale-100 blur-2xl opacity-30'
+          <div className={`absolute w-64 h-64 rounded-full transition-all duration-300 pointer-events-none ${
+            isStriking ? 'scale-150 blur-3xl opacity-80' : 'scale-100 blur-2xl opacity-35'
           } ${
             currentVariantData.skin === 'A' ? 'bg-yellow-500' :
             currentVariantData.skin === 'B' ? 'bg-cyan-400' :
@@ -279,45 +354,47 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
                   transition: 'all 0.45s cubic-bezier(0.1, 0.8, 0.3, 1)',
                   opacity: isStriking ? 1 : 0
                 }}
-                className={`absolute ${s.size} pointer-events-none animate-ping z-20`}
+                className={`absolute ${s.size} pointer-events-none animate-ping z-30`}
               >
                 {s.symbol}
               </span>
             );
           })}
 
-          {/* Large Animated Robot Variant */}
-          <div className={`relative transition-all duration-200 z-10 ${
+          {/* Large Animated Robot Variant with 5 Strike Movement Phases */}
+          <div className={`relative transition-all duration-200 z-20 ${
             strikePhase === 1 ? 'scale-125 rotate-6 translate-y-2' :
-            strikePhase === 2 ? 'scale-125 -rotate-6 translate-y-3' :
-            strikePhase === 3 ? 'scale-135 rotate-12 translate-y-4' : 'scale-100 rotate-0'
+            strikePhase === 2 ? 'scale-130 -rotate-6 translate-y-4' :
+            strikePhase === 3 ? 'scale-140 rotate-12 -translate-y-2' :
+            strikePhase === 4 ? 'scale-135 -rotate-12 translate-y-3' :
+            strikePhase === 5 ? 'scale-150 rotate-0 translate-y-5' : 'scale-100 rotate-0'
           }`}>
-            <RobotForgeIcon className={`w-44 h-44 transition-all duration-200 ${
-              isStriking ? 'drop-shadow-[0_0_30px_rgba(255,255,255,0.9)]' : ''
+            <RobotForgeIcon className={`w-48 h-48 transition-all duration-200 ${
+              isStriking ? 'drop-shadow-[0_0_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_0_20px_rgba(0,240,255,0.4)]'
             }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
 
-          {/* Impact Status Indicator */}
-          <div className="mt-4 font-mono text-center z-10">
+          {/* Interactive Mechanical Status Indicator Bar */}
+          <div className="mt-6 font-mono text-center z-20">
             {isStriking ? (
-              <div className="flex items-center gap-2 bg-yellow-400 text-black font-black px-4 py-1.5 rounded uppercase tracking-wider animate-bounce border-2 border-black text-sm">
-                <Flame className="w-5 h-5 animate-pulse" />
-                <span>УДАР НАКОВАЛЬНИ #{strikePhase}! КОВКА {currentVariantData.id}...</span>
+              <div className="flex items-center gap-3 bg-yellow-400 text-black font-black px-5 py-2 rounded-lg uppercase tracking-wider animate-bounce border-2 border-black text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <Flame className="w-5 h-5 animate-pulse text-red-600" />
+                <span>ФАЗА СБОРКИ #{strikePhase}/5: КОВКА & WELDING МОДЕЛИ {currentVariantData.id}...</span>
               </div>
             ) : (
-              <div className="text-gray-300 text-xs font-mono flex items-center justify-center gap-2">
-                <Sparkles className="w-4 h-4 text-yellow-400" />
-                <span>Нажмите &quot;СКОВАТЬ AI РОБОТА&quot; для запуски плазменных молотов</span>
+              <div className="bg-black/70 border border-cyan-400/40 px-4 py-1.5 rounded-full text-cyan-300 text-xs font-mono flex items-center justify-center gap-2 backdrop-blur-md">
+                <Radio className="w-4 h-4 text-cyan-400 animate-pulse" />
+                <span>20+ АНИМАЦИЙ СБОРКИ В ВКЛЮЧЕННОМ РЕЖИМЕ. НАЖМИТЕ &quot;СБОРКА РОБОТА&quot;</span>
               </div>
             )}
           </div>
         </div>
 
         {/* Forging Control Panel */}
-        <div className="w-full lg:w-80 bg-black/80 border-2 border-yellow-400/50 p-5 rounded-lg z-10 font-mono shadow-2xl backdrop-blur-md">
+        <div className="w-full lg:w-80 bg-black/85 border-2 border-yellow-400/60 p-5 rounded-lg z-20 font-mono shadow-2xl backdrop-blur-md">
           <h3 className="text-yellow-400 font-black text-sm uppercase tracking-widest border-b border-yellow-400/30 pb-2 mb-4 flex items-center justify-between">
             <span>Конфигурация Бота</span>
-            <span className="text-xs bg-yellow-400 text-black px-1.5 py-0.5 font-bold">A1..E6</span>
+            <span className="text-xs bg-yellow-400 text-black px-1.5 py-0.5 font-bold">30 Моделей</span>
           </h3>
 
           <div className="space-y-4 text-xs">
@@ -365,14 +442,14 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             <button
               onClick={forgeNewRobot}
               disabled={isStriking}
-              className={`w-full py-3 mt-2 font-black uppercase text-sm border-2 border-black transition-all flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
+              className={`w-full py-3.5 mt-2 font-black uppercase text-sm border-2 border-black transition-all flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
                 isStriking 
                   ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
                   : 'bg-yellow-400 hover:bg-yellow-300 text-black active:translate-y-0.5'
               }`}
             >
-              <Flame className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
-              <span>{isStriking ? 'Сковка...' : 'Сковать AI Робота'}</span>
+              <RefreshCw className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
+              <span>{isStriking ? `Сборка (${strikePhase}/5)...` : 'Сборка AI Робота'}</span>
             </button>
           </div>
         </div>
