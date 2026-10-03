@@ -216,11 +216,6 @@ function AppRoutes() {
 }
 
 function App() {
-  if (window.location.pathname === '/') {
-    window.location.replace('/app');
-    return null;
-  }
-
   return (
     <Router basename="/app">
       <AuthProvider>
