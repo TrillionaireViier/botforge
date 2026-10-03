@@ -413,24 +413,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
 
-          {/* Interactive Mechanical Status Indicator Bar */}
-          <div className="mt-4 font-mono text-center z-20">
-            {/* Large Prominent Action Button directly inside stage */}
-            <div className="mt-4">
-              <button
-                onClick={forgeNewRobot}
-                disabled={isStriking}
-                className={`px-8 py-3 font-black uppercase text-sm border-2 border-black transition-all flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
-                  isStriking 
-                    ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
-                    : 'bg-yellow-400 hover:bg-yellow-300 text-black active:translate-y-0.5'
-                }`}
-              >
-                <RefreshCw className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
-                <span>{isStriking ? `Сборка (${strikePhase}/5)...` : 'Собрать Робота'}</span>
-              </button>
-            </div>
-          </div>
+
         </div>
       </div>
 
