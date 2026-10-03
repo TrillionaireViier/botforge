@@ -294,22 +294,58 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           </svg>
         </div>
 
-        {/* --- ANIMATED HEAVY HAMMER STRIKING THE ANVIL --- */}
-        <div className={`absolute top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none transition-all duration-150 transform origin-bottom-right ${
-          strikePhase === 1 ? 'rotate-[-35deg] translate-x-[-40px] translate-y-[20px] scale-110' :
-          strikePhase === 2 ? 'rotate-[15deg] translate-x-[10px] translate-y-[80px] scale-125' :
-          strikePhase === 3 ? 'rotate-[-45deg] translate-x-[-60px] translate-y-[10px] scale-110' :
-          strikePhase === 4 ? 'rotate-[20deg] translate-x-[20px] translate-y-[90px] scale-130' :
-          strikePhase === 5 ? 'rotate-[0deg] translate-x-[0px] translate-y-[85px] scale-125' : 'rotate-[-40deg] translate-x-[-80px] translate-y-[-20px]'
+        {/* --- ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING BESIDE THE ANVIL HOLDING THE HAMMER --- */}
+        <div className={`absolute bottom-20 right-6 md:right-16 z-30 pointer-events-none transition-all duration-200 transform origin-bottom ${
+          strikePhase === 1 ? 'translate-x-[-40px] -rotate-12 scale-110' :
+          strikePhase === 2 ? 'translate-x-[-110px] translate-y-6 rotate-12 scale-125' :
+          strikePhase === 3 ? 'translate-x-[-60px] -rotate-20 scale-115' :
+          strikePhase === 4 ? 'translate-x-[-120px] translate-y-8 rotate-18 scale-130' :
+          strikePhase === 5 ? 'translate-x-[-100px] translate-y-7 rotate-15 scale-125' : 'rotate-0 translate-x-0 scale-100'
         }`}>
-          <svg className="w-32 h-32 drop-shadow-[0_0_25px_rgba(250,204,21,0.8)]" viewBox="0 0 100 100" fill="none">
-            {/* Hammer Handle */}
-            <rect x="15" y="45" width="50" height="10" rx="3" fill="#78350f" stroke="#000" strokeWidth="2.5" transform="rotate(-30 40 50)" />
-            {/* Heavy Forging Hammer Head */}
-            <rect x="45" y="15" width="35" height="30" rx="4" fill="#facc15" stroke="#000" strokeWidth="3.5" />
-            <rect x="48" y="18" width="29" height="8" fill="#ffffff" />
-            <path d="M80 15 L92 22 L92 38 L80 45 Z" fill="#ca8a04" stroke="#000" strokeWidth="3" />
-          </svg>
+          <div className="relative">
+            {/* Blacksmith Robot Back Sparks / Energy Aura */}
+            <div className={`absolute -inset-4 rounded-full bg-gradient-to-r from-amber-500 to-red-600 blur-md transition-opacity ${isStriking ? 'opacity-80 animate-pulse' : 'opacity-20'}`}></div>
+            
+            {/* Heavy Blacksmith Robot SVG */}
+            <svg className="w-36 h-44 drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)] overflow-visible" viewBox="0 0 120 140" fill="none">
+              {/* Robot Legs & Base Heavy Stance */}
+              <rect x="25" y="95" width="22" height="35" rx="4" fill="#0f172a" stroke="#000" strokeWidth="3" />
+              <rect x="73" y="95" width="22" height="35" rx="4" fill="#0f172a" stroke="#000" strokeWidth="3" />
+              <rect x="20" y="125" width="30" height="12" rx="3" fill="#334155" stroke="#000" strokeWidth="3" />
+              <rect x="70" y="125" width="30" height="12" rx="3" fill="#334155" stroke="#000" strokeWidth="3" />
+              
+              {/* Robot Heavy Mechanical Torso */}
+              <rect x="22" y="45" width="76" height="55" rx="8" fill="#1e293b" stroke="#000" strokeWidth="4" />
+              <rect x="35" y="55" width="50" height="25" rx="4" fill="#facc15" stroke="#000" strokeWidth="3" />
+              <circle cx="60" cy="67.5" r="8" fill="#ef4444" className={isStriking ? "animate-ping" : ""} />
+              <circle cx="60" cy="67.5" r="5" fill="#ffffff" />
+              
+              {/* Robot Helmet & Glowing Visor Eye */}
+              <rect x="36" y="10" width="48" height="38" rx="6" fill="#090d16" stroke="#000" strokeWidth="4" />
+              <rect x="42" y="20" width="36" height="12" rx="3" fill="#00f0ff" stroke="#000" strokeWidth="2" />
+              <circle cx="50" cy="26" r="3" fill="#ffffff" />
+              <circle cx="70" cy="26" r="3" fill="#ffffff" />
+              {/* Blacksmith Horns/Antenna */}
+              <polygon points="36,12 24,0 40,12" fill="#eab308" stroke="#000" strokeWidth="2" />
+              <polygon points="84,12 96,0 80,12" fill="#eab308" stroke="#000" strokeWidth="2" />
+
+              {/* Blacksmith Right Arm Holding Heavy Hammer */}
+              <g className={`transition-all duration-150 transform origin-top-left ${
+                isStriking ? 'rotate-[-45deg] translate-x-[-10px]' : 'rotate-0'
+              }`}>
+                {/* Arm Joint */}
+                <circle cx="20" cy="55" r="9" fill="#eab308" stroke="#000" strokeWidth="3" />
+                {/* Mechanical Arm Segment */}
+                <rect x="-15" y="50" width="30" height="14" rx="4" fill="#475569" stroke="#000" strokeWidth="3" transform="rotate(-30 0 55)" />
+                {/* Forging Hammer Handle */}
+                <rect x="-65" y="20" width="75" height="10" rx="3" fill="#78350f" stroke="#000" strokeWidth="3" transform="rotate(-25 -20 25)" />
+                {/* Forging Hammer Heavy Steel Head */}
+                <rect x="-95" y="-10" width="42" height="34" rx="5" fill="#facc15" stroke="#000" strokeWidth="4" />
+                <rect x="-90" y="-6" width="32" height="10" fill="#ffffff" />
+                <path d="M-53 -10 L-40 -2 L-40 18 L-53 24 Z" fill="#ca8a04" stroke="#000" strokeWidth="3" />
+              </g>
+            </svg>
+          </div>
         </div>
 
         {/* Robotic Arm Left (Laser Welding) */}
