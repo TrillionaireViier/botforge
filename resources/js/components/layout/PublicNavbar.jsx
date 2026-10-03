@@ -37,10 +37,10 @@ export default function PublicNavbar() {
 
           <div className="flex items-center gap-3">
             <Link 
-              to="/app/user/configurator" 
+              to="/login" 
               className="hidden sm:flex items-center gap-2 bg-yellow-300 text-black font-black uppercase tracking-widest py-2.5 px-4 text-xs border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all"
             >
-              <Cpu className="w-4 h-4" /> Сделать Бота
+              <Sparkles className="w-4 h-4" /> Регистрация
             </Link>
 
             <Link 
