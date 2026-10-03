@@ -216,8 +216,11 @@ function AppRoutes() {
 }
 
 function App() {
+  const currentPath = window.location.pathname;
+  const isAppPrefix = currentPath.startsWith('/app');
+  
   return (
-    <Router basename="/app">
+    <Router basename={isAppPrefix ? "/app" : "/"}>
       <AuthProvider>
         <AppRoutes />
       </AuthProvider>
