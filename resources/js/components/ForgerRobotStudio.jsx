@@ -411,7 +411,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
                 }`}
               >
                 <RefreshCw className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
-                <span>{isStriking ? `Удар кузнеца (${strikePhase}/5)...` : 'Сковать Робота на Наковальне'}</span>
+                <span>{isStriking ? `Ковка (${strikePhase}/5)...` : 'Сковать Робота на Наковальне'}</span>
               </button>
             </div>
           </div>
