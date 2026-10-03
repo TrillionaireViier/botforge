@@ -243,11 +243,18 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         </div>
       </div>
 
-      {/* Interactive Animated Stage for Selected 30 Variant */}
+      {/* Interactive Animated Stage for Selected 30 Variant with Cartoon Background Artwork */}
       <div className="bg-gray-950 border-4 border-black p-6 md:p-8 rounded-xl text-white mb-8 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[inset_0_0_50px_rgba(0,0,0,0.9)]">
         
+        {/* Cartoon Cyber Forge Assembly Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-luminosity pointer-events-none transition-opacity duration-500"
+          style={{ backgroundImage: `url('/cartoon_forge.jpg')` }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent pointer-events-none"></div>
+
         {/* Stage Backdrop Effect */}
-        <div className="flex-1 flex flex-col items-center justify-center relative min-h-[280px] w-full">
+        <div className="flex-1 flex flex-col items-center justify-center relative min-h-[300px] w-full z-10">
           
           {/* Variant-specific Glow backdrop */}
           <div className={`absolute w-56 h-56 rounded-full transition-all duration-300 pointer-events-none ${
@@ -293,167 +300,181 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           {/* Impact Status Indicator */}
           <div className="mt-4 font-mono text-center z-10">
             {isStriking ? (
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-yellow-300 font-black text-lg md:text-xl uppercase tracking-widest animate-pulse">
-                  {strikePhase === 1 && `🔨 ${currentVariantData.name} — УДАР #1: КОВКА СИГНАЛА! 💥`}
-                  {strikePhase === 2 && `⚡ ${currentVariantData.name} — УДАР #2: ПРОШИВКА СЕТКИ! ✨`}
-                  {strikePhase === 3 && `🏆 ${currentVariantData.name} — УДАР #3: ЗАПУСК В HFT! 🚀`}
-                </span>
-                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                  Скорость ковки: {currentVariantData.speed} | Рейтинг: {currentVariantData.rating}
-                </span>
+              <div className="flex items-center gap-2 bg-yellow-400 text-black font-black px-4 py-1.5 rounded uppercase tracking-wider animate-bounce border-2 border-black text-sm">
+                <Flame className="w-5 h-5 animate-pulse" />
+                <span>УДАР НАКОВАЛЬНИ #{strikePhase}! КОВКА {currentVariantData.id}...</span>
               </div>
             ) : (
-              <div className="flex items-center gap-2 text-gray-300 text-xs font-bold uppercase tracking-widest">
+              <div className="text-gray-300 text-xs font-mono flex items-center justify-center gap-2">
                 <Sparkles className="w-4 h-4 text-yellow-400" />
-                <span>Модель [{currentVariantData.id}]: <strong className="text-yellow-300">{currentVariantData.name}</strong> готова к ковке</span>
+                <span>Нажмите &quot;СКОВАТЬ AI РОБОТА&quot; для запуски плазменных молотов</span>
               </div>
             )}
           </div>
         </div>
 
-        {/* Controls and Variant Details */}
-        <div className="w-full lg:w-96 bg-gray-900 border-2 border-gray-700 p-6 rounded-lg space-y-4 shadow-xl z-10">
-          <div className="flex items-center justify-between border-b border-gray-800 pb-3">
-            <h3 className="font-black uppercase tracking-wider text-sm text-white flex items-center gap-2">
-              <Flame className="w-4 h-4 text-yellow-400 animate-pulse" /> Настройки {currentVariantData.name}
-            </h3>
-            <span className="text-[10px] font-mono font-bold bg-gray-800 text-yellow-300 px-2 py-0.5 border border-gray-700">
-              {currentVariantData.pnl}
-            </span>
-          </div>
+        {/* Forging Control Panel */}
+        <div className="w-full lg:w-80 bg-black/80 border-2 border-yellow-400/50 p-5 rounded-lg z-10 font-mono shadow-2xl backdrop-blur-md">
+          <h3 className="text-yellow-400 font-black text-sm uppercase tracking-widest border-b border-yellow-400/30 pb-2 mb-4 flex items-center justify-between">
+            <span>Конфигурация Бота</span>
+            <span className="text-xs bg-yellow-400 text-black px-1.5 py-0.5 font-bold">A1..E6</span>
+          </h3>
 
-          <div>
-            <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-1">Имя Кастомного Робота</label>
-            <input 
-              type="text" 
-              value={botNameInput}
-              onChange={(e) => setBotNameInput(e.target.value)}
-              placeholder={`e.g. ${currentVariantData.name} Alpha`}
-              className="w-full bg-black border-2 border-gray-700 px-3 py-2 text-xs font-mono text-white outline-none focus:border-yellow-400 transition-colors"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-4 text-xs">
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-1">Стратегия</label>
-              <select 
+              <label className="text-gray-400 block mb-1">Имя Модели:</label>
+              <input
+                type="text"
+                placeholder={currentVariantData.name}
+                value={botNameInput}
+                onChange={(e) => setBotNameInput(e.target.value)}
+                className="w-full bg-gray-900 border border-gray-700 text-white px-3 py-2 rounded focus:outline-none focus:border-yellow-400 font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="text-gray-400 block mb-1">Стратегия Торговли:</label>
+              <select
                 value={strategySelect}
                 onChange={(e) => setStrategySelect(e.target.value)}
-                className="w-full bg-black border-2 border-gray-700 px-2 py-1.5 text-xs font-mono text-white outline-none"
+                className="w-full bg-gray-900 border border-gray-700 text-white px-3 py-2 rounded focus:outline-none focus:border-yellow-400 font-mono"
               >
-                <option value="Grid Spot">Grid Spot</option>
-                <option value="Futures Scalp">Futures Scalp</option>
-                <option value="DCA Accumulator">DCA Accumulator</option>
-                <option value="AI Signal Follower">AI Signal Follower</option>
+                <option value="Grid Spot">Grid Spot (Сетка)</option>
+                <option value="Futures Scalp">Futures Scalp (Скальпинг)</option>
+                <option value="DCA Accumulator">DCA Accumulator (Накопление)</option>
+                <option value="HFT Arbitrage">HFT Arbitrage (Арбитраж)</option>
+                <option value="Martingale Multiplier">Martingale Multiplier</option>
               </select>
             </div>
 
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-1">Торговая Пара</label>
-              <select 
+              <label className="text-gray-400 block mb-1">Торговая Пара:</label>
+              <select
                 value={pairSelect}
                 onChange={(e) => setPairSelect(e.target.value)}
-                className="w-full bg-black border-2 border-gray-700 px-2 py-1.5 text-xs font-mono text-white outline-none"
+                className="w-full bg-gray-900 border border-gray-700 text-white px-3 py-2 rounded focus:outline-none focus:border-yellow-400 font-mono"
               >
                 <option value="BTC/USDT">BTC/USDT</option>
                 <option value="ETH/USDT">ETH/USDT</option>
                 <option value="SOL/USDT">SOL/USDT</option>
-                <option value="BNB/USDT">BNB/USDT</option>
+                <option value="AVAX/USDT">AVAX/USDT</option>
+                <option value="XRP/USDT">XRP/USDT</option>
               </select>
             </div>
-          </div>
 
-          {/* Forge Action Button */}
-          <button
-            disabled={isStriking}
-            onClick={forgeNewRobot}
-            className={`w-full py-3.5 font-black uppercase tracking-widest text-xs border-2 border-black flex items-center justify-center gap-2 transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] ${
-              isStriking ? 'bg-yellow-400 text-black cursor-wait animate-pulse' : 'bg-yellow-300 text-black hover:bg-yellow-200 hover:translate-x-0.5 hover:translate-y-0.5'
-            }`}
-          >
-            <Flame className="w-4 h-4" />
-            <span>{isStriking ? '🔨 Идет Ковка Робота...' : `🔨 Сковать ${currentVariantData.name}`}</span>
-          </button>
-        </div>
-
-      </div>
-
-      {/* Newly Forged Alert */}
-      {lastForgedBot && (
-        <div className="bg-yellow-300 border-4 border-black p-5 mb-8 animate-in fade-in slide-in-from-top-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">{lastForgedBot.icon}</span>
-              <div>
-                <span className="text-[10px] font-black uppercase tracking-widest bg-black text-white px-2 py-0.5 inline-block mb-1">
-                  Успешно Скован в Студии!
-                </span>
-                <h4 className="text-lg font-black uppercase tracking-wider text-black">{lastForgedBot.name}</h4>
-                <p className="font-mono text-xs text-gray-900">{lastForgedBot.strategy} — Ожидаемая доходность {lastForgedBot.pnl}</p>
-              </div>
-            </div>
-            <button 
-              onClick={() => setLastForgedBot(null)}
-              className="text-xs font-black uppercase tracking-widest border-2 border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition-colors"
+            <button
+              onClick={forgeNewRobot}
+              disabled={isStriking}
+              className={`w-full py-3 mt-2 font-black uppercase text-sm border-2 border-black transition-all flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
+                isStriking 
+                  ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
+                  : 'bg-yellow-400 hover:bg-yellow-300 text-black active:translate-y-0.5'
+              }`}
             >
-              Закрыть
+              <Flame className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
+              <span>{isStriking ? 'Сковка...' : 'Сковать AI Робота'}</span>
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Forged Notification Banner */}
+      {lastForgedBot && (
+        <div className="bg-emerald-400 border-4 border-black p-4 mb-8 flex items-center justify-between shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] animate-fadeIn">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 border-2 border-black bg-white flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              <RobotForgeIcon className="w-8 h-8" variant={lastForgedBot.variantId} animated={true} />
+            </div>
+            <div>
+              <div className="font-black text-black text-sm uppercase">Успешно Скован Новый ИИ-Бот!</div>
+              <div className="font-mono text-xs text-gray-900">
+                <strong>{lastForgedBot.name}</strong> • {lastForgedBot.strategy} • Ожидаемый PnL: <span className="font-bold">{lastForgedBot.pnl}</span>
+              </div>
+            </div>
+          </div>
+          <span className="bg-black text-emerald-400 font-mono text-xs font-bold px-3 py-1 border border-black uppercase tracking-widest">
+            Запущен в Флот
+          </span>
+        </div>
       )}
 
-      {/* Fleet of Forged Robots */}
-      <div>
-        <h3 className="text-base font-black uppercase tracking-wider mb-4 border-b-2 border-black pb-2 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Bot className="w-5 h-5" /> Скованные Роботы во Флотилии ({robots.length})
-          </div>
-          <span className="text-xs font-mono text-gray-600 uppercase">30 Доступных Моделей в Каталоге</span>
+      {/* Active Fleet List Header */}
+      <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
+        <h3 className="font-black text-lg uppercase tracking-wider text-black flex items-center gap-2">
+          <Zap className="w-5 h-5 text-yellow-500" />
+          <span>Активный Флот ИИ-Ботов ({robots.length})</span>
         </h3>
+        <span className="font-mono text-xs text-gray-600 font-bold">
+          Авто-Обновление: <strong className="text-black">Включено</strong>
+        </span>
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-          {robots.map((bot) => (
-            <div key={bot.id} className="bg-gray-50 border-2 border-black p-3 flex flex-col justify-between hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-6 h-6 flex items-center justify-center overflow-visible">
-                    <RobotForgeIcon variant={bot.variantId || 'A1'} className="w-6 h-6" animated={true} />
-                  </div>
-                  <span className="text-[9px] font-black uppercase px-1.5 py-0.5 border border-black bg-black text-white">
-                    {bot.variantId || `Скин ${bot.skin}`}
-                  </span>
-                </div>
-                <h4 className="font-black text-xs uppercase tracking-wider truncate">{bot.name}</h4>
-                <p className="font-mono text-[10px] text-gray-600 mt-0.5 truncate">{bot.strategy}</p>
+      {/* Active Fleet Table / Grid */}
+      <div className="space-y-3">
+        {robots.map((bot) => (
+          <div
+            key={bot.id}
+            className={`p-4 border-2 border-black flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all ${
+              bot.status === 'Active' 
+                ? 'bg-amber-50/50 hover:bg-yellow-100/60 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' 
+                : 'bg-gray-100 opacity-60 border-dashed'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className={`w-10 h-10 border-2 border-black flex items-center justify-center font-bold text-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${
+                bot.skin === 'A' ? 'bg-yellow-300' :
+                bot.skin === 'B' ? 'bg-cyan-300' :
+                bot.skin === 'C' ? 'bg-red-400 text-white' :
+                bot.skin === 'D' ? 'bg-emerald-300' : 'bg-amber-400'
+              }`}>
+                <RobotForgeIcon className="w-8 h-8" variant={bot.variantId || 'A1'} animated={bot.status === 'Active'} />
               </div>
 
-              <div className="mt-3 pt-2 border-t border-gray-300 flex items-center justify-between">
-                <div>
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-gray-500 block">PnL</span>
-                  <span className="font-black text-xs text-emerald-600">{bot.pnl}</span>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h4 className="font-black text-sm uppercase text-black">{bot.name}</h4>
+                  <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 border border-black uppercase ${
+                    bot.status === 'Active' ? 'bg-emerald-300 text-black' : 'bg-gray-300 text-gray-700'
+                  }`}>
+                    {bot.status}
+                  </span>
                 </div>
-
-                <div className="flex gap-1">
-                  <button 
-                    onClick={() => toggleBotStatus(bot.id)}
-                    className="p-1 border border-black bg-white hover:bg-black hover:text-white transition-colors"
-                  >
-                    {bot.status === 'Active' ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                  </button>
-                  <button 
-                    onClick={() => deleteBot(bot.id)}
-                    className="p-1 border border-black bg-white hover:bg-red-600 hover:text-white transition-colors"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
+                <div className="text-xs font-mono text-gray-600 mt-0.5">
+                  {bot.strategy} • <strong className="text-black">{bot.trades} сделок</strong>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
+            <div className="flex items-center justify-between w-full md:w-auto gap-6 border-t md:border-t-0 pt-2 md:pt-0 border-gray-300">
+              <div className="text-left md:text-right font-mono">
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Прибыль (PnL)</div>
+                <div className="text-sm font-black text-emerald-600">{bot.pnl}</div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => toggleBotStatus(bot.id)}
+                  className={`p-2 border-2 border-black font-mono text-xs font-bold uppercase flex items-center gap-1 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${
+                    bot.status === 'Active' 
+                      ? 'bg-yellow-300 hover:bg-yellow-400 text-black' 
+                      : 'bg-emerald-300 hover:bg-emerald-400 text-black'
+                  }`}
+                >
+                  {bot.status === 'Active' ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                  <span>{bot.status === 'Active' ? 'Пауза' : 'Старт'}</span>
+                </button>
+
+                <button
+                  onClick={() => deleteBot(bot.id)}
+                  className="p-2 border-2 border-black bg-red-400 hover:bg-red-500 text-white font-mono text-xs font-bold transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
