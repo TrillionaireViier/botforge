@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Zap, Activity, Layers, ArrowRight, ChevronRight } from 'lucide-react';
+import { Zap, Activity, Layers, ArrowRight, ChevronRight, Database } from 'lucide-react';
 import PublicNavbar from '../components/layout/PublicNavbar';
 import Footer from '../components/layout/Footer';
 import ForgerRobotStudio from '../components/ForgerRobotStudio';
@@ -305,6 +305,7 @@ export default function Landing() {
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> 1 Активный бот</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Спотовая торговля</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Базовые индикаторы</li>
+                <li className="flex items-center gap-2 text-cyan-400"><Database className="w-5 h-5 text-cyan-400"/> Neon Postgres Sync</li>
               </ul>
               <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors">Войти / Регистрация</Link>
             </div>
@@ -318,6 +319,7 @@ export default function Landing() {
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Спот и Фьючерсы</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Трейлинг стопы</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Продвинутые индикаторы</li>
+                <li className="flex items-center gap-2 text-black font-bold"><Database className="w-5 h-5 text-black"/> Neon Serverless DB Cloud</li>
               </ul>
               <Link to="/login" className="w-full text-center bg-black text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]">Войти / Регистрация</Link>
             </div>
@@ -330,6 +332,7 @@ export default function Landing() {
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> API Доступ</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Персональный менеджер</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Копитрейдинг</li>
+                <li className="flex items-center gap-2 text-cyan-400 font-bold"><Database className="w-5 h-5 text-cyan-400"/> High-Speed Neon DB Cluster</li>
               </ul>
               <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors">Войти / Регистрация</Link>
             </div>
