@@ -277,20 +277,34 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent pointer-events-none"></div>
 
         {/* --- ANIMATED HEAVY BLACK/STEEL ANVIL AT THE BASE --- */}
-        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-80 h-28 pointer-events-none z-10">
-          {/* Anvil Glow */}
-          <div className={`absolute inset-0 bg-gradient-to-t from-orange-500/40 via-yellow-400/20 to-transparent rounded-full blur-xl transition-opacity duration-300 ${isStriking ? 'opacity-100 animate-pulse' : 'opacity-30'}`}></div>
-          <svg className="w-full h-full overflow-visible drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]" viewBox="0 0 200 80" fill="none">
-            {/* Anvil Horn Left */}
-            <path d="M10 25 L40 25 L40 45 L25 45 Z" fill="#334155" stroke="#000" strokeWidth="3" />
-            {/* Anvil Main Surface */}
-            <rect x="40" y="20" width="120" height="25" rx="3" fill="#1e293b" stroke="#000" strokeWidth="3.5" />
-            <rect x="44" y="23" width="112" height="6" fill="#facc15" opacity={isStriking ? "0.9" : "0.3"} className="transition-opacity" />
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-96 h-36 pointer-events-none z-10">
+          {/* Anvil Magma & Plasma Impact Glow */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-red-600/60 via-yellow-400/40 to-transparent rounded-full blur-2xl transition-opacity duration-300 ${isStriking ? 'opacity-100 scale-125 animate-pulse' : 'opacity-40 scale-100'}`}></div>
+          
+          <svg className="w-full h-full overflow-visible drop-shadow-[0_15px_30px_rgba(0,0,0,0.95)]" viewBox="0 0 240 100" fill="none">
+            {/* Wooden Base Block */}
+            <rect x="55" y="75" width="130" height="20" rx="4" fill="#451a03" stroke="#000" strokeWidth="4" />
+            <line x1="80" y1="75" x2="80" y2="95" stroke="#78350f" strokeWidth="3" />
+            <line x1="160" y1="75" x2="160" y2="95" stroke="#78350f" strokeWidth="3" />
+            
+            {/* Anvil Base Foot */}
+            <polygon points="45,75 195,75 175,55 65,55" fill="#0f172a" stroke="#000" strokeWidth="4" />
+            {/* Anvil Central Waist */}
+            <rect x="80" y="38" width="80" height="20" fill="#1e293b" stroke="#000" strokeWidth="4" />
+            
+            {/* Anvil Horn Left (Pointed Classic Horn) */}
+            <path d="M5 20 C25 20 45 22 70 38 L70 20 Z" fill="#334155" stroke="#000" strokeWidth="4" />
+            <path d="M12 23 C28 23 45 25 65 35 Z" fill="#64748b" opacity="0.6" />
+
+            {/* Anvil Main Heavy Steel Top Deck */}
+            <rect x="68" y="14" width="112" height="26" rx="4" fill="#1e293b" stroke="#000" strokeWidth="4" />
+            {/* Glowing Hot Steel Working Surface */}
+            <rect x="72" y="17" width="104" height="8" rx="2" fill="#facc15" opacity={isStriking ? "1" : "0.5"} className="transition-opacity duration-150" />
+            <rect x="74" y="19" width="100" height="3" fill="#ffffff" opacity={isStriking ? "0.9" : "0.2"} />
+
             {/* Anvil Heel Right */}
-            <path d="M160 25 L185 25 L160 45 Z" fill="#334155" stroke="#000" strokeWidth="3" />
-            {/* Anvil Base Stem */}
-            <polygon points="65,45 135,45 150,75 50,75" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
-            <rect x="45" y="72" width="110" height="8" rx="2" fill="#475569" stroke="#000" strokeWidth="2.5" />
+            <rect x="180" y="20" width="30" height="18" rx="2" fill="#334155" stroke="#000" strokeWidth="4" />
+            <path d="M210 20 L230 20 L210 38 Z" fill="#1e293b" stroke="#000" strokeWidth="4" />
           </svg>
         </div>
 
@@ -411,7 +425,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
                 }`}
               >
                 <RefreshCw className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
-                <span>{isStriking ? `Ковка (${strikePhase}/5)...` : 'Сковать Робота на Наковальне'}</span>
+                <span>{isStriking ? `Сборка (${strikePhase}/5)...` : 'Собрать Робота'}</span>
               </button>
             </div>
           </div>
