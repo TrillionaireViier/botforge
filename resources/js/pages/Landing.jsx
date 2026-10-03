@@ -48,23 +48,23 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans selection:bg-black selection:text-white overflow-x-hidden w-full">
+    <div className="min-h-screen bg-white text-black font-sans selection:bg-yellow-300 selection:text-black overflow-x-hidden w-full">
       <PublicNavbar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto text-center border-b-2 border-black">
+      <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto text-center border-b-2 border-black bg-white">
         <motion.div initial="hidden" animate="visible" variants={fadeIn}>
-          <div className="inline-block border-2 border-black bg-gray-900 px-4 py-2 uppercase tracking-widest text-xs font-black text-white mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] max-w-full break-words">
+          <div className="inline-block border-2 border-black bg-yellow-300 px-4 py-2 uppercase tracking-widest text-xs font-black text-black mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] max-w-full break-words">
             Ультимативный No-Code Конфигуратор
           </div>
           
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none break-words">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none break-words text-black">
             Автоматизируй <br/>
-            <span className="text-white bg-gray-900 px-2 border-4 border-black inline-block mt-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">Свою Прибыль</span>
+            <span className="text-black bg-yellow-300 px-3 border-4 border-black inline-block mt-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">Свою Прибыль</span>
           </h1>
           
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-wide">
-            Создавайте сложные Grid-стратегии, настраивайте технические индикаторы и управляйте рисками с помощью трейлинг-стопов. Мгновенное подключение к Binance, Bybit и OKX.
+          <p className="text-xl text-gray-800 mb-12 max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-wide">
+            Подключайте индикаторы RSI, MACD и Bollinger Bands, чтобы ваш бот входил в сделку только при идеальных условиях. Используйте логарифмический или арифметический шаг сетки в комбинации с множителями объема Мартингейла.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
@@ -90,34 +90,34 @@ export default function Landing() {
       </section>
 
       {/* Features Grid */}
-      <section id="features" className="py-24 px-6 border-b-2 border-black bg-gray-50">
+      <section id="features" className="py-24 px-6 border-b-2 border-black bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 px-2">
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black break-words break-all sm:break-normal hyphens-auto">Профессиональные Инструменты</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Всё необходимое для создания прибыльных автоматизированных систем без написания единой строчки кода.</p>
+            <p className="text-gray-800 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Всё необходимое для создания прибыльных автоматизированных систем без написания единой строчки кода.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-900 border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <Activity className="w-12 h-12 text-white mb-6" />
-              <h3 className="text-2xl font-black uppercase tracking-widest mb-4">Технические Фильтры</h3>
-              <p className="text-gray-700 font-medium leading-relaxed">
+            <div className="bg-yellow-300 border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <Activity className="w-12 h-12 text-black mb-6" />
+              <h3 className="text-2xl font-black uppercase tracking-widest mb-4 text-black">Технические Фильтры</h3>
+              <p className="text-black font-semibold leading-relaxed">
                 Подключайте индикаторы RSI, MACD и Bollinger Bands, чтобы ваш бот входил в сделку только при идеальных условиях.
               </p>
             </div>
 
-            <div className="bg-black text-white border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <Zap className="w-12 h-12 text-white mb-6" />
-              <h3 className="text-2xl font-black uppercase tracking-widest mb-4">Трейлинг Стопы</h3>
-              <p className="text-gray-300 font-medium leading-relaxed">
+            <div className="bg-cyan-300 text-black border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <Zap className="w-12 h-12 text-black mb-6" />
+              <h3 className="text-2xl font-black uppercase tracking-widest mb-4 text-black">Трейлинг Стопы</h3>
+              <p className="text-black font-semibold leading-relaxed">
                 Максимизируйте прибыль во время сильных пампов с помощью Trailing Take Profit и защищайте капитал динамическим Trailing Stop Loss.
               </p>
             </div>
 
-            <div className="bg-gray-900 border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <Layers className="w-12 h-12 text-white mb-6" />
-              <h3 className="text-2xl font-black uppercase tracking-widest mb-4">Умные Сетки</h3>
-              <p className="text-gray-700 font-medium leading-relaxed">
+            <div className="bg-emerald-300 border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+              <Layers className="w-12 h-12 text-black mb-6" />
+              <h3 className="text-2xl font-black uppercase tracking-widest mb-4 text-black">Умные Сетки</h3>
+              <p className="text-black font-semibold leading-relaxed">
                 Используйте логарифмический или арифметический шаг сетки в комбинации с множителями объема Мартингейла.
               </p>
             </div>
@@ -126,58 +126,58 @@ export default function Landing() {
       </section>
 
       {/* Bots Showcase Section */}
-      <section className="py-24 px-6 border-b-2 border-black bg-gray-900">
+      <section className="py-24 px-6 border-b-2 border-black bg-gray-50 text-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 px-2">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words break-all sm:break-normal hyphens-auto">Готовые Торговые Боты</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Выберите проверенную стратегию или создайте свою с нуля.</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black break-words break-all sm:break-normal hyphens-auto">Готовые Торговые Боты</h2>
+            <p className="text-gray-800 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Выберите проверенную стратегию или создайте свою с нуля.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-[#D3F55F] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <h3 className="text-2xl font-black uppercase mb-2">ScalpBot Pro</h3>
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">ScalpBot Pro</h3>
               <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Скальпинг</span>
-              <p className="text-gray-900 font-medium leading-relaxed">
+              <p className="text-black font-semibold leading-relaxed">
                 Высокочастотный бот для краткосрочных сделок. Открывает до 200 позиций в сутки на минутных свечах BTC/ETH.
               </p>
             </div>
 
             <div className="bg-[#A5F3FC] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <h3 className="text-2xl font-black uppercase mb-2">TrendRider</h3>
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">TrendRider</h3>
               <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Трендовый</span>
-              <p className="text-gray-900 font-medium leading-relaxed">
+              <p className="text-black font-semibold leading-relaxed">
                 Торгует по направлению тренда на 4H и дневных графиках. Оптимален для спокойного рынка с чётким направлением.
               </p>
             </div>
 
             <div className="bg-[#FDE68A] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <h3 className="text-2xl font-black uppercase mb-2">GridMaster</h3>
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">GridMaster</h3>
               <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Сеточный</span>
-              <p className="text-gray-900 font-medium leading-relaxed">
+              <p className="text-black font-semibold leading-relaxed">
                 Сеточная стратегия в боковом рынке. Зарабатывает на волатильности без прогнозирования направления.
               </p>
             </div>
 
             <div className="bg-[#DDD6FE] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <h3 className="text-2xl font-black uppercase mb-2">ArbitrageX</h3>
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">ArbitrageX</h3>
               <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Арбитраж</span>
-              <p className="text-gray-900 font-medium leading-relaxed">
+              <p className="text-black font-semibold leading-relaxed">
                 Межбиржевой арбитраж. Использует разницу цен между биржами для безрискового заработка.
               </p>
             </div>
 
             <div className="bg-[#FCA5A5] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <h3 className="text-2xl font-black uppercase mb-2">NewsTrader AI</h3>
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">NewsTrader AI</h3>
               <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Новостной</span>
-              <p className="text-gray-900 font-medium leading-relaxed">
+              <p className="text-black font-semibold leading-relaxed">
                 ИИ-бот анализирует новости и твиты в реальном времени. Реагирует на события раньше рынка.
               </p>
             </div>
 
             <div className="bg-[#BBF7D0] border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-              <h3 className="text-2xl font-black uppercase mb-2">DCA Bot</h3>
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">DCA Bot</h3>
               <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block mb-4">Усреднение</span>
-              <p className="text-gray-900 font-medium leading-relaxed">
+              <p className="text-black font-semibold leading-relaxed">
                 Классическая стратегия усреднения (DCA). Идеален для долгосрочного накопления активов при падении.
               </p>
             </div>
@@ -186,46 +186,45 @@ export default function Landing() {
       </section>
 
       {/* How it Works Block */}
-      <section id="how-it-works" className="py-24 px-6 border-b-2 border-black bg-gray-900">
+      <section id="how-it-works" className="py-24 px-6 border-b-2 border-black bg-white text-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 px-2">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words break-all sm:break-normal hyphens-auto">Как Запустить Бота</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">От идеи до реализации за три простых шага.</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black break-words break-all sm:break-normal hyphens-auto">Как Запустить Бота</h2>
+            <p className="text-gray-800 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">От идеи до реализации за три простых шага.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="border-2 border-black p-8 text-center bg-gray-50 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div className="border-2 border-black p-8 text-center bg-gray-100 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <div className="w-16 h-16 bg-black text-white font-black text-2xl border-2 border-black flex items-center justify-center mx-auto mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">1</div>
-              <h3 className="text-2xl font-black uppercase mb-3">Настройка</h3>
-              <p className="text-gray-700 font-medium">Используйте визуальный конструктор для настройки пары, структуры сетки и индикаторов.</p>
+              <h3 className="text-2xl font-black uppercase mb-3 text-black">Настройка</h3>
+              <p className="text-gray-800 font-semibold">Используйте визуальный конструктор для настройки пары, структуры сетки и индикаторов.</p>
             </div>
-            <div className="border-2 border-black p-8 text-center bg-gray-50 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div className="border-2 border-black p-8 text-center bg-gray-100 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <div className="w-16 h-16 bg-black text-white font-black text-2xl border-2 border-black flex items-center justify-center mx-auto mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">2</div>
-              <h3 className="text-2xl font-black uppercase mb-3">Подключение</h3>
-              <p className="text-gray-700 font-medium">Подключите API ключи от вашей биржи. Мы нативно поддерживаем Binance, Bybit и OKX.</p>
+              <h3 className="text-2xl font-black uppercase mb-3 text-black">Подключение</h3>
+              <p className="text-gray-800 font-semibold">Подключите API ключи от вашей биржи. Мы нативно поддерживаем Binance, Bybit и OKX.</p>
             </div>
-            <div className="border-2 border-black p-8 text-center bg-gray-50 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div className="border-2 border-black p-8 text-center bg-gray-100 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <div className="w-16 h-16 bg-black text-white font-black text-2xl border-2 border-black flex items-center justify-center mx-auto mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">3</div>
-              <h3 className="text-2xl font-black uppercase mb-3">Запуск</h3>
-              <p className="text-gray-700 font-medium">Запустите бота. Он будет автоматически торговать 24/7 строго по вашим правилам.</p>
+              <h3 className="text-2xl font-black uppercase mb-3 text-black">Запуск</h3>
+              <p className="text-gray-800 font-semibold">Запустите бота. Он будет автоматически торговать 24/7 строго по вашим правилам.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Architecture Features */}
-      <section className="py-24 px-6 border-b-2 border-black bg-gray-900">
+      <section className="py-24 px-6 border-b-2 border-black bg-gray-100 text-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 px-2">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words break-all sm:break-normal hyphens-auto">Создано для Масштабирования</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Надежная бэкенд инфраструктура в сочетании с молниеносным фронтендом.</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black break-words break-all sm:break-normal hyphens-auto">Создано для Масштабирования</h2>
+            <p className="text-gray-800 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Надежная бэкенд инфраструктура в сочетании с молниеносным фронтендом.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
             {/* Фронтенд Block */}
-            <div className="border-4 border-black p-10 bg-gray-50 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-black rotate-45 translate-x-16 -translate-y-16"></div>
-              <h3 className="text-3xl font-black uppercase mb-6 flex items-center gap-3">
+            <div className="border-4 border-black p-10 bg-white text-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
+              <h3 className="text-3xl font-black uppercase mb-6 flex items-center gap-3 text-black">
                 <span className="w-4 h-4 bg-black block"></span>
                 Фронтенд
               </h3>
@@ -233,54 +232,53 @@ export default function Landing() {
                 <li className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-black text-white flex items-center justify-center font-black mt-1 shrink-0 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)]">1</div>
                   <div>
-                    <h4 className="text-xl font-black uppercase mb-1">Визуальный Конфигуратор</h4>
-                    <p className="text-gray-700 font-medium">Интуитивно понятный React-интерфейс, который рассчитывает параметры сетки и визуализирует риски до запуска.</p>
+                    <h4 className="text-xl font-black uppercase mb-1 text-black">Визуальный Конфигуратор</h4>
+                    <p className="text-gray-800 font-semibold">Интуитивно понятный React-интерфейс, который рассчитывает параметры сетки и визуализирует риски до запуска.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-black text-white flex items-center justify-center font-black mt-1 shrink-0 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)]">2</div>
                   <div>
-                    <h4 className="text-xl font-black uppercase mb-1">Валидация в Реальном Времени</h4>
-                    <p className="text-gray-700 font-medium">Мгновенная проверка на стороне клиента предотвращает ввод конфликтующих параметров и перерасход капитала.</p>
+                    <h4 className="text-xl font-black uppercase mb-1 text-black">Валидация в Реальном Времени</h4>
+                    <p className="text-gray-800 font-semibold">Мгновенная проверка на стороне клиента предотвращает ввод конфликтующих параметров и перерасход капитала.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-black text-white flex items-center justify-center font-black mt-1 shrink-0 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)]">3</div>
                   <div>
-                    <h4 className="text-xl font-black uppercase mb-1">Управление Состоянием</h4>
-                    <p className="text-gray-700 font-medium">Глобальный стейт-менеджмент надежно управляет состояниями сложных стратегий при редактировании.</p>
+                    <h4 className="text-xl font-black uppercase mb-1 text-black">Управление Состоянием</h4>
+                    <p className="text-gray-800 font-semibold">Глобальный стейт-менеджмент надежно управляет состояниями сложных стратегий при редактировании.</p>
                   </div>
                 </li>
               </ul>
             </div>
 
             {/* Бэкенд Block */}
-            <div className="border-4 border-black p-10 bg-black text-white shadow-[12px_12px_0px_0px_rgba(200,200,200,1)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gray-900 rotate-45 translate-x-16 -translate-y-16"></div>
-              <h3 className="text-3xl font-black uppercase mb-6 flex items-center gap-3">
-                <span className="w-4 h-4 bg-gray-900 block"></span>
+            <div className="border-4 border-black p-10 bg-yellow-300 text-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
+              <h3 className="text-3xl font-black uppercase mb-6 flex items-center gap-3 text-black">
+                <span className="w-4 h-4 bg-black block"></span>
                 Бэкенд
               </h3>
               <ul className="space-y-6">
                 <li className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-gray-900 text-white flex items-center justify-center font-black mt-1 shrink-0">1</div>
+                  <div className="w-8 h-8 bg-black text-white flex items-center justify-center font-black mt-1 shrink-0">1</div>
                   <div>
-                    <h4 className="text-xl font-black uppercase mb-1">Мгновенное Исполнение</h4>
-                    <p className="text-gray-400 font-medium">Node.js Express сервер обеспечивает передачу торговых сигналов по API бирж с миллисекундной задержкой.</p>
+                    <h4 className="text-xl font-black uppercase mb-1 text-black">Мгновенное Исполнение</h4>
+                    <p className="text-black font-semibold">Node.js Express сервер обеспечивает передачу торговых сигналов по API бирж с миллисекундной задержкой.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-gray-900 text-white flex items-center justify-center font-black mt-1 shrink-0">2</div>
+                  <div className="w-8 h-8 bg-black text-white flex items-center justify-center font-black mt-1 shrink-0">2</div>
                   <div>
-                    <h4 className="text-xl font-black uppercase mb-1">Безопасная База Данных</h4>
-                    <p className="text-gray-400 font-medium">Архитектура на PostgreSQL/SQLite безопасно хранит ваши настройки, токены и зашифрованные данные.</p>
+                    <h4 className="text-xl font-black uppercase mb-1 text-black">Безопасная База Данных</h4>
+                    <p className="text-black font-semibold">Архитектура на PostgreSQL/SQLite безопасно хранит ваши настройки, токены и зашифрованные данные.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-gray-900 text-white flex items-center justify-center font-black mt-1 shrink-0">3</div>
+                  <div className="w-8 h-8 bg-black text-white flex items-center justify-center font-black mt-1 shrink-0">3</div>
                   <div>
-                    <h4 className="text-xl font-black uppercase mb-1">Бесперебойная Работа 24/7</h4>
-                    <p className="text-gray-400 font-medium">Фоновые процессы постоянно отслеживают WebSocket-потоки для корректировки стопов и сеток, даже когда вы спите.</p>
+                    <h4 className="text-xl font-black uppercase mb-1 text-black">Бесперебойная Работа 24/7</h4>
+                    <p className="text-black font-semibold">Фоновые процессы постоянно отслеживают WebSocket-потоки для корректировки стопов и сеток, даже когда вы спите.</p>
                   </div>
                 </li>
               </ul>
@@ -290,73 +288,73 @@ export default function Landing() {
       </section>
       
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-6 border-b-2 border-black bg-gray-900">
+      <section id="pricing" className="py-24 px-6 border-b-2 border-black bg-white text-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 px-2">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words break-all sm:break-normal hyphens-auto">Тарифы</h2>
-            <p className="text-gray-600 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Выберите подходящий план для ваших торговых амбиций.</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black break-words break-all sm:break-normal hyphens-auto">Тарифы</h2>
+            <p className="text-gray-800 font-bold uppercase tracking-widest text-base sm:text-lg max-w-2xl mx-auto break-words">Выберите подходящий план для ваших торговых амбиций.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="border-2 border-black bg-gray-900 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-              <h3 className="text-2xl font-black uppercase mb-2">Бесплатный</h3>
-              <div className="text-4xl font-black mb-6">$0<span className="text-lg text-gray-400">/мес</span></div>
-              <ul className="space-y-4 mb-8 flex-1 font-medium text-gray-300">
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> 1 Активный бот</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Спотовая торговля</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Базовые индикаторы</li>
-                <li className="flex items-center gap-2 text-cyan-400"><Database className="w-5 h-5 text-cyan-400"/> Neon Postgres Sync</li>
+            <div className="border-2 border-black bg-gray-100 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">Бесплатный</h3>
+              <div className="text-4xl font-black mb-6 text-black">$0<span className="text-lg text-gray-700">/мес</span></div>
+              <ul className="space-y-4 mb-8 flex-1 font-semibold text-gray-900">
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> 1 Активный бот</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Спотовая торговля</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Базовые индикаторы</li>
+                <li className="flex items-center gap-2 text-black font-bold"><Database className="w-5 h-5 text-black"/> Neon Postgres Sync</li>
               </ul>
-              <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors">Войти / Регистрация</Link>
+              <Link to="/login" className="w-full text-center bg-black text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors">Войти / Регистрация</Link>
             </div>
 
             <div className="border-4 border-black bg-yellow-300 text-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col transform md:-translate-y-4 relative">
               <div className="absolute top-0 right-0 bg-black text-white px-3 py-1 font-black uppercase text-xs tracking-widest border-l-2 border-b-2 border-black">Популярный</div>
               <h3 className="text-2xl font-black uppercase mb-2 text-black">Про</h3>
-              <div className="text-4xl font-black mb-6 text-black">$29<span className="text-lg text-gray-800">/мес</span></div>
-              <ul className="space-y-4 mb-8 flex-1 font-medium text-black">
+              <div className="text-4xl font-black mb-6 text-black">$29<span className="text-lg text-gray-900">/мес</span></div>
+              <ul className="space-y-4 mb-8 flex-1 font-bold text-black">
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> До 10 активных ботов</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Спот и Фьючерсы</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Трейлинг стопы</li>
                 <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Продвинутые индикаторы</li>
-                <li className="flex items-center gap-2 text-black font-bold"><Database className="w-5 h-5 text-black"/> Neon Serverless DB Cloud</li>
+                <li className="flex items-center gap-2 text-black font-extrabold"><Database className="w-5 h-5 text-black"/> Neon Serverless DB Cloud</li>
               </ul>
               <Link to="/login" className="w-full text-center bg-black text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]">Войти / Регистрация</Link>
             </div>
 
-            <div className="border-2 border-black bg-gray-900 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
-              <h3 className="text-2xl font-black uppercase mb-2">Ультра</h3>
-              <div className="text-4xl font-black mb-6">$99<span className="text-lg text-gray-400">/мес</span></div>
-              <ul className="space-y-4 mb-8 flex-1 font-medium text-gray-300">
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Неограниченно ботов</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> API Доступ</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Персональный менеджер</li>
-                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-white"/> Копитрейдинг</li>
-                <li className="flex items-center gap-2 text-cyan-400 font-bold"><Database className="w-5 h-5 text-cyan-400"/> High-Speed Neon DB Cluster</li>
+            <div className="border-2 border-black bg-cyan-300 text-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+              <h3 className="text-2xl font-black uppercase mb-2 text-black">Ультра</h3>
+              <div className="text-4xl font-black mb-6 text-black">$99<span className="text-lg text-gray-900">/мес</span></div>
+              <ul className="space-y-4 mb-8 flex-1 font-bold text-black">
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Неограниченно ботов</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> API Доступ</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Персональный менеджер</li>
+                <li className="flex items-center gap-2"><Zap className="w-5 h-5 text-black"/> Копитрейдинг</li>
+                <li className="flex items-center gap-2 text-black font-extrabold"><Database className="w-5 h-5 text-black"/> High-Speed Neon DB Cluster</li>
               </ul>
-              <Link to="/login" className="w-full text-center bg-gray-900 text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors">Войти / Регистрация</Link>
+              <Link to="/login" className="w-full text-center bg-black text-white border-2 border-black font-black uppercase tracking-widest py-3 hover:bg-gray-800 transition-colors">Войти / Регистрация</Link>
             </div>
           </div>
         </div>
       </section>
-      <section className="py-24 px-6 bg-gray-50">
+      <section className="py-24 px-6 bg-white text-black">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16 px-2">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 break-words">FAQ</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight mb-6 text-black break-words">FAQ</h2>
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-3">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-gray-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden transition-all duration-300">
+              <div key={idx} className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden transition-all duration-300">
                 <button 
-                  className="w-full text-left p-3 flex justify-between items-center font-bold uppercase text-sm"
+                  className="w-full text-left p-4 flex justify-between items-center font-black uppercase text-sm text-black"
                   onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
                 >
                   {faq.q}
-                  <ChevronRight className={`w-4 h-4 transition-transform ${openFaq === idx ? 'rotate-90' : ''}`} />
+                  <ChevronRight className={`w-4 h-4 text-black transition-transform ${openFaq === idx ? 'rotate-90' : ''}`} />
                 </button>
                 {openFaq === idx && (
-                  <div className="px-4 pb-3 text-gray-700 font-medium text-xs leading-relaxed border-t-2 border-black pt-2 bg-gray-50">
+                  <div className="px-4 pb-4 text-gray-900 font-semibold text-xs leading-relaxed border-t-2 border-black pt-3 bg-yellow-50">
                     {faq.a}
                   </div>
                 )}

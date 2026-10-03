@@ -262,7 +262,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
 
       {/* Main 3D Cyber Forge Stage Box with Volumetric Isometric Perspective */}
       <div 
-        className="relative mb-8 p-8 border-4 border-black bg-gray-950 overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center min-h-[460px]"
+        className="relative mb-8 p-8 border-4 border-black bg-white overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center min-h-[460px]"
         style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
       >
         {/* Layer 1: Cartoon Blue Robotic Assembly Arm Artwork */}
