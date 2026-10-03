@@ -70,14 +70,11 @@ export default function PublicNavbar() {
             </div>
           </Link>
           
-          <div className="hidden lg:flex gap-8 items-center">
-            <a href="#features" className="text-sm font-bold uppercase tracking-widest text-black hover:underline underline-offset-4">Функции</a>
-            <a href="#how-it-works" className="text-sm font-bold uppercase tracking-widest text-black hover:underline underline-offset-4">Как это работает</a>
-            <a href="#pricing" className="text-sm font-bold uppercase tracking-widest text-black hover:underline underline-offset-4">Тарифы</a>
-            <Link to="/app/user" className="text-sm font-bold uppercase tracking-widest text-black hover:underline underline-offset-4 flex items-center gap-1">
-              <LayoutDashboard className="w-4 h-4 text-emerald-600" /> Демо Кабинет
-            </Link>
-            <Link to="/login" className="text-sm font-bold uppercase tracking-widest text-black hover:underline underline-offset-4">Войти</Link>
+          <div className="hidden lg:flex items-center gap-6 whitespace-nowrap">
+            <a href="#features" className="text-sm font-bold uppercase tracking-widest text-black hover:text-yellow-600 transition-colors">Функции</a>
+            <a href="#how-it-works" className="text-sm font-bold uppercase tracking-widest text-black hover:text-yellow-600 transition-colors">Как это работает</a>
+            <a href="#pricing" className="text-sm font-bold uppercase tracking-widest text-black hover:text-yellow-600 transition-colors">Тарифы</a>
+            <Link to="/app/user" className="text-sm font-bold uppercase tracking-widest text-black hover:text-yellow-600 transition-colors">Демо Кабинет</Link>
           </div>
 
           <div className="flex items-center gap-3">
