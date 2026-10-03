@@ -1,14 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Lock, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Lock, ArrowLeft, UserPlus } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Login() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const modeFromUrl = queryParams.get('mode');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isRegister, setIsRegister] = useState(false);
+  const [isRegister, setIsRegister] = useState(modeFromUrl === 'register');
   const { login, register } = useAuth();
+
+  useEffect(() => {
+    if (modeFromUrl === 'register') {
+      setIsRegister(true);
+    }
+  }, [modeFromUrl]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
