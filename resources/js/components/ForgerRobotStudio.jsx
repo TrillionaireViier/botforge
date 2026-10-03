@@ -413,19 +413,19 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             );
           })}
 
-          {/* Large Animated Robot Standing Upright on Top of the 3D Anvil Deck */}
+          {/* Large Animated Robot Standing Upright directly on Top Deck of the 3D Anvil */}
           <div 
-            className={`relative transition-all duration-200 z-20 ${
-              strikePhase === 1 ? '-translate-y-2 scale-105 rotate-[-3deg]' :
-              strikePhase === 2 ? 'translate-y-3 scale-110 rotate-[4deg]' :
-              strikePhase === 3 ? '-translate-y-3 scale-108 rotate-[-5deg]' :
-              strikePhase === 4 ? 'translate-y-4 scale-112 rotate-[6deg]' :
-              strikePhase === 5 ? 'translate-y-1 scale-115 rotate-[0deg]' : 'translate-y-0 scale-100'
+            className={`relative transition-all duration-200 z-20 translate-y-6 ${
+              strikePhase === 1 ? 'translate-y-4 scale-105 rotate-[-3deg]' :
+              strikePhase === 2 ? 'translate-y-8 scale-110 rotate-[4deg]' :
+              strikePhase === 3 ? 'translate-y-3 scale-108 rotate-[-5deg]' :
+              strikePhase === 4 ? 'translate-y-9 scale-112 rotate-[6deg]' :
+              strikePhase === 5 ? 'translate-y-7 scale-115 rotate-[0deg]' : 'scale-100'
             }`}
-            style={{ transformStyle: "preserve-3d", transform: "translateZ(30px)" }}
+            style={{ transformStyle: "preserve-3d", transform: "rotateX(0deg) translateZ(40px)" }}
           >
-            <RobotForgeIcon className={`w-44 h-44 transition-all duration-200 ${
-              isStriking ? 'drop-shadow-[0_20px_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_15px_30px_rgba(0,240,255,0.5)]'
+            <RobotForgeIcon className={`w-48 h-48 transition-all duration-200 ${
+              isStriking ? 'drop-shadow-[0_20px_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_15px_30px_rgba(0,240,255,0.6)]'
             }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
 
