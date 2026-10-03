@@ -312,13 +312,13 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-transparent pointer-events-none animate-pulse"></div>
 
         {/* --- ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING BEHIND THE ANVIL & TARGET ROBOT --- */}
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 z-10 pointer-events-none transition-all duration-300">
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 pointer-events-none transition-all duration-300">
           <div className="relative">
             {/* Blacksmith Robot Back Energy Glow */}
-            <div className={`absolute -inset-6 rounded-full bg-gradient-to-r from-amber-500 to-red-600 blur-xl transition-opacity ${isStriking ? 'opacity-90 animate-pulse' : 'opacity-20'}`}></div>
+            <div className={`absolute -inset-4 rounded-full bg-gradient-to-r from-amber-500 to-red-600 blur-md transition-opacity ${isStriking ? 'opacity-80 animate-pulse' : 'opacity-20'}`}></div>
             
             {/* Heavy Blacksmith Robot SVG standing behind */}
-            <svg className="w-52 h-60 drop-shadow-[0_12px_24px_rgba(0,0,0,0.95)] overflow-visible" viewBox="0 0 140 160" fill="none">
+            <svg className="w-32 h-36 drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] overflow-visible" viewBox="0 0 140 160" fill="none">
               {/* Robot Legs & Stance */}
               <rect x="30" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
               <rect x="84" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
