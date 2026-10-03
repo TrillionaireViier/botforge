@@ -24,7 +24,7 @@ export default function PublicNavbar() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
             </span>
             <Flame className="w-4 h-4 text-orange-400 animate-pulse" />
-            <span>BotForge Studio Live: Анимированная кузница роботов задействована</span>
+            <span>BotForge Studio</span>
           </div>
 
           {/* Quick Page Links Bar */}
