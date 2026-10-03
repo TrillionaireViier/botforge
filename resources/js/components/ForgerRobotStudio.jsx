@@ -194,13 +194,13 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
               </div>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h2 className="text-2xl font-black uppercase tracking-widest text-black">Мульти-Кузница 30 ИИ-Роботов (С Полной Анимацией)</h2>
+                  <h2 className="text-2xl font-black uppercase tracking-widest text-black">Мульти-Кузница 30 ИИ-Роботов На Наковальне</h2>
                   <span className="bg-black text-yellow-300 font-mono text-xs font-bold px-2 py-0.5 border border-black uppercase tracking-widest animate-pulse">
-                    20+ Анимированных Сценариев Сборки
+                    Heavy Anvil Forge & Robotic Arms
                   </span>
                 </div>
                 <p className="text-gray-600 font-mono text-xs mt-1">
-                  Анимированная симуляция робо-рук, лазеров, сварки плазмой и 3D-сборки ядра на наковальне!
+                  Анимированная плазменная наковальня: кузнечные молоты, сварка лазером и сборка ядер роботов!
                 </p>
               </div>
             </div>
@@ -260,12 +260,12 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         </div>
       </div>
 
-      {/* Dynamic Animated Stage with Cartoon & Blue Robotic Assembly Arms Background Artworks */}
-      <div className="bg-gray-950 border-4 border-black p-6 md:p-8 rounded-xl text-white mb-8 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[inset_0_0_50px_rgba(0,0,0,0.9)]">
+      {/* Dynamic Animated Stage with Heavy Steel Anvil Base */}
+      <div className="bg-gray-950 border-4 border-black p-6 md:p-8 rounded-xl text-white mb-8 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[inset_0_0_50px_rgba(0,0,0,0.9)] min-h-[420px]">
         
         {/* Layer 1: Cartoon Blue Robotic Assembly Arm Artwork */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-screen pointer-events-none transition-all duration-700"
+          className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-screen pointer-events-none transition-all duration-700"
           style={{ backgroundImage: `url('/robot_assembly_blue.png')` }}
         ></div>
 
@@ -276,9 +276,43 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         ></div>
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent pointer-events-none"></div>
 
-        {/* --- 20+ ANIMATED ROBOTIC MECHANICAL ARMS & LASERS OVERLAYS --- */}
-        
-        {/* Robotic Arm Left 1 (Laser Welding) */}
+        {/* --- ANIMATED HEAVY BLACK/STEEL ANVIL AT THE BASE --- */}
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-80 h-28 pointer-events-none z-10">
+          {/* Anvil Glow */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-orange-500/40 via-yellow-400/20 to-transparent rounded-full blur-xl transition-opacity duration-300 ${isStriking ? 'opacity-100 animate-pulse' : 'opacity-30'}`}></div>
+          <svg className="w-full h-full overflow-visible drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]" viewBox="0 0 200 80" fill="none">
+            {/* Anvil Horn Left */}
+            <path d="M10 25 L40 25 L40 45 L25 45 Z" fill="#334155" stroke="#000" strokeWidth="3" />
+            {/* Anvil Main Surface */}
+            <rect x="40" y="20" width="120" height="25" rx="3" fill="#1e293b" stroke="#000" strokeWidth="3.5" />
+            <rect x="44" y="23" width="112" height="6" fill="#facc15" opacity={isStriking ? "0.9" : "0.3"} className="transition-opacity" />
+            {/* Anvil Heel Right */}
+            <path d="M160 25 L185 25 L160 45 Z" fill="#334155" stroke="#000" strokeWidth="3" />
+            {/* Anvil Base Stem */}
+            <polygon points="65,45 135,45 150,75 50,75" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
+            <rect x="45" y="72" width="110" height="8" rx="2" fill="#475569" stroke="#000" strokeWidth="2.5" />
+          </svg>
+        </div>
+
+        {/* --- ANIMATED HEAVY HAMMER STRIKING THE ANVIL --- */}
+        <div className={`absolute top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none transition-all duration-150 transform origin-bottom-right ${
+          strikePhase === 1 ? 'rotate-[-35deg] translate-x-[-40px] translate-y-[20px] scale-110' :
+          strikePhase === 2 ? 'rotate-[15deg] translate-x-[10px] translate-y-[80px] scale-125' :
+          strikePhase === 3 ? 'rotate-[-45deg] translate-x-[-60px] translate-y-[10px] scale-110' :
+          strikePhase === 4 ? 'rotate-[20deg] translate-x-[20px] translate-y-[90px] scale-130' :
+          strikePhase === 5 ? 'rotate-[0deg] translate-x-[0px] translate-y-[85px] scale-125' : 'rotate-[-40deg] translate-x-[-80px] translate-y-[-20px]'
+        }`}>
+          <svg className="w-32 h-32 drop-shadow-[0_0_25px_rgba(250,204,21,0.8)]" viewBox="0 0 100 100" fill="none">
+            {/* Hammer Handle */}
+            <rect x="15" y="45" width="50" height="10" rx="3" fill="#78350f" stroke="#000" strokeWidth="2.5" transform="rotate(-30 40 50)" />
+            {/* Heavy Forging Hammer Head */}
+            <rect x="45" y="15" width="35" height="30" rx="4" fill="#facc15" stroke="#000" strokeWidth="3.5" />
+            <rect x="48" y="18" width="29" height="8" fill="#ffffff" />
+            <path d="M80 15 L92 22 L92 38 L80 45 Z" fill="#ca8a04" stroke="#000" strokeWidth="3" />
+          </svg>
+        </div>
+
+        {/* Robotic Arm Left (Laser Welding) */}
         <div className={`absolute top-4 left-6 z-20 pointer-events-none transition-all duration-500 transform ${
           isStriking ? 'translate-x-12 translate-y-8 rotate-12 scale-110' : '-translate-x-4 translate-y-0 rotate-0'
         }`}>
@@ -292,7 +326,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           </div>
         </div>
 
-        {/* Robotic Arm Right 1 (Plasma Torch) */}
+        {/* Robotic Arm Right (Plasma Torch) */}
         <div className={`absolute top-4 right-6 z-20 pointer-events-none transition-all duration-500 transform ${
           isStriking ? '-translate-x-12 translate-y-8 -rotate-12 scale-110' : 'translate-x-4 translate-y-0 rotate-0'
         }`}>
@@ -306,30 +340,11 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           </div>
         </div>
 
-        {/* Robotic Arm Bottom Left (Hydraulic Claw) */}
-        <div className={`absolute bottom-6 left-10 z-20 pointer-events-none transition-all duration-500 transform ${
-          isStriking ? 'translate-x-10 -translate-y-8 -rotate-45' : 'translate-x-0 translate-y-0 rotate-0'
-        }`}>
-          <div className="w-20 h-5 bg-zinc-900 border-2 border-amber-500 rounded-lg flex items-center justify-around px-1 shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-            <div className="w-2 h-3 bg-amber-400 rounded-sm animate-ping"></div>
-            <div className="w-2 h-3 bg-amber-400 rounded-sm animate-ping"></div>
-          </div>
-        </div>
-
-        {/* Robotic Arm Bottom Right (Micro-Assembler Screwdriver) */}
-        <div className={`absolute bottom-6 right-10 z-20 pointer-events-none transition-all duration-500 transform ${
-          isStriking ? '-translate-x-10 -translate-y-8 rotate-45' : 'translate-x-0 translate-y-0 rotate-0'
-        }`}>
-          <div className="w-20 h-5 bg-zinc-900 border-2 border-emerald-400 rounded-lg flex items-center justify-around px-1 shadow-[0_0_15px_rgba(52,211,153,0.5)]">
-            <Activity className="w-4 h-4 text-emerald-300 animate-pulse" />
-          </div>
-        </div>
-
         {/* Overhead Spotlights Scan Lines */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-transparent pointer-events-none animate-pulse"></div>
 
-        {/* Stage Backdrop Effect */}
-        <div className="flex-1 flex flex-col items-center justify-center relative min-h-[320px] w-full z-10">
+        {/* Stage Backdrop Effect & Robot Resting on Anvil */}
+        <div className="flex-1 flex flex-col items-center justify-center relative min-h-[340px] w-full z-10 pb-6">
           
           {/* Variant-specific Glow backdrop */}
           <div className={`absolute w-64 h-64 rounded-full transition-all duration-300 pointer-events-none ${
@@ -361,30 +376,30 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             );
           })}
 
-          {/* Large Animated Robot Variant with 5 Strike Movement Phases */}
+          {/* Large Animated Robot Resting on top of the Anvil */}
           <div className={`relative transition-all duration-200 z-20 ${
-            strikePhase === 1 ? 'scale-125 rotate-6 translate-y-2' :
-            strikePhase === 2 ? 'scale-130 -rotate-6 translate-y-4' :
-            strikePhase === 3 ? 'scale-140 rotate-12 -translate-y-2' :
-            strikePhase === 4 ? 'scale-135 -rotate-12 translate-y-3' :
-            strikePhase === 5 ? 'scale-150 rotate-0 translate-y-5' : 'scale-100 rotate-0'
+            strikePhase === 1 ? 'scale-115 rotate-6 translate-y-2' :
+            strikePhase === 2 ? 'scale-120 -rotate-6 translate-y-4' :
+            strikePhase === 3 ? 'scale-125 rotate-12 -translate-y-2' :
+            strikePhase === 4 ? 'scale-120 -rotate-12 translate-y-3' :
+            strikePhase === 5 ? 'scale-130 rotate-0 translate-y-5' : 'scale-100 rotate-0'
           }`}>
-            <RobotForgeIcon className={`w-48 h-48 transition-all duration-200 ${
+            <RobotForgeIcon className={`w-44 h-44 transition-all duration-200 ${
               isStriking ? 'drop-shadow-[0_0_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_0_20px_rgba(0,240,255,0.4)]'
             }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
 
           {/* Interactive Mechanical Status Indicator Bar */}
-          <div className="mt-6 font-mono text-center z-20">
+          <div className="mt-4 font-mono text-center z-20">
             {isStriking ? (
               <div className="flex items-center gap-3 bg-yellow-400 text-black font-black px-5 py-2 rounded-lg uppercase tracking-wider animate-bounce border-2 border-black text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                 <Flame className="w-5 h-5 animate-pulse text-red-600" />
-                <span>ФАЗА СБОРКИ #{strikePhase}/5: КОВКА & WELDING МОДЕЛИ {currentVariantData.id}...</span>
+                <span>УДАР МОЛОТА И КОВКА НА НАКОВАЛЬНЕ #{strikePhase}/5: МОДЕЛЬ {currentVariantData.id}...</span>
               </div>
             ) : (
               <div className="bg-black/70 border border-cyan-400/40 px-4 py-1.5 rounded-full text-cyan-300 text-xs font-mono flex items-center justify-center gap-2 backdrop-blur-md">
                 <Radio className="w-4 h-4 text-cyan-400 animate-pulse" />
-                <span>20+ АНИМАЦИЙ СБОРКИ В ВКЛЮЧЕННОМ РЕЖИМЕ. НАЖМИТЕ &quot;СБОРКА РОБОТА&quot;</span>
+                <span>НАКОВАЛЬНЯ И КУЗНЕЧНЫЙ МОЛОТ ГОТОВЫ. НАЖМИТЕ &quot;СКОКАТЬ НА НАКОВАЛЬНЕ&quot;</span>
               </div>
             )}
           </div>
@@ -393,8 +408,8 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         {/* Forging Control Panel */}
         <div className="w-full lg:w-80 bg-black/85 border-2 border-yellow-400/60 p-5 rounded-lg z-20 font-mono shadow-2xl backdrop-blur-md">
           <h3 className="text-yellow-400 font-black text-sm uppercase tracking-widest border-b border-yellow-400/30 pb-2 mb-4 flex items-center justify-between">
-            <span>Конфигурация Бота</span>
-            <span className="text-xs bg-yellow-400 text-black px-1.5 py-0.5 font-bold">30 Моделей</span>
+            <span>Панель Кузницы</span>
+            <span className="text-xs bg-yellow-400 text-black px-1.5 py-0.5 font-bold">Наковальня</span>
           </h3>
 
           <div className="space-y-4 text-xs">
@@ -449,7 +464,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
               }`}
             >
               <RefreshCw className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
-              <span>{isStriking ? `Сборка (${strikePhase}/5)...` : 'Сборка AI Робота'}</span>
+              <span>{isStriking ? `Удар молота (${strikePhase}/5)...` : 'Сковать на Наковальне'}</span>
             </button>
           </div>
         </div>
@@ -463,7 +478,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
               <RobotForgeIcon className="w-8 h-8" variant={lastForgedBot.variantId} animated={true} />
             </div>
             <div>
-              <div className="font-black text-black text-sm uppercase">Успешно Скован Новый ИИ-Бот!</div>
+              <div className="font-black text-black text-sm uppercase">Успешно Скован Новый ИИ-Бот На Наковальне!</div>
               <div className="font-mono text-xs text-gray-900">
                 <strong>{lastForgedBot.name}</strong> • {lastForgedBot.strategy} • Ожидаемый PnL: <span className="font-bold">{lastForgedBot.pnl}</span>
               </div>
