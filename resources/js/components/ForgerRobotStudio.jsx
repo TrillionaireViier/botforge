@@ -321,15 +321,15 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
 
         {/* --- 3D ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING TO THE LEFT OF THE ANVIL --- */}
         <div 
-          className="absolute top-12 left-16 sm:left-24 md:left-32 z-20 pointer-events-none transition-all duration-300"
-          style={{ transform: "rotateY(15deg) translateZ(-20px)" }}
+          className="absolute top-20 left-[18%] sm:left-[26%] md:left-[32%] z-20 pointer-events-none transition-all duration-300"
+          style={{ transform: "rotateY(15deg) translateZ(-10px)" }}
         >
           <div className="relative">
             {/* 3D Blacksmith Robot Back Energy Aura */}
-            <div className={`absolute -inset-6 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 blur-xl transition-opacity ${isStriking ? 'opacity-90 animate-pulse' : 'opacity-25'}`}></div>
+            <div className={`absolute -inset-4 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 blur-lg transition-opacity ${isStriking ? 'opacity-90 animate-pulse' : 'opacity-25'}`}></div>
             
-            {/* Heavy Blacksmith Robot SVG standing to the left */}
-            <svg className="w-36 h-40 drop-shadow-[0_15px_30px_rgba(0,0,0,0.95)] overflow-visible" viewBox="0 0 140 160" fill="none">
+            {/* Heavy Blacksmith Robot SVG standing right next to anvil */}
+            <svg className="w-28 h-32 drop-shadow-[0_12px_24px_rgba(0,0,0,0.95)] overflow-visible" viewBox="0 0 140 160" fill="none">
               {/* Robot Legs & Stance */}
               <rect x="30" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
               <rect x="84" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
@@ -435,18 +435,18 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             );
           })}
 
-          {/* Large Animated Robot Lying Down Horizontally Flat Across the 3D Anvil Deck */}
+          {/* Animated Target Robot Lying Down Horizontally Flat Across the 3D Anvil Deck */}
           <div 
-            className={`relative transition-all duration-200 z-20 translate-y-10 ${
-              strikePhase === 1 ? 'rotate-[85deg] scale-105 translate-y-12' :
-              strikePhase === 2 ? 'rotate-[95deg] scale-110 translate-y-14' :
-              strikePhase === 3 ? 'rotate-[82deg] scale-108 translate-y-10' :
-              strikePhase === 4 ? 'rotate-[98deg] scale-112 translate-y-15' :
-              strikePhase === 5 ? 'rotate-[90deg] scale-115 translate-y-12' : 'rotate-[90deg] scale-100'
+            className={`relative transition-all duration-200 z-20 translate-y-12 ${
+              strikePhase === 1 ? 'rotate-[85deg] scale-105 translate-y-14' :
+              strikePhase === 2 ? 'rotate-[95deg] scale-110 translate-y-16' :
+              strikePhase === 3 ? 'rotate-[82deg] scale-108 translate-y-13' :
+              strikePhase === 4 ? 'rotate-[98deg] scale-112 translate-y-17' :
+              strikePhase === 5 ? 'rotate-[90deg] scale-115 translate-y-14' : 'rotate-[90deg] scale-100'
             }`}
             style={{ transformStyle: "preserve-3d", transform: "rotateX(20deg) rotateZ(90deg) translateZ(25px)" }}
           >
-            <RobotForgeIcon className={`w-44 h-44 transition-all duration-200 ${
+            <RobotForgeIcon className={`w-32 h-32 transition-all duration-200 ${
               isStriking ? 'drop-shadow-[0_20px_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_15px_30px_rgba(0,240,255,0.6)]'
             }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
