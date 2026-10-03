@@ -319,16 +319,16 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         {/* Overhead Spotlights Scan Lines */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-transparent pointer-events-none animate-pulse"></div>
 
-        {/* --- 3D ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING BEHIND THE ANVIL --- */}
+        {/* --- 3D ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING TO THE LEFT OF THE ANVIL --- */}
         <div 
-          className="absolute top-14 left-1/2 -translate-x-1/2 z-10 pointer-events-none transition-all duration-300"
-          style={{ transform: "translateX(-50%) translateZ(-40px)" }}
+          className="absolute top-12 left-16 sm:left-24 md:left-32 z-20 pointer-events-none transition-all duration-300"
+          style={{ transform: "rotateY(15deg) translateZ(-20px)" }}
         >
           <div className="relative">
             {/* 3D Blacksmith Robot Back Energy Aura */}
             <div className={`absolute -inset-6 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 blur-xl transition-opacity ${isStriking ? 'opacity-90 animate-pulse' : 'opacity-25'}`}></div>
             
-            {/* Heavy Blacksmith Robot SVG standing behind */}
+            {/* Heavy Blacksmith Robot SVG standing to the left */}
             <svg className="w-36 h-40 drop-shadow-[0_15px_30px_rgba(0,0,0,0.95)] overflow-visible" viewBox="0 0 140 160" fill="none">
               {/* Robot Legs & Stance */}
               <rect x="30" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
@@ -349,15 +349,15 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
               <polygon points="42,12 28,-4 48,12" fill="#eab308" stroke="#000" strokeWidth="2.5" />
               <polygon points="98,12 112,-4 92,12" fill="#eab308" stroke="#000" strokeWidth="2.5" />
 
-              {/* Both Arms Overhead Holding Big Forging Hammer Swinging Down from Behind */}
+              {/* Both Arms Overhead Holding Big Forging Hammer Swinging Down from Left onto Anvil */}
               <g 
                 className="transition-transform duration-100 ease-out origin-[70px_60px]"
                 style={{
                   transform: strikePhase === 1 ? 'rotate(-60deg) translateY(-20px) rotateX(15deg)' : // High backswing
-                             strikePhase === 2 ? 'rotate(15deg) translateY(35px) scale(1.1) rotateX(-10deg)' :   // Powerful downward slam
+                             strikePhase === 2 ? 'rotate(35deg) translateY(45px) scale(1.15) rotateX(-10deg)' :   // Powerful downward slam onto anvil
                              strikePhase === 3 ? 'rotate(-70deg) translateY(-25px) rotateX(20deg)' : // Higher backswing
-                             strikePhase === 4 ? 'rotate(20deg) translateY(40px) scale(1.15) rotateX(-15deg)' :   // Hardest slam
-                             strikePhase === 5 ? 'rotate(10deg) translateY(30px) rotateX(0deg)' :   // Final impact
+                             strikePhase === 4 ? 'rotate(40deg) translateY(50px) scale(1.2) rotateX(-15deg)' :   // Hardest slam
+                             strikePhase === 5 ? 'rotate(25deg) translateY(35px) rotateX(0deg)' :   // Final impact
                              'rotate(-40deg) translateY(-10px)'                      // Ready stance
                 }}
               >
@@ -397,14 +397,12 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
                 <rect x="35" y="-85" width="70" height="42" rx="7" fill="#facc15" stroke="#000" strokeWidth="4.5" />
                 <rect x="42" y="-78" width="56" height="12" fill="#ffffff" />
                 <path d="M105 -85 L124 -72 L124 -50 L105 -43 Z" fill="#ca8a04" stroke="#000" strokeWidth="3.5" />
-                <rect x="42" y="-78" width="56" height="12" fill="#ffffff" />
-                <path d="M105 -85 L120 -72 L120 -50 L105 -43 Z" fill="#ca8a04" stroke="#000" strokeWidth="3.5" />
               </g>
             </svg>
           </div>
         </div>
 
-        {/* Stage Backdrop Effect & Robot Resting on Anvil */}
+        {/* Stage Backdrop Effect & Robot Resting Lying Down on Anvil */}
         <div className="flex-1 flex flex-col items-center justify-center relative min-h-[340px] w-full z-10 pb-6">
           
           {/* Variant-specific 3D Volumetric Glow backdrop */}
@@ -437,18 +435,18 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             );
           })}
 
-          {/* Large Animated Robot Standing Upright directly on Top Deck of the 3D Anvil */}
+          {/* Large Animated Robot Lying Down Horizontally Flat Across the 3D Anvil Deck */}
           <div 
-            className={`relative transition-all duration-200 z-20 translate-y-6 ${
-              strikePhase === 1 ? 'translate-y-4 scale-105 rotate-[-3deg]' :
-              strikePhase === 2 ? 'translate-y-8 scale-110 rotate-[4deg]' :
-              strikePhase === 3 ? 'translate-y-3 scale-108 rotate-[-5deg]' :
-              strikePhase === 4 ? 'translate-y-9 scale-112 rotate-[6deg]' :
-              strikePhase === 5 ? 'translate-y-7 scale-115 rotate-[0deg]' : 'scale-100'
+            className={`relative transition-all duration-200 z-20 translate-y-10 ${
+              strikePhase === 1 ? 'rotate-[85deg] scale-105 translate-y-12' :
+              strikePhase === 2 ? 'rotate-[95deg] scale-110 translate-y-14' :
+              strikePhase === 3 ? 'rotate-[82deg] scale-108 translate-y-10' :
+              strikePhase === 4 ? 'rotate-[98deg] scale-112 translate-y-15' :
+              strikePhase === 5 ? 'rotate-[90deg] scale-115 translate-y-12' : 'rotate-[90deg] scale-100'
             }`}
-            style={{ transformStyle: "preserve-3d", transform: "rotateX(0deg) translateZ(40px)" }}
+            style={{ transformStyle: "preserve-3d", transform: "rotateX(20deg) rotateZ(90deg) translateZ(25px)" }}
           >
-            <RobotForgeIcon className={`w-48 h-48 transition-all duration-200 ${
+            <RobotForgeIcon className={`w-44 h-44 transition-all duration-200 ${
               isStriking ? 'drop-shadow-[0_20px_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_15px_30px_rgba(0,240,255,0.6)]'
             }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
