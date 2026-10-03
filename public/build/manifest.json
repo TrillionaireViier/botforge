@@ -1,16 +1,16 @@
 {
   "resources/js/index.css": {
-    "file": "assets/index-BI86-LzS.css",
+    "file": "assets/index-jy7WJPgO.css",
     "src": "resources/js/index.css",
     "isEntry": true
   },
   "resources/js/main.jsx": {
-    "file": "assets/main-BlGzcsct.js",
+    "file": "assets/main-Bqup2qjI.js",
     "name": "main",
     "src": "resources/js/main.jsx",
     "isEntry": true,
     "css": [
-      "assets/index-BI86-LzS.css"
+      "assets/index-jy7WJPgO.css"
     ]
   }
 }

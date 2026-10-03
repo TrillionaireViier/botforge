@@ -294,13 +294,13 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           </svg>
         </div>
 
-        {/* --- ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING BESIDE THE ANVIL HOLDING THE HAMMER --- */}
-        <div className={`absolute bottom-20 right-6 md:right-16 z-30 pointer-events-none transition-all duration-200 transform origin-bottom ${
-          strikePhase === 1 ? 'translate-x-[-40px] -rotate-12 scale-110' :
-          strikePhase === 2 ? 'translate-x-[-110px] translate-y-6 rotate-12 scale-125' :
-          strikePhase === 3 ? 'translate-x-[-60px] -rotate-20 scale-115' :
-          strikePhase === 4 ? 'translate-x-[-120px] translate-y-8 rotate-18 scale-130' :
-          strikePhase === 5 ? 'translate-x-[-100px] translate-y-7 rotate-15 scale-125' : 'rotate-0 translate-x-0 scale-100'
+        {/* --- ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING DIRECTLY BESIDE THE ANVIL --- */}
+        <div className={`absolute bottom-14 left-[58%] z-30 pointer-events-none transition-all duration-200 transform origin-bottom-left ${
+          strikePhase === 1 ? 'translate-x-[-120px] translate-y-[-10px] -rotate-15 scale-110' :
+          strikePhase === 2 ? 'translate-x-[-180px] translate-y-4 rotate-15 scale-125' :
+          strikePhase === 3 ? 'translate-x-[-140px] translate-y-[-15px] -rotate-25 scale-115' :
+          strikePhase === 4 ? 'translate-x-[-190px] translate-y-6 rotate-20 scale-130' :
+          strikePhase === 5 ? 'translate-x-[-175px] translate-y-5 rotate-18 scale-125' : 'rotate-0 translate-x-0 scale-100'
         }`}>
           <div className="relative">
             {/* Blacksmith Robot Back Sparks / Energy Aura */}
@@ -399,81 +399,21 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
 
           {/* Interactive Mechanical Status Indicator Bar */}
           <div className="mt-4 font-mono text-center z-20">
-            {isStriking ? (
-              <div className="flex items-center gap-3 bg-yellow-400 text-black font-black px-5 py-2 rounded-lg uppercase tracking-wider animate-bounce border-2 border-black text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <Flame className="w-5 h-5 animate-pulse text-red-600" />
-                <span>УДАР МОЛОТА И КОВКА НА НАКОВАЛЬНЕ #{strikePhase}/5: МОДЕЛЬ {currentVariantData.id}...</span>
-              </div>
-            ) : (
-              <div className="bg-black/70 border border-cyan-400/40 px-4 py-1.5 rounded-full text-cyan-300 text-xs font-mono flex items-center justify-center gap-2 backdrop-blur-md">
-                <Radio className="w-4 h-4 text-cyan-400 animate-pulse" />
-                <span>НАКОВАЛЬНЯ И КУЗНЕЧНЫЙ МОЛОТ ГОТОВЫ. НАЖМИТЕ &quot;СКОКАТЬ НА НАКОВАЛЬНЕ&quot;</span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Forging Control Panel */}
-        <div className="w-full lg:w-80 bg-black/85 border-2 border-yellow-400/60 p-5 rounded-lg z-20 font-mono shadow-2xl backdrop-blur-md">
-          <h3 className="text-yellow-400 font-black text-sm uppercase tracking-widest border-b border-yellow-400/30 pb-2 mb-4 flex items-center justify-between">
-            <span>Панель Кузницы</span>
-            <span className="text-xs bg-yellow-400 text-black px-1.5 py-0.5 font-bold">Наковальня</span>
-          </h3>
-
-          <div className="space-y-4 text-xs">
-            <div>
-              <label className="text-gray-400 block mb-1">Имя Модели:</label>
-              <input
-                type="text"
-                placeholder={currentVariantData.name}
-                value={botNameInput}
-                onChange={(e) => setBotNameInput(e.target.value)}
-                className="w-full bg-gray-900 border border-gray-700 text-white px-3 py-2 rounded focus:outline-none focus:border-yellow-400 font-mono"
-              />
-            </div>
-
-            <div>
-              <label className="text-gray-400 block mb-1">Стратегия Торговли:</label>
-              <select
-                value={strategySelect}
-                onChange={(e) => setStrategySelect(e.target.value)}
-                className="w-full bg-gray-900 border border-gray-700 text-white px-3 py-2 rounded focus:outline-none focus:border-yellow-400 font-mono"
+            {/* Large Prominent Action Button directly inside stage */}
+            <div className="mt-4">
+              <button
+                onClick={forgeNewRobot}
+                disabled={isStriking}
+                className={`px-8 py-3 font-black uppercase text-sm border-2 border-black transition-all flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
+                  isStriking 
+                    ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
+                    : 'bg-yellow-400 hover:bg-yellow-300 text-black active:translate-y-0.5'
+                }`}
               >
-                <option value="Grid Spot">Grid Spot (Сетка)</option>
-                <option value="Futures Scalp">Futures Scalp (Скальпинг)</option>
-                <option value="DCA Accumulator">DCA Accumulator (Накопление)</option>
-                <option value="HFT Arbitrage">HFT Arbitrage (Арбитраж)</option>
-                <option value="Martingale Multiplier">Martingale Multiplier</option>
-              </select>
+                <RefreshCw className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
+                <span>{isStriking ? `Удар кузнеца (${strikePhase}/5)...` : 'Сковать Робота на Наковальне'}</span>
+              </button>
             </div>
-
-            <div>
-              <label className="text-gray-400 block mb-1">Торговая Пара:</label>
-              <select
-                value={pairSelect}
-                onChange={(e) => setPairSelect(e.target.value)}
-                className="w-full bg-gray-900 border border-gray-700 text-white px-3 py-2 rounded focus:outline-none focus:border-yellow-400 font-mono"
-              >
-                <option value="BTC/USDT">BTC/USDT</option>
-                <option value="ETH/USDT">ETH/USDT</option>
-                <option value="SOL/USDT">SOL/USDT</option>
-                <option value="AVAX/USDT">AVAX/USDT</option>
-                <option value="XRP/USDT">XRP/USDT</option>
-              </select>
-            </div>
-
-            <button
-              onClick={forgeNewRobot}
-              disabled={isStriking}
-              className={`w-full py-3.5 mt-2 font-black uppercase text-sm border-2 border-black transition-all flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
-                isStriking 
-                  ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
-                  : 'bg-yellow-400 hover:bg-yellow-300 text-black active:translate-y-0.5'
-              }`}
-            >
-              <RefreshCw className={`w-5 h-5 ${isStriking ? 'animate-spin' : ''}`} />
-              <span>{isStriking ? `Удар молота (${strikePhase}/5)...` : 'Сковать на Наковальне'}</span>
-            </button>
           </div>
         </div>
       </div>
