@@ -348,34 +348,6 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           </div>
         </div>
 
-        {/* Robotic Arm Left (Laser Welding) */}
-        <div className={`absolute top-4 left-6 z-20 pointer-events-none transition-all duration-500 transform ${
-          isStriking ? 'translate-x-12 translate-y-8 rotate-12 scale-110' : '-translate-x-4 translate-y-0 rotate-0'
-        }`}>
-          <div className="flex items-center gap-1">
-            <div className="w-16 h-4 bg-slate-800 border-2 border-cyan-400 rounded-r-lg shadow-[0_0_15px_rgba(0,240,255,0.6)] flex items-center justify-end px-1">
-              <Zap className="w-3 h-3 text-cyan-300 animate-spin" />
-            </div>
-            {isStriking && (
-              <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-transparent animate-pulse shadow-[0_0_20px_#00f0ff]"></div>
-            )}
-          </div>
-        </div>
-
-        {/* Robotic Arm Right (Plasma Torch) */}
-        <div className={`absolute top-4 right-6 z-20 pointer-events-none transition-all duration-500 transform ${
-          isStriking ? '-translate-x-12 translate-y-8 -rotate-12 scale-110' : 'translate-x-4 translate-y-0 rotate-0'
-        }`}>
-          <div className="flex items-center gap-1 flex-row-reverse">
-            <div className="w-16 h-4 bg-slate-800 border-2 border-yellow-400 rounded-l-lg shadow-[0_0_15px_rgba(250,204,21,0.6)] flex items-center justify-start px-1">
-              <Flame className="w-3 h-3 text-yellow-300 animate-bounce" />
-            </div>
-            {isStriking && (
-              <div className="w-32 h-1 bg-gradient-to-l from-yellow-400 to-transparent animate-pulse shadow-[0_0_20px_#facc15]"></div>
-            )}
-          </div>
-        </div>
-
         {/* Overhead Spotlights Scan Lines */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-transparent pointer-events-none animate-pulse"></div>
 
