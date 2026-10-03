@@ -308,64 +308,66 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
           </svg>
         </div>
 
-        {/* --- ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING BESIDE THE ANVIL --- */}
-        <div className="absolute bottom-10 left-[62%] md:left-[64%] z-30 pointer-events-none transition-all duration-300">
+        {/* Overhead Spotlights Scan Lines */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-transparent pointer-events-none animate-pulse"></div>
+
+        {/* --- ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING BEHIND THE ANVIL & TARGET ROBOT --- */}
+        <div className="absolute top-12 left-1/2 -translate-x-1/2 z-10 pointer-events-none transition-all duration-300">
           <div className="relative">
             {/* Blacksmith Robot Back Energy Glow */}
-            <div className={`absolute -inset-4 rounded-full bg-gradient-to-r from-amber-500 to-red-600 blur-md transition-opacity ${isStriking ? 'opacity-90 animate-pulse' : 'opacity-20'}`}></div>
+            <div className={`absolute -inset-6 rounded-full bg-gradient-to-r from-amber-500 to-red-600 blur-xl transition-opacity ${isStriking ? 'opacity-90 animate-pulse' : 'opacity-20'}`}></div>
             
-            {/* Heavy Blacksmith Robot SVG */}
-            <svg className="w-40 h-48 drop-shadow-[0_12px_24px_rgba(0,0,0,0.95)] overflow-visible" viewBox="0 0 120 140" fill="none">
+            {/* Heavy Blacksmith Robot SVG standing behind */}
+            <svg className="w-52 h-60 drop-shadow-[0_12px_24px_rgba(0,0,0,0.95)] overflow-visible" viewBox="0 0 140 160" fill="none">
               {/* Robot Legs & Stance */}
-              <rect x="25" y="95" width="22" height="35" rx="4" fill="#0f172a" stroke="#000" strokeWidth="3" />
-              <rect x="73" y="95" width="22" height="35" rx="4" fill="#0f172a" stroke="#000" strokeWidth="3" />
-              <rect x="20" y="125" width="30" height="12" rx="3" fill="#334155" stroke="#000" strokeWidth="3" />
-              <rect x="70" y="125" width="30" height="12" rx="3" fill="#334155" stroke="#000" strokeWidth="3" />
+              <rect x="30" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
+              <rect x="84" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
               
               {/* Robot Heavy Mechanical Torso */}
-              <rect x="22" y="45" width="76" height="55" rx="8" fill="#1e293b" stroke="#000" strokeWidth="4" />
-              <rect x="35" y="55" width="50" height="25" rx="4" fill="#facc15" stroke="#000" strokeWidth="3" />
-              <circle cx="60" cy="67.5" r="8" fill="#ef4444" className={isStriking ? "animate-ping" : ""} />
-              <circle cx="60" cy="67.5" r="5" fill="#ffffff" />
+              <rect x="22" y="50" width="96" height="65" rx="10" fill="#1e293b" stroke="#000" strokeWidth="4.5" />
+              <rect x="38" y="62" width="64" height="30" rx="5" fill="#facc15" stroke="#000" strokeWidth="3.5" />
+              <circle cx="70" cy="77" r="10" fill="#ef4444" className={isStriking ? "animate-ping" : ""} />
+              <circle cx="70" cy="77" r="6" fill="#ffffff" />
               
               {/* Robot Helmet & Visor */}
-              <rect x="36" y="10" width="48" height="38" rx="6" fill="#090d16" stroke="#000" strokeWidth="4" />
-              <rect x="42" y="20" width="36" height="12" rx="3" fill="#00f0ff" stroke="#000" strokeWidth="2" />
-              <circle cx="50" cy="26" r="3" fill="#ffffff" />
-              <circle cx="70" cy="26" r="3" fill="#ffffff" />
+              <rect x="42" y="10" width="56" height="44" rx="8" fill="#090d16" stroke="#000" strokeWidth="4.5" />
+              <rect x="48" y="22" width="44" height="15" rx="4" fill="#00f0ff" stroke="#000" strokeWidth="2.5" />
+              <circle cx="58" cy="29.5" r="4" fill="#ffffff" />
+              <circle cx="82" cy="29.5" r="4" fill="#ffffff" />
               {/* Blacksmith Horns */}
-              <polygon points="36,12 24,0 40,12" fill="#eab308" stroke="#000" strokeWidth="2" />
-              <polygon points="84,12 96,0 80,12" fill="#eab308" stroke="#000" strokeWidth="2" />
+              <polygon points="42,12 28,-4 48,12" fill="#eab308" stroke="#000" strokeWidth="2.5" />
+              <polygon points="98,12 112,-4 92,12" fill="#eab308" stroke="#000" strokeWidth="2.5" />
 
-              {/* Arm & Hammer Pivot Assembly - Realistic Backswing and Downward Impact Strike */}
+              {/* Both Arms Overhead Holding Big Forging Hammer Swinging Down from Behind */}
               <g 
-                className="transition-transform duration-100 ease-out origin-[25px_55px]"
+                className="transition-transform duration-100 ease-out origin-[70px_60px]"
                 style={{
-                  transform: strikePhase === 1 ? 'rotate(-65deg)' : // Backswing high up
-                             strikePhase === 2 ? 'rotate(38deg)' :   // Heavy impact down on target
-                             strikePhase === 3 ? 'rotate(-75deg)' : // Higher backswing
-                             strikePhase === 4 ? 'rotate(42deg)' :   // Harder impact down
-                             strikePhase === 5 ? 'rotate(35deg)' :   // Final impact
-                             'rotate(-20deg)'                       // Ready resting pose
+                  transform: strikePhase === 1 ? 'rotate(-60deg) translateY(-20px)' : // High backswing
+                             strikePhase === 2 ? 'rotate(15deg) translateY(35px) scale(1.1)' :   // Powerful downward slam
+                             strikePhase === 3 ? 'rotate(-70deg) translateY(-25px)' : // Higher backswing
+                             strikePhase === 4 ? 'rotate(20deg) translateY(40px) scale(1.15)' :   // Hardest slam
+                             strikePhase === 5 ? 'rotate(10deg) translateY(30px)' :   // Final impact
+                             'rotate(-40deg) translateY(-10px)'                      // Ready stance
                 }}
               >
-                {/* Shoulder Joint Pivot */}
-                <circle cx="25" cy="55" r="10" fill="#eab308" stroke="#000" strokeWidth="3.5" />
-                {/* Mechanical Arm Segment */}
-                <rect x="-35" y="48" width="45" height="14" rx="5" fill="#475569" stroke="#000" strokeWidth="3.5" />
-                {/* Hammer Handle */}
-                <rect x="-115" y="50" width="90" height="10" rx="3" fill="#78350f" stroke="#000" strokeWidth="3.5" />
-                {/* Forging Hammer Heavy Head */}
-                <rect x="-155" y="32" width="48" height="42" rx="6" fill="#facc15" stroke="#000" strokeWidth="4" />
-                <rect x="-148" y="37" width="36" height="12" fill="#ffffff" />
-                <path d="M-107 32 L-92 42 L-92 64 L-107 74 Z" fill="#ca8a04" stroke="#000" strokeWidth="3" />
+                {/* Shoulder Joints */}
+                <circle cx="20" cy="65" r="11" fill="#eab308" stroke="#000" strokeWidth="4" />
+                <circle cx="120" cy="65" r="11" fill="#eab308" stroke="#000" strokeWidth="4" />
+                
+                {/* Mechanical Arms */}
+                <rect x="10" y="60" width="45" height="16" rx="6" fill="#475569" stroke="#000" strokeWidth="4" transform="rotate(-40 20 65)" />
+                <rect x="85" y="60" width="45" height="16" rx="6" fill="#475569" stroke="#000" strokeWidth="4" transform="rotate(40 120 65)" />
+
+                {/* Big Hammer Long Handle Vertical */}
+                <rect x="64" y="-50" width="12" height="120" rx="4" fill="#78350f" stroke="#000" strokeWidth="4" />
+                {/* Massive Forging Hammer Head */}
+                <rect x="35" y="-85" width="70" height="42" rx="7" fill="#facc15" stroke="#000" strokeWidth="4.5" />
+                <rect x="42" y="-78" width="56" height="12" fill="#ffffff" />
+                <path d="M105 -85 L120 -72 L120 -50 L105 -43 Z" fill="#ca8a04" stroke="#000" strokeWidth="3.5" />
               </g>
             </svg>
           </div>
         </div>
-
-        {/* Overhead Spotlights Scan Lines */}
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-transparent pointer-events-none animate-pulse"></div>
 
         {/* Stage Backdrop Effect & Robot Resting on Anvil */}
         <div className="flex-1 flex flex-col items-center justify-center relative min-h-[340px] w-full z-10 pb-6">
