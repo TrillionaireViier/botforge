@@ -260,45 +260,53 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         </div>
       </div>
 
-      {/* Dynamic Animated Stage with Heavy Steel Anvil Base */}
-      <div className="bg-gray-950 border-4 border-black p-6 md:p-8 rounded-xl text-white mb-8 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[inset_0_0_50px_rgba(0,0,0,0.9)] min-h-[420px]">
-        
+      {/* Main 3D Cyber Forge Stage Box with Volumetric Isometric Perspective */}
+      <div 
+        className="relative mb-8 p-8 border-4 border-black bg-gray-950 overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center min-h-[460px]"
+        style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
+      >
         {/* Layer 1: Cartoon Blue Robotic Assembly Arm Artwork */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-screen pointer-events-none transition-all duration-700"
+          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none transition-all duration-700"
           style={{ backgroundImage: `url('/robot_assembly_blue.png')` }}
         ></div>
 
-        {/* Layer 2: Cartoon Cyber Forge Anvil Background Image */}
+        {/* Layer 2: Cartoon Cyber Forge Anvil Background Image with 3D Depth Tiling */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-luminosity pointer-events-none transition-opacity duration-500"
+          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity pointer-events-none transition-opacity duration-500"
           style={{ backgroundImage: `url('/cartoon_forge.jpg')` }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent pointer-events-none"></div>
 
-        {/* --- ANIMATED HEAVY BLACK/STEEL ANVIL AT THE BASE --- */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-96 h-36 pointer-events-none z-10">
-          {/* Anvil Magma & Plasma Impact Glow */}
-          <div className={`absolute inset-0 bg-gradient-to-t from-red-600/60 via-yellow-400/40 to-transparent rounded-full blur-2xl transition-opacity duration-300 ${isStriking ? 'opacity-100 scale-125 animate-pulse' : 'opacity-40 scale-100'}`}></div>
+        {/* --- 3D ISOMETRIC STEEL ANVIL WITH REALISTIC DEPTH & BEVEL SHADOWS --- */}
+        <div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 w-96 h-40 pointer-events-none z-10 transition-transform duration-200"
+          style={{ transform: "translateX(-50%) rotateX(25deg) rotateY(-5deg) translateZ(10px)" }}
+        >
+          {/* Anvil Magma & 3D Volumetric Lighting Glow */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-red-600/70 via-yellow-400/50 to-transparent rounded-full blur-3xl transition-opacity duration-300 ${isStriking ? 'opacity-100 scale-125 animate-pulse' : 'opacity-40 scale-100'}`}></div>
           
-          <svg className="w-full h-full overflow-visible drop-shadow-[0_15px_30px_rgba(0,0,0,0.95)]" viewBox="0 0 240 100" fill="none">
-            {/* Wooden Base Block */}
-            <rect x="55" y="75" width="130" height="20" rx="4" fill="#451a03" stroke="#000" strokeWidth="4" />
-            <line x1="80" y1="75" x2="80" y2="95" stroke="#78350f" strokeWidth="3" />
-            <line x1="160" y1="75" x2="160" y2="95" stroke="#78350f" strokeWidth="3" />
+          <svg className="w-full h-full overflow-visible drop-shadow-[0_25px_35px_rgba(0,0,0,0.98)]" viewBox="0 0 240 100" fill="none">
+            {/* 3D Wooden Base Block with Isometric Side Panels */}
+            <polygon points="45,75 195,75 205,95 55,95" fill="#290e02" stroke="#000" strokeWidth="3" />
+            <rect x="55" y="75" width="140" height="20" rx="4" fill="#451a03" stroke="#000" strokeWidth="4" />
+            <line x1="80" y1="75" x2="80" y2="95" stroke="#78350f" strokeWidth="3.5" />
+            <line x1="160" y1="75" x2="160" y2="95" stroke="#78350f" strokeWidth="3.5" />
             
-            {/* Anvil Base Foot */}
+            {/* 3D Anvil Base Foot */}
             <polygon points="45,75 195,75 175,55 65,55" fill="#0f172a" stroke="#000" strokeWidth="4" />
+            <polygon points="195,75 205,65 185,45 175,55" fill="#020617" opacity="0.8" />
+
             {/* Anvil Central Waist */}
             <rect x="80" y="38" width="80" height="20" fill="#1e293b" stroke="#000" strokeWidth="4" />
             
-            {/* Anvil Horn Left (Pointed Classic Horn) */}
+            {/* Anvil Horn Left (3D Tapered Bevel Horn) */}
             <path d="M5 20 C25 20 45 22 70 38 L70 20 Z" fill="#334155" stroke="#000" strokeWidth="4" />
-            <path d="M12 23 C28 23 45 25 65 35 Z" fill="#64748b" opacity="0.6" />
+            <path d="M12 23 C28 23 45 25 65 35 Z" fill="#94a3b8" opacity="0.7" />
 
-            {/* Anvil Main Heavy Steel Top Deck */}
+            {/* 3D Anvil Main Heavy Steel Top Deck */}
             <rect x="68" y="14" width="112" height="26" rx="4" fill="#1e293b" stroke="#000" strokeWidth="4" />
-            {/* Glowing Hot Steel Working Surface */}
+            {/* Glowing 3D Hot Steel Working Surface */}
             <rect x="72" y="17" width="104" height="8" rx="2" fill="#facc15" opacity={isStriking ? "1" : "0.5"} className="transition-opacity duration-150" />
             <rect x="74" y="19" width="100" height="3" fill="#ffffff" opacity={isStriking ? "0.9" : "0.2"} />
 
@@ -311,14 +319,17 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         {/* Overhead Spotlights Scan Lines */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-transparent pointer-events-none animate-pulse"></div>
 
-        {/* --- ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING BEHIND THE ANVIL & TARGET ROBOT --- */}
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 pointer-events-none transition-all duration-300">
+        {/* --- 3D ANIMATED BLACKSMITH ROBOT FORGER (Кузнец-Робот) STANDING BEHIND THE ANVIL --- */}
+        <div 
+          className="absolute top-14 left-1/2 -translate-x-1/2 z-10 pointer-events-none transition-all duration-300"
+          style={{ transform: "translateX(-50%) translateZ(-40px)" }}
+        >
           <div className="relative">
-            {/* Blacksmith Robot Back Energy Glow */}
-            <div className={`absolute -inset-4 rounded-full bg-gradient-to-r from-amber-500 to-red-600 blur-md transition-opacity ${isStriking ? 'opacity-80 animate-pulse' : 'opacity-20'}`}></div>
+            {/* 3D Blacksmith Robot Back Energy Aura */}
+            <div className={`absolute -inset-6 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 blur-xl transition-opacity ${isStriking ? 'opacity-90 animate-pulse' : 'opacity-25'}`}></div>
             
             {/* Heavy Blacksmith Robot SVG standing behind */}
-            <svg className="w-32 h-36 drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] overflow-visible" viewBox="0 0 140 160" fill="none">
+            <svg className="w-36 h-40 drop-shadow-[0_15px_30px_rgba(0,0,0,0.95)] overflow-visible" viewBox="0 0 140 160" fill="none">
               {/* Robot Legs & Stance */}
               <rect x="30" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
               <rect x="84" y="105" width="26" height="45" rx="5" fill="#0f172a" stroke="#000" strokeWidth="3.5" />
@@ -342,11 +353,11 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
               <g 
                 className="transition-transform duration-100 ease-out origin-[70px_60px]"
                 style={{
-                  transform: strikePhase === 1 ? 'rotate(-60deg) translateY(-20px)' : // High backswing
-                             strikePhase === 2 ? 'rotate(15deg) translateY(35px) scale(1.1)' :   // Powerful downward slam
-                             strikePhase === 3 ? 'rotate(-70deg) translateY(-25px)' : // Higher backswing
-                             strikePhase === 4 ? 'rotate(20deg) translateY(40px) scale(1.15)' :   // Hardest slam
-                             strikePhase === 5 ? 'rotate(10deg) translateY(30px)' :   // Final impact
+                  transform: strikePhase === 1 ? 'rotate(-60deg) translateY(-20px) rotateX(15deg)' : // High backswing
+                             strikePhase === 2 ? 'rotate(15deg) translateY(35px) scale(1.1) rotateX(-10deg)' :   // Powerful downward slam
+                             strikePhase === 3 ? 'rotate(-70deg) translateY(-25px) rotateX(20deg)' : // Higher backswing
+                             strikePhase === 4 ? 'rotate(20deg) translateY(40px) scale(1.15) rotateX(-15deg)' :   // Hardest slam
+                             strikePhase === 5 ? 'rotate(10deg) translateY(30px) rotateX(0deg)' :   // Final impact
                              'rotate(-40deg) translateY(-10px)'                      // Ready stance
                 }}
               >
@@ -372,9 +383,9 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
         {/* Stage Backdrop Effect & Robot Resting on Anvil */}
         <div className="flex-1 flex flex-col items-center justify-center relative min-h-[340px] w-full z-10 pb-6">
           
-          {/* Variant-specific Glow backdrop */}
-          <div className={`absolute w-64 h-64 rounded-full transition-all duration-300 pointer-events-none ${
-            isStriking ? 'scale-150 blur-3xl opacity-80' : 'scale-100 blur-2xl opacity-35'
+          {/* Variant-specific 3D Volumetric Glow backdrop */}
+          <div className={`absolute w-72 h-72 rounded-full transition-all duration-300 pointer-events-none ${
+            isStriking ? 'scale-150 blur-3xl opacity-90' : 'scale-100 blur-2xl opacity-40'
           } ${
             currentVariantData.skin === 'A' ? 'bg-yellow-500' :
             currentVariantData.skin === 'B' ? 'bg-cyan-400' :
@@ -382,7 +393,7 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             currentVariantData.skin === 'D' ? 'bg-emerald-400' : 'bg-amber-400'
           }`}></div>
 
-          {/* Flying Spark Particles */}
+          {/* Flying Spark 3D Particles */}
           {sparks.map((s) => {
             const rad = (s.angle * Math.PI) / 180;
             const tx = Math.cos(rad) * s.dist;
@@ -391,30 +402,32 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
               <span
                 key={s.id}
                 style={{
-                  transform: `translate(${tx}px, ${ty}px)`,
+                  transform: `translate3d(${tx}px, ${ty}px, 50px)`,
                   transition: 'all 0.45s cubic-bezier(0.1, 0.8, 0.3, 1)',
                   opacity: isStriking ? 1 : 0
                 }}
-                className={`absolute ${s.size} pointer-events-none animate-ping z-30`}
+                className={`absolute ${s.size} pointer-events-none animate-ping z-30 drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]`}
               >
                 {s.symbol}
               </span>
             );
           })}
 
-          {/* Large Animated Robot Lying Down Horizontally on its Side across the Anvil Deck */}
-          <div className={`relative transition-all duration-200 z-20 translate-y-14 ${
-            strikePhase === 1 ? 'rotate-[85deg] scale-105 translate-y-16' :
-            strikePhase === 2 ? 'rotate-[95deg] scale-110 translate-y-18' :
-            strikePhase === 3 ? 'rotate-[82deg] scale-108 translate-y-14' :
-            strikePhase === 4 ? 'rotate-[98deg] scale-112 translate-y-17' :
-            strikePhase === 5 ? 'rotate-[90deg] scale-115 translate-y-16' : 'rotate-[90deg] scale-100'
-          }`}>
+          {/* Large Animated Robot Lying Down Horizontally on its Side across the 3D Anvil Deck */}
+          <div 
+            className={`relative transition-all duration-200 z-20 translate-y-12 ${
+              strikePhase === 1 ? 'rotate-[85deg] scale-105 translate-y-14' :
+              strikePhase === 2 ? 'rotate-[95deg] scale-110 translate-y-16' :
+              strikePhase === 3 ? 'rotate-[82deg] scale-108 translate-y-12' :
+              strikePhase === 4 ? 'rotate-[98deg] scale-112 translate-y-15' :
+              strikePhase === 5 ? 'rotate-[90deg] scale-115 translate-y-14' : 'rotate-[90deg] scale-100'
+            }`}
+            style={{ transformStyle: "preserve-3d", transform: "rotateX(20deg) rotateZ(90deg) translateZ(20px)" }}
+          >
             <RobotForgeIcon className={`w-40 h-40 transition-all duration-200 ${
-              isStriking ? 'drop-shadow-[0_0_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_0_20px_rgba(0,240,255,0.4)]'
+              isStriking ? 'drop-shadow-[0_20px_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_15px_30px_rgba(0,240,255,0.5)]'
             }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
-
 
         </div>
       </div>
