@@ -402,15 +402,15 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
             );
           })}
 
-          {/* Large Animated Robot Resting on top of the Anvil */}
-          <div className={`relative transition-all duration-200 z-20 ${
-            strikePhase === 1 ? 'scale-115 rotate-6 translate-y-2' :
-            strikePhase === 2 ? 'scale-120 -rotate-6 translate-y-4' :
-            strikePhase === 3 ? 'scale-125 rotate-12 -translate-y-2' :
-            strikePhase === 4 ? 'scale-120 -rotate-12 translate-y-3' :
-            strikePhase === 5 ? 'scale-130 rotate-0 translate-y-5' : 'scale-100 rotate-0'
+          {/* Large Animated Robot Lying Down Horizontally Flat on top of the Anvil */}
+          <div className={`relative transition-all duration-200 z-20 translate-y-12 ${
+            strikePhase === 1 ? 'rotate-[-85deg] scale-105 translate-y-14' :
+            strikePhase === 2 ? 'rotate-[-95deg] scale-110 translate-y-16' :
+            strikePhase === 3 ? 'rotate-[-82deg] scale-108 translate-y-12' :
+            strikePhase === 4 ? 'rotate-[-98deg] scale-112 translate-y-15' :
+            strikePhase === 5 ? 'rotate-[-90deg] scale-115 translate-y-14' : 'rotate-[-90deg] scale-100'
           }`}>
-            <RobotForgeIcon className={`w-44 h-44 transition-all duration-200 ${
+            <RobotForgeIcon className={`w-40 h-40 transition-all duration-200 ${
               isStriking ? 'drop-shadow-[0_0_40px_rgba(255,255,255,1)]' : 'drop-shadow-[0_0_20px_rgba(0,240,255,0.4)]'
             }`} isDark={true} variant={currentVariantData.id} animated={true} />
           </div>
