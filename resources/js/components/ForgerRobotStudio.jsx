@@ -361,18 +361,42 @@ export default function ForgerRobotStudio({ autoAnimate = false }) {
                              'rotate(-40deg) translateY(-10px)'                      // Ready stance
                 }}
               >
-                {/* Shoulder Joints */}
-                <circle cx="20" cy="65" r="11" fill="#eab308" stroke="#000" strokeWidth="4" />
-                <circle cx="120" cy="65" r="11" fill="#eab308" stroke="#000" strokeWidth="4" />
+                {/* Heavy Hydraulic Shoulder Power Joints */}
+                <circle cx="15" cy="65" r="14" fill="#ca8a04" stroke="#000" strokeWidth="4.5" />
+                <circle cx="15" cy="65" r="7" fill="#facc15" stroke="#000" strokeWidth="2.5" />
+                <circle cx="125" cy="65" r="14" fill="#ca8a04" stroke="#000" strokeWidth="4.5" />
+                <circle cx="125" cy="65" r="7" fill="#facc15" stroke="#000" strokeWidth="2.5" />
                 
-                {/* Mechanical Arms */}
-                <rect x="10" y="60" width="45" height="16" rx="6" fill="#475569" stroke="#000" strokeWidth="4" transform="rotate(-40 20 65)" />
-                <rect x="85" y="60" width="45" height="16" rx="6" fill="#475569" stroke="#000" strokeWidth="4" transform="rotate(40 120 65)" />
+                {/* Left Bicep Arm Segment */}
+                <path d="M12 60 L38 35 L48 45 L22 70 Z" fill="#334155" stroke="#000" strokeWidth="4" />
+                <line x1="18" y1="62" x2="42" y2="40" stroke="#00f0ff" strokeWidth="3" />
+                {/* Left Elbow Joint */}
+                <circle cx="43" cy="40" r="8" fill="#eab308" stroke="#000" strokeWidth="3" />
+
+                {/* Left Forearm Segment Gripping Hammer Handle */}
+                <path d="M43 40 L65 -10 L75 -5 L51 45 Z" fill="#475569" stroke="#000" strokeWidth="4" />
+                <rect x="58" y="-18" width="18" height="18" rx="4" fill="#ca8a04" stroke="#000" strokeWidth="3.5" />
+
+                {/* Right Bicep Arm Segment */}
+                <path d="M128 60 L102 35 L92 45 L118 70 Z" fill="#334155" stroke="#000" strokeWidth="4" />
+                <line x1="122" y1="62" x2="98" y2="40" stroke="#00f0ff" strokeWidth="3" />
+                {/* Right Elbow Joint */}
+                <circle cx="97" cy="40" r="8" fill="#eab308" stroke="#000" strokeWidth="3" />
+
+                {/* Right Forearm Segment Gripping Hammer Handle */}
+                <path d="M97 40 L75 -10 L65 -5 L89 45 Z" fill="#475569" stroke="#000" strokeWidth="4" />
+                <rect x="64" y="-18" width="18" height="18" rx="4" fill="#ca8a04" stroke="#000" strokeWidth="3.5" />
 
                 {/* Big Hammer Long Handle Vertical */}
                 <rect x="64" y="-50" width="12" height="120" rx="4" fill="#78350f" stroke="#000" strokeWidth="4" />
-                {/* Massive Forging Hammer Head */}
+                {/* Hydraulic Piston Rings on Hammer Shaft */}
+                <rect x="62" y="-25" width="16" height="8" rx="2" fill="#00f0ff" stroke="#000" strokeWidth="2.5" />
+                <rect x="62" y="10" width="16" height="8" rx="2" fill="#00f0ff" stroke="#000" strokeWidth="2.5" />
+
+                {/* Massive Forging Hammer Head with Glowing Plasma Cores */}
                 <rect x="35" y="-85" width="70" height="42" rx="7" fill="#facc15" stroke="#000" strokeWidth="4.5" />
+                <rect x="42" y="-78" width="56" height="12" fill="#ffffff" />
+                <path d="M105 -85 L124 -72 L124 -50 L105 -43 Z" fill="#ca8a04" stroke="#000" strokeWidth="3.5" />
                 <rect x="42" y="-78" width="56" height="12" fill="#ffffff" />
                 <path d="M105 -85 L120 -72 L120 -50 L105 -43 Z" fill="#ca8a04" stroke="#000" strokeWidth="3.5" />
               </g>
