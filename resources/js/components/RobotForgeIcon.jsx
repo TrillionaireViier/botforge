@@ -54,11 +54,16 @@ export default function RobotForgeIcon({
   const isPixel = v === 'B4' || v === 'D5';
 
   return (
-    <svg className={`${className} overflow-visible`} viewBox="0 0 100 100" fill="none">
+    <svg className={`${className} overflow-visible transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`} viewBox="0 0 100 100" fill="none">
       
+      {/* Dynamic Animated Pulse Aura on Logo */}
+      {animated && (
+        <circle cx="50" cy="40" r="38" className="animate-ping opacity-25" fill={eyeColor} />
+      )}
+
       {/* 1. Antennas / Ears / Horns */}
       {isHorns && (
-        <g>
+        <g className={animated ? "animate-bounce" : ""}>
           <polygon points="25,5 33,25 20,25" fill={mainColor} stroke="#000" strokeWidth="3" />
           <polygon points="75,5 67,25 80,25" fill={mainColor} stroke="#000" strokeWidth="3" />
         </g>

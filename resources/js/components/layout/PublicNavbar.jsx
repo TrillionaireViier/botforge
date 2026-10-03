@@ -54,12 +54,19 @@ export default function PublicNavbar() {
       <nav className="border-b-2 border-black bg-white shadow-md">
         <div className="flex items-center justify-between p-4 md:p-5 max-w-7xl mx-auto w-full">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="bg-yellow-300 p-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center group-hover:scale-105 transition-transform">
-              <RobotForgeIcon className="w-8 h-8" animated={true} />
+            <div className="relative">
+              <div className="bg-yellow-300 p-2.5 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 relative overflow-visible">
+                <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-cyan-400 rounded blur-xs opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <RobotForgeIcon className="w-9 h-9 relative z-10 animate-[bounce_3s_infinite]" animated={true} />
+              </div>
+              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-black rounded-full animate-ping"></span>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-black uppercase tracking-widest text-black leading-none">BotForge</span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-600">No-Code Trading Bot Studio</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-2xl font-black uppercase tracking-widest text-black leading-none group-hover:text-yellow-600 transition-colors">BotForge</span>
+                <span className="bg-black text-yellow-300 font-mono text-[9px] font-extrabold px-1.5 py-0.2 border border-black uppercase tracking-wider animate-pulse">PRO</span>
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-600 group-hover:text-black transition-colors">No-Code Trading Bot Studio</span>
             </div>
           </Link>
           
