@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Dark Cyberpunk Rounded Background -->
+  <rect width="64" height="64" rx="16" fill="#090d16" />
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#facc15" stroke-width="3.5" />
+
+  <!-- Anvil Base Body -->
+  <path d="M12 44 H52 L45 34 H54 V30 H20 L12 34 Z" fill="#334155" stroke="#000000" stroke-width="2" />
+  <rect x="22" y="44" width="20" height="12" fill="#1e293b" stroke="#000000" stroke-width="2" />
+  
+  <!-- Hot Glowing Steel Surface -->
+  <rect x="18" y="29" width="34" height="4" rx="2" fill="#facc15" />
+  
+  <!-- Blacksmith Robot Hammer Slamming -->
+  <g transform="rotate(-15 32 20)">
+    <rect x="28" y="-4" width="8" height="36" rx="2" fill="#78350f" stroke="#000000" stroke-width="2" />
+    <rect x="18" y="-12" width="28" height="18" rx="4" fill="#facc15" stroke="#000000" stroke-width="2.5" />
+    <rect x="21" y="-9" width="22" height="5" fill="#ffffff" />
+  </g>
+
+  <!-- Radiant Plasma Sparks -->
+  <circle cx="16" cy="22" r="3" fill="#00f0ff" />
+  <circle cx="48" cy="20" r="3.5" fill="#ef4444" />
+  <circle cx="52" cy="30" r="2.5" fill="#facc15" />
+  <path d="M26 26 L18 16 M38 26 L46 14" stroke="#00f0ff" stroke-width="3" stroke-linecap="round" />
+</svg>
