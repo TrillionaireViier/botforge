@@ -42,14 +42,10 @@ import ApiKeys from "./pages/User/ApiKeys";
 import RiskManagement from "./pages/User/RiskManagement";
 import UserSettings from "./pages/User/UserSettings";
 import Watchlist from "./pages/User/Watchlist";
-
 import PublicNavbar from "./components/layout/PublicNavbar";
 import Footer from "./components/layout/Footer";
-
 import Configurator from "./pages/User/Configurator";
 import Marketplace from "./pages/User/Marketplace";
-
-
 import KYCAML from "./pages/Admin/KYCAML";
 import ABTesting from "./pages/Admin/ABTesting";
 import Affiliate from "./pages/Admin/Affiliate";
@@ -80,13 +76,19 @@ import BotLimits from "./pages/Admin/BotLimits";
 import Events from "./pages/Admin/Events";
 import FileManager from "./pages/Admin/FileManager";
 import Plugins from "./pages/Admin/Plugins";
+import Changelog from "./pages/Public/Changelog";
+import ApiReference from "./pages/Public/ApiReference";
+import Guides from "./pages/Public/Guides";
+import Terms from "./pages/Public/Terms";
+import Privacy from "./pages/Public/Privacy";
+import Cookies from "./pages/Public/Cookies";
+import Contact from "./pages/Public/Contact";
+import LiquidityFvgStrategy from "./pages/Public/LiquidityFvgStrategy";
 
 const ProtectedRoute = ({ children, allowedRole }) => {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
-  if (allowedRole === 'user' && user.role === 'admin') {
-    return children;
-  }
+  if (allowedRole === 'user' && user.role === 'admin') return children;
   if (user.role !== allowedRole) return <Navigate to={user.role === 'admin' ? '/admin' : '/user'} replace />;
   return children;
 };
@@ -99,20 +101,10 @@ const Placeholder = ({ title }) => (
   </div>
 );
 
-import Changelog from "./pages/Public/Changelog";
-import ApiReference from "./pages/Public/ApiReference";
-import Guides from "./pages/Public/Guides";
-import Terms from "./pages/Public/Terms";
-import Privacy from "./pages/Public/Privacy";
-import Cookies from "./pages/Public/Cookies";
-import Contact from "./pages/Public/Contact";
-
 const PublicLayout = ({ children }) => (
   <div className="min-h-screen bg-white flex flex-col font-sans">
     <PublicNavbar />
-    <main className="flex-1 pt-24 pb-12">
-      {children}
-    </main>
+    <main className="flex-1 pt-24 pb-12">{children}</main>
     <Footer />
   </div>
 );
@@ -134,6 +126,7 @@ function AppRoutes() {
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
       <Route path="/cookies" element={<PublicLayout><Cookies /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+      <Route path="/liquidity-fvg-strategy" element={<PublicLayout><LiquidityFvgStrategy /></PublicLayout>} />
 
       <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><AdminLayout /></ProtectedRoute>}>
         <Route index element={<Dashboard />} />
@@ -154,9 +147,6 @@ function AppRoutes() {
         <Route path="export" element={<DataExport />} />
         <Route path="settings" element={<Settings />} />
         <Route path="support" element={<AdminSupport />} />
-        
-        
-        {/* 30 New Admin Placeholder Routes */}
         <Route path="kyc-aml" element={<KYCAML />} />
         <Route path="ab-testing" element={<ABTesting />} />
         <Route path="affiliate" element={<Affiliate />} />
@@ -187,7 +177,6 @@ function AppRoutes() {
         <Route path="events" element={<Events />} />
         <Route path="file-manager" element={<FileManager />} />
         <Route path="plugins" element={<Plugins />} />
-
       </Route>
 
       <Route path="/user" element={<ProtectedRoute allowedRole="user"><UserLayout /></ProtectedRoute>}>
@@ -218,12 +207,9 @@ function AppRoutes() {
 function App() {
   const currentPath = window.location.pathname;
   const isAppPrefix = currentPath.startsWith('/app');
-  
   return (
     <Router basename={isAppPrefix ? "/app" : "/"}>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
+      <AuthProvider><AppRoutes /></AuthProvider>
     </Router>
   );
 }
