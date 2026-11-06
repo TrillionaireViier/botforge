@@ -23,3 +23,29 @@
   border: 1px solid #1e293b; /* border-slate-800 */
   border-radius: 1rem;
 }
+
+/* The robot's inline transform included rotateZ(90deg), which laid it on its side.
+   Override it so the robot stays upright and bounces vertically during each strike. */
+div[class*="rotate-[85deg]"] {
+  transform: rotateX(8deg) translateY(56px) translateZ(25px) scale(1.05) !important;
+}
+
+div[class*="rotate-[95deg]"] {
+  transform: rotateX(8deg) translateY(64px) translateZ(25px) scale(1.1) !important;
+}
+
+div[class*="rotate-[82deg]"] {
+  transform: rotateX(8deg) translateY(52px) translateZ(25px) scale(1.08) !important;
+}
+
+div[class*="rotate-[98deg]"] {
+  transform: rotateX(8deg) translateY(68px) translateZ(25px) scale(1.12) !important;
+}
+
+div[class*="rotate-[90deg]"][class*="scale-115"] {
+  transform: rotateX(8deg) translateY(56px) translateZ(25px) scale(1.15) !important;
+}
+
+div[class*="rotate-[90deg]"] {
+  transform: rotateX(8deg) translateY(48px) translateZ(25px) !important;
+}
