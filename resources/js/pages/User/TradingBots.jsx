@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bot, Zap, Shield, TrendingUp, Clock, BarChart2, Star, CheckCircle, Users, DollarSign, Lock, Unlock, ChevronDown, ChevronUp } from "lucide-react";
+import { Bot, Zap, Shield, TrendingUp, Clock, BarChart2, Star, Users, DollarSign, Lock, Unlock, ChevronDown, ChevronUp } from "lucide-react";
 
 const bots = [
   {
@@ -87,12 +87,23 @@ const bots = [
       { name: "ETH Накопление", apy: "21% годовых", min: "$25", total: "$340 000", filled: 48, locked: false },
     ],
   },
+  {
+    name: "Liquidity Sweep + FVG Reversal",
+    tag: "Ликвидность / разворот",
+    color: "#BAE6FD",
+    icon: TrendingUp,
+    desc: "Учебная стратегия для криптодеривативов: 1H контекст, sweep локальной ликвидности, MSS и ретест FVG на 15m/5m. Это описание правил, не действующий автоматический исполнитель ордеров.",
+    stats: { winrate: "—", avg_profit: "—", trades_day: "—", drawdown: "—" },
+    features: ["BTC, ETH и ликвидные альткоины", "1H контекст · 15m/5m исполнение", "Sweep → MSS → FVG", "Риск на сделку: 0,5–1%"],
+    badge: "📘 Учебная стратегия",
+    pools: [],
+  },
 ];
 
 function PoolBar({ filled }) {
   const color = filled >= 90 ? "#ef4444" : filled >= 70 ? "#f59e0b" : "#10b981";
   return (
-    <div className="w-full bg-gray-200 border border-black h-3 mt-1">
+    <div className="mt-1 h-3 w-full border border-black bg-gray-200">
       <div className="h-full transition-all duration-500" style={{ width: `${filled}%`, background: color }} />
     </div>
   );
@@ -105,99 +116,95 @@ export default function TradingBots() {
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
       <div className="mb-8">
-        <h1 className="text-3xl font-black uppercase tracking-widest flex items-center gap-3">
-          <Bot className="w-8 h-8" /> Торговые Боты
+        <h1 className="flex items-center gap-3 text-3xl font-black uppercase tracking-widest">
+          <Bot className="h-8 w-8" /> Торговые Боты
         </h1>
-        <p className="text-gray-500 mt-2 font-mono text-sm">Выберите стратегию и пул для инвестиций</p>
+        <p className="mt-2 font-mono text-sm text-gray-500">Выберите стратегию и пул для инвестиций</p>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
         {bots.map((bot) => {
           const isOpen = expanded[bot.name];
-          const totalInvestors = bot.pools.reduce((a, p) => a + Math.floor(Math.random() * 200 + 50), 0);
           return (
-            <div key={bot.name} className="bg-white border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:shadow-[6px_6px_0_0_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
-
-              {/* Header */}
-              <div className="p-4 border-b-2 border-black flex items-center justify-between" style={{ background: bot.color }}>
+            <div key={bot.name} className="flex flex-col border-2 border-black bg-white shadow-[4px_4px_0_0_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_rgba(0,0,0,1)]">
+              <div className="flex items-center justify-between border-b-2 border-black p-4" style={{ background: bot.color }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-black flex items-center justify-center flex-shrink-0">
-                    <bot.icon className="w-5 h-5 text-white" />
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-black">
+                    <bot.icon className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <h2 className="font-black uppercase text-base leading-none">{bot.name}</h2>
+                    <h2 className="text-base font-black uppercase leading-none">{bot.name}</h2>
                     <span className="text-xs font-bold uppercase tracking-widest opacity-70">{bot.tag}</span>
                   </div>
                 </div>
-                <span className="text-xs font-bold bg-black text-white px-2 py-1 whitespace-nowrap">{bot.badge}</span>
+                <span className="whitespace-nowrap bg-black px-2 py-1 text-xs font-bold text-white">{bot.badge}</span>
               </div>
 
-              {/* Stats row */}
               <div className="grid grid-cols-4 border-b-2 border-black">
-                {[["Винрейт", bot.stats.winrate], ["Прибыль", bot.stats.avg_profit], ["Сделок/д", bot.stats.trades_day], ["Просадка", bot.stats.drawdown]].map(([l, v]) => (
-                  <div key={l} className="p-3 border-r border-black last:border-r-0 text-center">
-                    <p className="text-xs text-gray-400 uppercase">{l}</p>
-                    <p className="font-black text-sm">{v}</p>
+                {[['Винрейт', bot.stats.winrate], ['Прибыль', bot.stats.avg_profit], ['Сделок/д', bot.stats.trades_day], ['Просадка', bot.stats.drawdown]].map(([label, value]) => (
+                  <div key={label} className="border-r border-black p-3 text-center last:border-r-0">
+                    <p className="text-xs uppercase text-gray-400">{label}</p>
+                    <p className="text-sm font-black">{value}</p>
                   </div>
                 ))}
               </div>
 
-              {/* Pools section */}
-              <div className="p-4 flex-1">
+              <div className="flex-1 p-4">
                 <button
                   onClick={() => toggle(bot.name)}
-                  className="w-full flex items-center justify-between font-bold uppercase text-sm tracking-widest border-2 border-black px-4 py-2 bg-gray-50 hover:bg-black hover:text-white transition-colors mb-3"
+                  aria-expanded={Boolean(isOpen)}
+                  className="mb-3 flex w-full items-center justify-between border-2 border-black bg-gray-50 px-4 py-2 text-sm font-bold uppercase tracking-widest transition-colors hover:bg-black hover:text-white"
                 >
                   <span className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4" /> Пулы для инвестиций ({bot.pools.length})
+                    {bot.pools.length > 0 ? <><DollarSign className="h-4 w-4" /> Пулы для инвестиций ({bot.pools.length})</> : "Правила стратегии"}
                   </span>
-                  {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                 </button>
 
                 {isOpen && (
-                  <div className="space-y-3 animate-in fade-in duration-200">
-                    {bot.pools.map((pool) => (
-                      <div key={pool.name} className={`border-2 border-black p-3 ${pool.locked ? "bg-gray-100" : "bg-white"}`}>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            {pool.locked
-                              ? <Lock className="w-4 h-4 text-gray-400" />
-                              : <Unlock className="w-4 h-4 text-emerald-500" />
-                            }
-                            <span className="font-black uppercase text-sm">{pool.name}</span>
-                          </div>
-                          <span className="text-xs font-bold bg-black text-white px-2 py-0.5">{pool.apy}</span>
-                        </div>
+                  <div className="animate-in fade-in space-y-3 duration-200">
+                    <div className="border-2 border-black bg-gray-50 p-3">
+                      <p className="mb-2 font-mono text-sm leading-6 text-gray-700">{bot.desc}</p>
+                      <ul className="space-y-1">
+                        {bot.features.map((feature) => <li key={feature} className="font-mono text-xs text-gray-600">• {feature}</li>)}
+                      </ul>
+                    </div>
 
-                        <div className="grid grid-cols-3 gap-2 text-xs font-mono mb-2">
+                    {bot.pools.length > 0 ? bot.pools.map((pool) => (
+                      <div key={pool.name} className={`border-2 border-black p-3 ${pool.locked ? "bg-gray-100" : "bg-white"}`}>
+                        <div className="mb-2 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            {pool.locked ? <Lock className="h-4 w-4 text-gray-400" /> : <Unlock className="h-4 w-4 text-emerald-500" />}
+                            <span className="text-sm font-black uppercase">{pool.name}</span>
+                          </div>
+                          <span className="bg-black px-2 py-0.5 text-xs font-bold text-white">{pool.apy}</span>
+                        </div>
+                        <div className="mb-2 grid grid-cols-3 gap-2 font-mono text-xs">
                           <div><span className="text-gray-500">Мин. вклад</span><br /><b>{pool.min}</b></div>
                           <div><span className="text-gray-500">Объём пула</span><br /><b>{pool.total}</b></div>
                           <div><span className="text-gray-500">Заполнен</span><br /><b>{pool.filled}%</b></div>
                         </div>
-
                         <PoolBar filled={pool.filled} />
-
-                        <button
-                          disabled={pool.locked}
-                          className={`w-full mt-3 py-2 text-xs font-bold uppercase tracking-widest border-2 border-black transition-colors ${
-                            pool.locked
-                              ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                              : "bg-black text-white hover:bg-white hover:text-black"
-                          }`}
-                        >
+                        <button disabled={pool.locked} className={`mt-3 w-full border-2 border-black py-2 text-xs font-bold uppercase tracking-widest transition-colors ${pool.locked ? "cursor-not-allowed bg-gray-200 text-gray-400" : "bg-black text-white hover:bg-white hover:text-black"}`}>
                           {pool.locked ? "🔒 Только Профи тариф" : "Инвестировать"}
                         </button>
                       </div>
-                    ))}
+                    )) : (
+                      <p className="border-2 border-amber-500 bg-amber-50 p-3 font-mono text-xs leading-5 text-gray-700">
+                        Инвестиционные пулы и автоматическое исполнение для этой стратегии не настроены. Проверьте правила и протестируйте их отдельно перед торговлей.
+                      </p>
+                    )}
                   </div>
                 )}
 
                 {!isOpen && (
-                  <div className="flex items-center gap-4 text-xs font-mono text-gray-500">
-                    <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {bot.pools.length} пула</span>
-                    <span>от {bot.pools[0].min}</span>
-                    <span className="font-bold text-black">до {bot.pools[bot.pools.length - 1].apy}</span>
-                  </div>
+                  bot.pools.length > 0 ? (
+                    <div className="flex items-center gap-4 font-mono text-xs text-gray-500">
+                      <span className="flex items-center gap-1"><Users className="h-3 w-3" /> {bot.pools.length} пула</span>
+                      <span>от {bot.pools[0].min}</span>
+                      <span className="font-bold text-black">до {bot.pools[bot.pools.length - 1].apy}</span>
+                    </div>
+                  ) : <p className="font-mono text-xs text-gray-500">Таймфреймы: 1H / 15m / 5m · данные о доходности отсутствуют</p>
                 )}
               </div>
             </div>
