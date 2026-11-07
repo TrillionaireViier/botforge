@@ -1,42 +1,39 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "public/**",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "api/index.php",
-            "use": "vercel-php@0.6.2"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(build|css|js|images)/(.*)",
-            "dest": "/public/$1/$2"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
-        }
-    ],
-    "env": {
-        "APP_ENV": "production",
-        "APP_DEBUG": "true",
-        "APP_KEY": "base64:R5CK/3KAVJLdJYLdzJo/Bu+7KzywMBmcyIydrLvgZOE=",
-        "APP_URL": "https://botforge-khaki.vercel.app",
-        "ASSET_URL": "https://botforge-khaki.vercel.app",
-        "CACHE_DRIVER": "array",
-        "SESSION_DRIVER": "cookie",
-        "QUEUE_CONNECTION": "sync",
-        "LOG_CHANNEL": "stderr",
-        "VIEW_COMPILED_PATH": "/tmp",
-        "APP_SERVICES_CACHE": "/tmp/services.php",
-        "APP_PACKAGES_CACHE": "/tmp/packages.php",
-        "APP_CONFIG_CACHE": "/tmp/config.php",
-        "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_EVENTS_CACHE": "/tmp/events.php",
-        "DB_CONNECTION": "pgsql",
-        "DATABASE_URL": "postgresql://neondb_owner:npg_9SVAZh6YJxIG@ep-fragrant-band-afo098g1.c-2.us-west-2.aws.neon.tech/neondb?sslmode=require"
+  "version": 2,
+  "builds": [
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/index.php",
+      "use": "vercel-php@0.6.2"
     }
+  ],
+  "routes": [
+    {
+      "src": "/(build|css|js|images|fonts)/(.*)",
+      "dest": "/public/$1/$2"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
+  ],
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_URL": "https://botforge-new-333.vercel.app",
+    "ASSET_URL": "https://botforge-new-333.vercel.app",
+    "CACHE_DRIVER": "array",
+    "SESSION_DRIVER": "cookie",
+    "QUEUE_CONNECTION": "sync",
+    "LOG_CHANNEL": "stderr",
+    "VIEW_COMPILED_PATH": "/tmp",
+    "APP_SERVICES_CACHE": "/tmp/services.php",
+    "APP_PACKAGES_CACHE": "/tmp/packages.php",
+    "APP_CONFIG_CACHE": "/tmp/config.php",
+    "APP_ROUTES_CACHE": "/tmp/routes.php",
+    "APP_EVENTS_CACHE": "/tmp/events.php"
+  }
 }
