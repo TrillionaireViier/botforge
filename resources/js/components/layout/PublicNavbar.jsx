@@ -1,54 +1,28 @@
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronRight, Flame, Sparkles, LayoutDashboard, Cpu, Store, ShieldCheck, Zap } from 'lucide-react';
+import { ChevronRight, Flame, Sparkles, LayoutDashboard, Cpu, Store, ShieldCheck, Zap, Waves } from 'lucide-react';
 import RobotForgeIcon from '../RobotForgeIcon';
 
 export default function PublicNavbar() {
   const location = useLocation();
-
   return (
     <header className="sticky top-0 z-50 w-full">
-
-      {/* Main Navigation Bar */}
       <nav className="border-b-2 border-black bg-white shadow-md">
-        <div className="flex items-center justify-between p-4 md:p-5 max-w-7xl mx-auto w-full">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="bg-yellow-300 p-2.5 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 relative overflow-visible">
-                <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-cyan-400 rounded blur-xs opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <RobotForgeIcon className="w-9 h-9 relative z-10 animate-[bounce_3s_infinite]" animated={true} />
-              </div>
-              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-black rounded-full animate-ping"></span>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="text-2xl font-black uppercase tracking-widest text-black leading-none group-hover:text-yellow-600 transition-colors">BotForge</span>
-                <span className="bg-black text-yellow-300 font-mono text-[9px] font-extrabold px-1.5 py-0.2 border border-black uppercase tracking-wider animate-pulse">PRO</span>
-              </div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-600 group-hover:text-black transition-colors">No-Code Trading Bot Studio</span>
-            </div>
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-4 md:p-5">
+          <Link to="/" className="group flex items-center gap-3">
+            <div className="relative"><div className="flex items-center justify-center border-2 border-black bg-yellow-300 p-2.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-transform group-hover:rotate-6 group-hover:scale-110"><div className="absolute -inset-1 rounded bg-gradient-to-r from-yellow-400 via-orange-500 to-cyan-400 opacity-0 blur-sm transition-opacity group-hover:opacity-100" /><RobotForgeIcon className="relative z-10 h-9 w-9 animate-[bounce_3s_infinite]" animated /></div><span className="absolute -right-1 -top-1 h-3.5 w-3.5 animate-ping rounded-full border-2 border-black bg-emerald-400" /></div>
+            <div className="flex flex-col"><div className="flex items-center gap-1.5"><span className="text-2xl font-black uppercase leading-none tracking-widest text-black transition-colors group-hover:text-yellow-600">BotForge</span><span className="border border-black bg-black px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-yellow-300">PRO</span></div><span className="text-[10px] font-bold uppercase tracking-widest text-gray-600">No-Code Trading Bot Studio</span></div>
           </Link>
-          
-          <div className="hidden lg:flex items-center gap-6 whitespace-nowrap">
-            <a href="#features" className="text-sm font-bold uppercase tracking-widest text-black hover:text-yellow-600 transition-colors">Функции</a>
-            <a href="#how-it-works" className="text-sm font-bold uppercase tracking-widest text-black hover:text-yellow-600 transition-colors">Как это работает</a>
-            <a href="#pricing" className="text-sm font-bold uppercase tracking-widest text-black hover:text-yellow-600 transition-colors">Тарифы</a>
-            <Link to="/app/user" className="text-sm font-bold uppercase tracking-widest text-black hover:text-yellow-600 transition-colors">Демо Кабинет</Link>
+          <div className="hidden items-center gap-5 whitespace-nowrap lg:flex">
+            <a href="#features" className="text-sm font-bold uppercase tracking-widest hover:text-yellow-600">Функции</a>
+            <a href="#how-it-works" className="text-sm font-bold uppercase tracking-widest hover:text-yellow-600">Как это работает</a>
+            <a href="#pricing" className="text-sm font-bold uppercase tracking-widest hover:text-yellow-600">Тарифы</a>
+            <Link to="/liquidity-fvg-strategy" className={`flex items-center gap-1 text-xs font-black uppercase tracking-wide hover:text-cyan-700 ${location.pathname === '/liquidity-fvg-strategy' ? 'text-cyan-700' : 'text-black'}`}><Waves className="h-4 w-4" /> Стратегия FVG</Link>
+            <Link to="/app/user" className="text-sm font-bold uppercase tracking-widest hover:text-yellow-600">Демо Кабинет</Link>
           </div>
-
           <div className="flex items-center gap-3">
-            <Link 
-              to="/login?mode=register" 
-              className="hidden sm:flex items-center gap-2 bg-yellow-300 text-black font-black uppercase tracking-widest py-2.5 px-4 text-xs border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all"
-            >
-              <Sparkles className="w-4 h-4" /> Регистрация
-            </Link>
-
-            <Link 
-              to="/login" 
-              className="flex items-center gap-2 bg-black text-white font-bold uppercase tracking-widest py-2.5 px-5 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all text-xs sm:text-sm"
-            >
-              Войти <ChevronRight className="w-4 h-4" />
-            </Link>
+            <Link to="/liquidity-fvg-strategy" className="flex items-center gap-1 border-2 border-black bg-cyan-200 px-2 py-2 text-[10px] font-black uppercase sm:px-3 sm:text-xs lg:hidden"><Waves className="h-4 w-4" /><span className="hidden sm:inline">Стратегия FVG</span></Link>
+            <Link to="/login?mode=register" className="hidden items-center gap-2 border-2 border-black bg-yellow-300 px-4 py-2.5 text-xs font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:flex"><Sparkles className="h-4 w-4" /> Регистрация</Link>
+            <Link to="/login" className="flex items-center gap-2 border-2 border-black bg-black px-4 py-2.5 font-bold uppercase tracking-widest text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">Войти <ChevronRight className="h-4 w-4" /></Link>
           </div>
         </div>
       </nav>

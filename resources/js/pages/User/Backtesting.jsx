@@ -11,42 +11,23 @@ const Backtesting = () => {
   const [strategy, setStrategy] = useState('Grid Bot (Сетка)');
   const [timeframe, setTimeframe] = useState('1h');
   const [capital, setCapital] = useState(10000);
+  const [riskPercent, setRiskPercent] = useState(0.5);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [results, setResults] = useState(null);
 
   const handleRunBacktest = async () => {
-    if (status === 'running') {
-      setStatus('idle');
-      return;
-    }
-
     setStatus('running');
     setError(null);
     setResults(null);
-
     try {
       const response = await fetch('/api/backtest', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          pair,
-          timeframe,
-          strategy,
-          capital,
-          start_date: startDate,
-          end_date: endDate
-        })
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ pair, timeframe, strategy, capital, risk_percent: riskPercent, start_date: startDate, end_date: endDate })
       });
-
       const data = await response.json();
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || 'Ошибка сервера при бэктестинге');
-      }
-
+      if (!response.ok || !data.success) throw new Error(data.message || 'Ошибка сервера при бэктестинге');
       setResults(data.data);
       setStatus('finished');
     } catch (err) {
@@ -55,12 +36,11 @@ const Backtesting = () => {
     }
   };
 
+  const isLiquidityFvg = strategy === LIQUIDITY_FVG_STRATEGY;
+
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-900">Движок Бэктестинга</h1>
-      </div>
-
+      <h1 className="text-3xl font-bold text-gray-900">Движок Бэктестинга</h1>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-1">
           <div className="rounded-xl border-2 border-black bg-white p-6 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
@@ -68,13 +48,13 @@ const Backtesting = () => {
             <div className="space-y-4">
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Торговая пара</label>
-                <select value={pair} onChange={e => setPair(e.target.value)} className="w-full rounded-md border-2 border-black p-2 focus:border-black focus:ring-black">
+                <select value={pair} onChange={e => setPair(e.target.value)} className="w-full rounded-md border-2 border-black p-2">
                   {['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'BNB/USDT', 'XRP/USDT', 'ADA/USDT', 'DOGE/USDT', 'TRX/USDT', 'DOT/USDT', 'MATIC/USDT', 'LTC/USDT', 'BCH/USDT', 'SHIB/USDT', 'LINK/USDT', 'AVAX/USDT'].map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
               </div>
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Стратегия бота</label>
-                <select value={strategy} onChange={e => setStrategy(e.target.value)} className="w-full rounded-md border-2 border-black p-2 focus:border-black focus:ring-black">
+                <select value={strategy} onChange={e => setStrategy(e.target.value)} className="w-full rounded-md border-2 border-black p-2">
                   <option value="Grid Bot (Сетка)">Grid Bot (Сетка)</option>
                   <option value="DCA Bot (Усреднение)">DCA Bot (Усреднение)</option>
                   <option value="Scalping Bot (Скальпинг)">Scalping Bot (Скальпинг)</option>
@@ -83,33 +63,30 @@ const Backtesting = () => {
                   <option value={LIQUIDITY_FVG_STRATEGY}>{LIQUIDITY_FVG_STRATEGY}</option>
                 </select>
               </div>
-
-              {strategy === LIQUIDITY_FVG_STRATEGY && (
-                <div className="border-2 border-amber-500 bg-amber-50 p-3 text-xs leading-5 text-amber-950">
-                  Стратегия доступна для выбора, но серверный движок пока не реализует её правила sweep → MSS → FVG и использует базовую симуляцию MA crossover. Показанные результаты не являются бэктестом Liquidity Sweep + FVG.
-                </div>
-              )}
-
+              {isLiquidityFvg && <div className="border-2 border-amber-500 bg-amber-50 p-3 text-xs leading-5 text-amber-950">Используется фактический OHLCV-симулятор USD-M Futures: 1H SMA-контекст, локальный sweep, MSS, FVG-ретест, стоп за sweep, частичная фиксация. OI, delta, ликвидации, сессии и funding не моделируются.</div>}
               <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Таймфрейм</label>
-                <select value={timeframe} onChange={e => setTimeframe(e.target.value)} className="w-full rounded-md border-2 border-black p-2 focus:border-black focus:ring-black">
-                  <option value="1h">1h</option>
-                  <option value="4h">4h</option>
-                  <option value="1d">1d</option>
+                <label className="mb-1 block text-sm font-medium text-gray-700">Таймфрейм исполнения</label>
+                <select value={timeframe} onChange={e => setTimeframe(e.target.value)} className="w-full rounded-md border-2 border-black p-2">
+                  {isLiquidityFvg ? <><option value="5m">5m</option><option value="15m">15m</option></> : <><option value="1h">1h</option><option value="4h">4h</option><option value="1d">1d</option></>}
                 </select>
               </div>
+              {isLiquidityFvg && <div>
+                <label className="mb-1 block text-sm font-medium text-gray-700">Риск на сделку (%)</label>
+                <input type="number" min="0.5" max="1" step="0.1" value={riskPercent} onChange={e => setRiskPercent(Number(e.target.value))} className="w-full rounded-md border-2 border-black p-2" />
+                <p className="mt-1 text-xs text-gray-500">Допустимо 0,5–1% капитала; уменьшайте риск при необходимости.</p>
+              </div>}
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Период дат (Опционально)</label>
                 <div className="flex space-x-2">
-                  <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-1/2 rounded-md border-2 border-black p-2 focus:border-black focus:ring-black" title="Дата начала тестирования" />
-                  <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-1/2 rounded-md border-2 border-black p-2 focus:border-black focus:ring-black" title="Дата окончания тестирования" />
+                  <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-1/2 rounded-md border-2 border-black p-2" title="Дата начала тестирования" />
+                  <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-1/2 rounded-md border-2 border-black p-2" title="Дата окончания тестирования" />
                 </div>
               </div>
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Начальный капитал (USDT)</label>
                 <input type="number" value={capital} onChange={e => setCapital(Number(e.target.value))} min="1" className="w-full rounded-md border-2 border-black p-2" />
               </div>
-              <button onClick={handleRunBacktest} disabled={status === 'running'} className={`flex w-full items-center justify-center rounded-md border-2 border-black py-3 font-bold shadow-[2px_2px_0_0_rgba(0,0,0,1)] transition-colors ${status === 'running' ? 'cursor-not-allowed bg-gray-300' : 'bg-black text-white hover:bg-white hover:text-black'}`}>
+              <button onClick={handleRunBacktest} disabled={status === 'running'} className={`flex w-full items-center justify-center rounded-md border-2 border-black py-3 font-bold shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${status === 'running' ? 'cursor-not-allowed bg-gray-300' : 'bg-black text-white hover:bg-white hover:text-black'}`}>
                 {status === 'running' ? 'Тестирование...' : <><Play className="mr-2 h-5 w-5" /> Запустить тест</>}
               </button>
             </div>
@@ -120,34 +97,21 @@ const Backtesting = () => {
           <div className="flex min-h-[400px] flex-col rounded-xl border-2 border-black bg-white p-6 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
             <h2 className="mb-4 flex items-center text-xl font-bold"><BarChart2 className="mr-2" /> Результаты</h2>
             {error && <div className="mb-4 border-l-4 border-red-500 bg-red-100 p-4 text-red-700"><p className="font-bold">Ошибка</p><p>{error}</p></div>}
-
             {status === 'running' && <div className="flex flex-1 flex-col items-center justify-center"><div className="mb-4 h-16 w-16 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" /><p className="animate-pulse text-lg font-semibold">Скачивание OHLCV и запуск симуляции...</p></div>}
             {status === 'idle' && !error && <div className="flex flex-1 items-center justify-center text-gray-400"><p>Настройте параметры и запустите тест, чтобы увидеть результаты.</p></div>}
-
-            {status === 'finished' && results && (
-              <div className="flex flex-1 animate-in flex-col space-y-6 fade-in slide-in-from-bottom-4 duration-500">
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                  <div className={`border-2 border-black p-4 ${results.roi >= 0 ? 'bg-[#D3F55F]' : 'bg-red-200'}`}><p className="text-xs font-bold uppercase">ROI</p><p className="mt-1 text-2xl font-black">{results.roi > 0 ? '+' : ''}{results.roi}%</p></div>
-                  <div className={`border-2 border-black p-4 ${results.net_profit >= 0 ? 'bg-[#A5F3FC]' : 'bg-red-200'}`}><p className="text-xs font-bold uppercase">Чистая Прибыль</p><p className="mt-1 text-2xl font-black">{results.net_profit > 0 ? '+' : ''}${results.net_profit}</p></div>
-                  <div className="border-2 border-black bg-white p-4"><p className="text-xs font-bold uppercase">Винрейт</p><p className="mt-1 text-2xl font-black">{results.winrate}%</p><p className="mt-1 text-xs text-gray-500">Всего сделок: {results.total_trades}</p></div>
-                  <div className="border-2 border-black bg-white p-4"><p className="text-xs font-bold uppercase">Макс. Просадка</p><p className="mt-1 text-2xl font-black text-red-500">-{results.max_drawdown}%</p></div>
-                </div>
-                <div className="flex min-h-[350px] flex-1 flex-col border-2 border-black bg-gray-50 p-4">
-                  <h3 className="mb-4 font-bold">Кривая доходности (Equity Curve)</h3>
-                  <div className="min-h-[250px] w-full flex-1">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={results.equity_curve}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                        <XAxis dataKey="time" tick={{ fontSize: 10 }} minTickGap={50} />
-                        <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} tickFormatter={value => `$${value}`} />
-                        <Tooltip contentStyle={{ border: '2px solid black', borderRadius: '8px', boxShadow: '4px 4px 0 0 rgba(0,0,0,1)' }} formatter={value => [`$${value}`, 'Капитал']} labelStyle={{ fontWeight: 'bold', color: 'black' }} />
-                        <Line type="monotone" dataKey="equity" stroke="#000000" strokeWidth={3} dot={false} activeDot={{ r: 6, fill: '#D3F55F', stroke: 'black', strokeWidth: 2 }} />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
+            {status === 'finished' && results && <div className="flex flex-1 flex-col space-y-6">
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                <div className={`border-2 border-black p-4 ${results.roi >= 0 ? 'bg-[#D3F55F]' : 'bg-red-200'}`}><p className="text-xs font-bold uppercase">ROI</p><p className="mt-1 text-2xl font-black">{results.roi > 0 ? '+' : ''}{results.roi}%</p></div>
+                <div className={`border-2 border-black p-4 ${results.net_profit >= 0 ? 'bg-[#A5F3FC]' : 'bg-red-200'}`}><p className="text-xs font-bold uppercase">Чистая прибыль</p><p className="mt-1 text-2xl font-black">{results.net_profit > 0 ? '+' : ''}${results.net_profit}</p></div>
+                <div className="border-2 border-black bg-white p-4"><p className="text-xs font-bold uppercase">Винрейт</p><p className="mt-1 text-2xl font-black">{results.winrate}%</p><p className="mt-1 text-xs text-gray-500">Всего сделок: {results.total_trades}</p></div>
+                <div className="border-2 border-black bg-white p-4"><p className="text-xs font-bold uppercase">Макс. просадка</p><p className="mt-1 text-2xl font-black text-red-500">-{results.max_drawdown}%</p></div>
               </div>
-            )}
+              {results.strategy_notes && <p className="border-2 border-amber-500 bg-amber-50 p-3 text-xs leading-5 text-amber-950">Модель и допущения: {results.strategy_notes}</p>}
+              <div className="flex min-h-[350px] flex-1 flex-col border-2 border-black bg-gray-50 p-4">
+                <h3 className="mb-4 font-bold">Кривая доходности (Equity Curve)</h3>
+                <div className="min-h-[250px] w-full flex-1"><ResponsiveContainer width="100%" height="100%"><LineChart data={results.equity_curve}><CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="time" tick={{ fontSize: 10 }} minTickGap={50} /><YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} tickFormatter={value => `$${value}`} /><Tooltip contentStyle={{ border: '2px solid black', borderRadius: '8px' }} formatter={value => [`$${value}`, 'Капитал']} /><Line type="monotone" dataKey="equity" stroke="#000000" strokeWidth={3} dot={false} /></LineChart></ResponsiveContainer></div>
+              </div>
+            </div>}
           </div>
         </div>
       </div>
