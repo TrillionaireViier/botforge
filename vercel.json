@@ -24,6 +24,7 @@
     "APP_ENV": "production",
     "APP_DEBUG": "false",
     "APP_URL": "https://botforge-new.vercel.app",
+    "ASSET_URL": "https://botforge-new.vercel.app",
     "CACHE_DRIVER": "array",
     "SESSION_DRIVER": "cookie",
     "QUEUE_CONNECTION": "sync",
