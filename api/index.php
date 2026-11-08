@@ -13,12 +13,6 @@ if (!isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
 $_SERVER['SCRIPT_NAME'] = '/index.php';
 $_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/../public/index.php';
 
-// Vercel strips the /api/ prefix from the request path when routing to api/index.php.
-// We need to restore it so Laravel's router correctly matches routes/api.php.
-if (isset($_SERVER['REQUEST_URI']) && str_starts_with($_SERVER['REQUEST_URI'], '/') && !str_starts_with($_SERVER['REQUEST_URI'], '/api/')) {
-    $_SERVER['REQUEST_URI'] = '/api' . $_SERVER['REQUEST_URI'];
-}
-
 // Ensure Authorization header is available for Sanctum
 if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
     if (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
