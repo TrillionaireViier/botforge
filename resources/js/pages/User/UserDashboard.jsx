@@ -1,6 +1,5 @@
 import { Wallet, Activity, ArrowUpRight, Save, X, TrendingUp, TrendingDown, RefreshCw, CreditCard } from "lucide-react";
 import { useState, useEffect } from "react";
-import ForgerRobotStudio from "../../components/ForgerRobotStudio";
 
 export default function UserDashboard() {
   const [editingBinance, setEditingBinance] = useState(false);
@@ -101,9 +100,6 @@ export default function UserDashboard() {
           </div>
         </div>
       </div>
-
-      {/* Forger Robot Anvil Creation Component */}
-      <ForgerRobotStudio />
 
       {/* Отсебятина: Статус рынка */}
       <div className="bg-black text-white border-2 border-black p-6 group transition-all duration-500 ease-out animate-in slide-in-from-top-12 fade-in hover:shadow-[0_15px_0px_0px_rgba(200,200,200,1)] relative overflow-hidden">
