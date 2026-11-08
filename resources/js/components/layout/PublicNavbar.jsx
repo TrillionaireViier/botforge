@@ -44,7 +44,7 @@ export default function PublicNavbar() {
             Войти
           </Link>
           <Link
-            to="/cabinet"
+            to="/user"
             className="inline-flex items-center gap-1.5 sm:gap-2 h-9 sm:h-10 px-4 sm:px-5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold hover:bg-gray-800 transition-all shrink-0 shadow-sm"
           >
             <span>Кабинет</span>

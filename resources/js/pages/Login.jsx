@@ -90,10 +90,27 @@ export default function Login() {
           </button>
         </form>
         
-        <div className="mt-10 p-4 border-2 border-black bg-yellow-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-          <h4 className="font-black uppercase tracking-widest text-sm mb-2 text-black">Демо-доступы</h4>
-          <p className="text-black font-medium text-sm mb-1">Админ: Email <strong className="font-black">admin@example.com</strong> / Пароль: <strong className="font-black">admin123</strong></p>
-          <p className="text-black font-medium text-sm">Юзер: Email <strong className="font-black">user@example.com</strong> / Пароль: <strong className="font-black">user123</strong></p>
+        <div className="mt-8 p-5 border-2 border-black bg-yellow-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <h4 className="font-black uppercase tracking-widest text-sm mb-3 text-black">Быстрый доступ в кабинет</h4>
+          <div className="flex flex-col sm:flex-row gap-2.5">
+            <button
+              type="button"
+              onClick={() => login('user@example.com', 'user123')}
+              className="flex-1 bg-black text-white font-black py-3 px-4 uppercase text-xs tracking-wider border-2 border-black hover:bg-white hover:text-black transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-center cursor-pointer"
+            >
+              Войти как Инвестор →
+            </button>
+            <button
+              type="button"
+              onClick={() => login('admin@example.com', 'admin123')}
+              className="flex-1 bg-white text-black font-black py-3 px-4 uppercase text-xs tracking-wider border-2 border-black hover:bg-black hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-center cursor-pointer"
+            >
+              Войти как Админ →
+            </button>
+          </div>
+          <p className="text-[11px] text-gray-800 font-mono mt-3 text-center">
+            user@example.com &bull; admin@example.com
+          </p>
         </div>
       </div>
     </div>

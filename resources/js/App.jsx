@@ -114,7 +114,8 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="/cabinet" element={<Cabinet />} />
+      <Route path="/cabinet" element={<Navigate to="/user" replace />} />
+      <Route path="/cabinet/*" element={<Navigate to="/user" replace />} />
       <Route path="/login" element={<Login />} />
 
       {/* Public Footer Links */}

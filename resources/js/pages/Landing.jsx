@@ -166,7 +166,7 @@ export default function Landing() {
 
                     <div className="p-3 grid grid-cols-1 min-[540px]:grid-cols-2 gap-2.5">
                       <Link
-                        to="/cabinet"
+                        to="/user/apikeys"
                         onClick={() => setMenuOpen(false)}
                         className="flex items-center justify-center gap-2 h-11 rounded-xl bg-black text-white text-xs min-[540px]:text-sm font-semibold hover:bg-gray-800 transition-colors"
                       >
@@ -174,7 +174,7 @@ export default function Landing() {
                         Подключить API-ключ
                       </Link>
                       <Link
-                        to="/login"
+                        to="/user"
                         onClick={() => setMenuOpen(false)}
                         className="flex items-center justify-center gap-2 h-11 rounded-xl border border-gray-200 bg-gray-50 text-xs min-[540px]:text-sm font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
                       >
@@ -193,7 +193,7 @@ export default function Landing() {
             {/* Right Action Button */}
             <div className="flex-1 flex justify-end">
               <Link
-                to="/cabinet"
+                to="/user"
                 className="inline-flex items-center gap-1.5 sm:gap-2 h-9 sm:h-10 px-3.5 sm:px-5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold hover:bg-gray-800 transition-all shrink-0 hover:shadow-md"
               >
                 <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -1014,9 +1014,18 @@ export default function Landing() {
               className="text-center mb-10"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#0d0d0d]">Готовы начать?</h2>
-              <p className="text-lg text-gray-500">
-                Оставьте заявку — менеджер свяжется и поможет с подключением.
+              <p className="text-lg text-gray-500 mb-6">
+                Подключите стратегию напрямую в личном кабинете или задайте вопрос нашему специалисту.
               </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Link
+                  to="/user"
+                  className="inline-flex items-center gap-2 h-11 px-7 rounded-full bg-black text-white text-sm font-semibold hover:bg-gray-800 transition-all shadow-md hover:shadow-lg"
+                >
+                  <span>Войти в личный кабинет</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </motion.div>
 
             {/* Contact Form Card */}
@@ -1264,14 +1273,14 @@ export default function Landing() {
                 </p>
                 <ul className="space-y-2.5">
                   {[
-                    { label: 'Войти в кабинет', href: '/login' },
+                    { label: 'Войти в кабинет', href: '/user' },
                     { label: 'Регистрация', href: '/login?mode=register' },
-                    { label: 'Мои стратегии', href: '/cabinet' },
-                    { label: 'Подключённые пулы', href: '/cabinet' },
-                    { label: 'История сделок', href: '/cabinet' },
-                    { label: 'Партнёрская статистика', href: '/cabinet' },
-                    { label: 'Рефералы и ранги', href: '/cabinet' },
-                    { label: 'Настройки API-ключей', href: '/cabinet' },
+                    { label: 'Мои стратегии', href: '/user/bots' },
+                    { label: 'Подключённые пулы', href: '/user/portfolio' },
+                    { label: 'История сделок', href: '/user/history' },
+                    { label: 'Партнёрская статистика', href: '/user/partners' },
+                    { label: 'Рефералы и ранги', href: '/user/partners' },
+                    { label: 'Настройки API-ключей', href: '/user/apikeys' },
                   ].map((item, idx) => (
                     <li key={idx}>
                       <Link to={item.href} className="text-sm text-gray-500 hover:text-black transition-colors">
