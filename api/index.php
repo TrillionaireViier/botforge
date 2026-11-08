@@ -1,5 +1,12 @@
 <?php
 
+// Force HTTPS environment variables for Vercel Serverless runtime
+$_SERVER['HTTPS'] = 'on';
+$_SERVER['SERVER_PORT'] = 443;
+if (!isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+    $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+}
+
 // Fix for Vercel's vercel-php builder which sets SCRIPT_NAME to /api/index.php.
 // This causes Laravel (Symfony Request) to incorrectly strip /api from the pathInfo,
 // resulting in 405 Method Not Allowed because it matches the web fallback route.
