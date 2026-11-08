@@ -83,6 +83,13 @@ export default function Cabinet() {
               Bot<span className="text-[#7360F2]">Forge</span>
             </span>
           </Link>
+
+          <a
+            href="/#contact"
+            className="inline-flex items-center gap-2 h-9 px-5 rounded-full bg-black text-white text-xs font-semibold hover:bg-gray-800 transition-all shadow-sm"
+          >
+            Подключиться
+          </a>
         </div>
       </nav>
 
@@ -222,12 +229,29 @@ export default function Cabinet() {
                   ))}
                 </div>
 
-                <button
-                  onClick={() => setModalOpen(true)}
-                  className="inline-flex items-center gap-2 h-11 px-8 rounded-full bg-black text-white text-sm font-semibold hover:bg-gray-800 transition-all shadow-md hover:shadow-lg"
-                >
-                  Подать заявку на ранний доступ
-                </button>
+                <div className="mt-4 pt-8 border-t border-gray-100 flex flex-col items-center max-w-md w-full">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                    Готовы начать?
+                  </h3>
+                  <p className="text-gray-500 text-sm mb-6 text-center max-w-sm">
+                    Оставьте заявку — менеджер свяжется и поможет с подключением.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+                    <a
+                      href="/#contact"
+                      className="inline-flex items-center justify-center gap-2 h-11 px-8 rounded-full bg-black text-white text-sm font-semibold hover:bg-gray-800 transition-all shadow-md hover:shadow-lg w-full sm:w-auto"
+                    >
+                      Подключиться
+                    </a>
+                    <a
+                      href="/#contact"
+                      className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-full border border-gray-200 bg-white text-gray-800 text-sm font-semibold hover:bg-gray-50 transition-all w-full sm:w-auto"
+                    >
+                      Подать заявку на ранний доступ
+                    </a>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </main>

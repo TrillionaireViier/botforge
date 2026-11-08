@@ -1,16 +1,16 @@
 {
   "resources/js/index.css": {
-    "file": "assets/index--2i9Yh0A.css",
+    "file": "assets/index-Due5Xnmt.css",
     "src": "resources/js/index.css",
     "isEntry": true
   },
   "resources/js/main.jsx": {
-    "file": "assets/main-DQOobgNL.js",
+    "file": "assets/main-Di8ebNnM.js",
     "name": "main",
     "src": "resources/js/main.jsx",
     "isEntry": true,
     "css": [
-      "assets/index--2i9Yh0A.css"
+      "assets/index-Due5Xnmt.css"
     ]
   }
 }

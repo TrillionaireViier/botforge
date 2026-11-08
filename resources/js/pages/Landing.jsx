@@ -60,6 +60,20 @@ export default function Landing() {
     return () => clearInterval(timer);
   }, []);
 
+  // Smooth scroll to hash anchor on mount (e.g. /#contact)
+  useEffect(() => {
+    if (window.location.hash) {
+      const hash = window.location.hash;
+      const timer = setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   const handleLeadSubmit = (e) => {
     e.preventDefault();
     setLeadSubmitted(true);
