@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Landing from "./pages/Landing";
+import Cabinet from "./pages/Cabinet";
 import Login from "./pages/Login";
 import AdminLayout from "./pages/Admin/AdminLayout";
 import Dashboard from "./pages/Admin/Dashboard";
@@ -113,6 +114,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="/cabinet" element={<Cabinet />} />
       <Route path="/login" element={<Login />} />
 
       {/* Public Footer Links */}
@@ -127,6 +129,14 @@ function AppRoutes() {
       <Route path="/cookies" element={<PublicLayout><Cookies /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/liquidity-fvg-strategy" element={<PublicLayout><LiquidityFvgStrategy /></PublicLayout>} />
+      <Route path="/legal/privacy-policy" element={<PublicLayout><Privacy /></PublicLayout>} />
+      <Route path="/legal/terms-of-use" element={<PublicLayout><Terms /></PublicLayout>} />
+      <Route path="/legal/cookie-policy" element={<PublicLayout><Cookies /></PublicLayout>} />
+      <Route path="/legal/public-offer" element={<PublicLayout><Terms /></PublicLayout>} />
+      <Route path="/legal/aml-kyc" element={<PublicLayout><Privacy /></PublicLayout>} />
+      <Route path="/legal/risk-disclosure" element={<PublicLayout><Privacy /></PublicLayout>} />
+      <Route path="/legal/affiliate-terms" element={<PublicLayout><Terms /></PublicLayout>} />
+      <Route path="/legal/pool-agreement" element={<PublicLayout><Terms /></PublicLayout>} />
 
       <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><AdminLayout /></ProtectedRoute>}>
         <Route index element={<Dashboard />} />

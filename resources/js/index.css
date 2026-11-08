@@ -1,51 +1,90 @@
 @import "tailwindcss";
-@config "../../tailwind.config.js";
+
+@theme {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-background: #ffffff;
+  --color-foreground: #0d0d0d;
+  --color-card: #f9f9fb;
+  --color-card-foreground: #0d0d0d;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0d0d0d;
+  --color-primary: #0d0d0d;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f3f4f6;
+  --color-secondary-foreground: #0d0d0d;
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #6b7280;
+  --color-accent: #f3f4f6;
+  --color-accent-foreground: #0d0d0d;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #e5e7eb;
+  --color-input: #e5e7eb;
+  --color-ring: #7360F2;
+  --color-brand: #7360F2;
+}
 
 @layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0d0d0d;
+    --card: #f9f9fb;
+    --card-foreground: #0d0d0d;
+    --popover: #ffffff;
+    --popover-foreground: #0d0d0d;
+    --primary: #0d0d0d;
+    --primary-foreground: #ffffff;
+    --secondary: #f3f4f6;
+    --secondary-foreground: #0d0d0d;
+    --muted: #f3f4f6;
+    --muted-foreground: #6b7280;
+    --accent: #f3f4f6;
+    --accent-foreground: #0d0d0d;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #e5e7eb;
+    --input: #e5e7eb;
+    --ring: #7360F2;
+    --brand: #7360F2;
+    --radius: 0.75rem;
+  }
+
   html, body {
-    background-color: #f9fafb; /* bg-gray-50 */
-    color: #000;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    width: 100vw;
+    scroll-behavior: smooth;
   }
-  
+
   ::selection {
-    background-color: #000;
-    color: #fff;
+    background-color: rgba(115, 96, 242, 0.25);
+    color: #0d0d0d;
   }
+}
+
+.bf-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bf-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bf-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 9999px;
+}
+
+.bf-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.22);
 }
 
 .glass-panel {
-  background-color: rgba(15, 23, 42, 0.5); /* bg-slate-900/50 */
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
-  border: 1px solid #1e293b; /* border-slate-800 */
+  border: 1px solid rgba(229, 231, 235, 0.8);
   border-radius: 1rem;
-}
-
-/* The robot's inline transform included rotateZ(90deg), which laid it on its side.
-   Override it so the robot stays upright and bounces vertically during each strike. */
-div[class*="rotate-[85deg]"] {
-  transform: rotateX(8deg) translateY(56px) translateZ(25px) scale(1.05) !important;
-}
-
-div[class*="rotate-[95deg]"] {
-  transform: rotateX(8deg) translateY(64px) translateZ(25px) scale(1.1) !important;
-}
-
-div[class*="rotate-[82deg]"] {
-  transform: rotateX(8deg) translateY(52px) translateZ(25px) scale(1.08) !important;
-}
-
-div[class*="rotate-[98deg]"] {
-  transform: rotateX(8deg) translateY(68px) translateZ(25px) scale(1.12) !important;
-}
-
-div[class*="rotate-[90deg]"][class*="scale-115"] {
-  transform: rotateX(8deg) translateY(56px) translateZ(25px) scale(1.15) !important;
-}
-
-div[class*="rotate-[90deg]"] {
-  transform: rotateX(8deg) translateY(48px) translateZ(25px) !important;
 }
